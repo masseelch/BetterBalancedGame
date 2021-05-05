@@ -61,7 +61,7 @@ local NO_BUILDING :number = -1;
 function OnGameTurnStarted( turn:number )
 	print ("BBG TURN STARTING: " .. turn);
 	Check_DominationVictory()
-	Check_Barbarians()
+	--Check_Barbarians()
 end
 
 function OnCombatOccurred(attackerPlayerID :number, attackerUnitID :number, defenderPlayerID :number, defenderUnitID :number, attackerDistrictID :number, defenderDistrictID :number)
@@ -95,7 +95,7 @@ function OnCombatOccurred(attackerPlayerID :number, attackerUnitID :number, defe
 	-- Gilga XP Sharing, Gilga is not attacker or defender
 	local pDiplomacyAttacker:table = pAttackerPlayer:GetDiplomacy();
 	local pDiplomacyDefender:table = pDefenderPlayer:GetDiplomacy();
-		
+
 	for _, iPlayerID in ipairs(PlayerManager.GetAliveMajorIDs()) do
 		local pCheckedPlayer = Players[iPlayerID]
 		if iPlayerID ~= attackerUnitID and iPlayerID ~= defenderPlayerID then
@@ -108,10 +108,10 @@ function OnCombatOccurred(attackerPlayerID :number, attackerUnitID :number, defe
 					-- Is Gilga also at war with Defender ?
 					local pDiploGilga = pCheckedPlayer:GetDiplomacy()
 					if (pDiploGilga:IsAtWarWith(defenderPlayerID) == true) then
-					
+
 					-- does Gilgamesh has one his unit nearby ?
 					local playerGilgaUnits;
-					playerGilgaUnits = pCheckedPlayer:GetUnits();	
+					playerGilgaUnits = pCheckedPlayer:GetUnits();
 					for k, unit in playerGilgaUnits:Members() do
 						local unitGilgaPlot = Map.GetPlot(unit:GetX(), unit:GetY())
 						local iGilgaPlotIndex = unitGilgaPlot:GetIndex()
@@ -122,11 +122,11 @@ function OnCombatOccurred(attackerPlayerID :number, attackerUnitID :number, defe
 								ApplyGilgameshTrait_XP(iPlayerID,unit,unitGilgaPlot,false)
 							end
 						end
-					end	
+					end
 					end
 					end
 				end
-				
+
 				-- Defender is allied with Gilgamesh
 				if pDiplomacyDefender:HasAllied(iPlayerID) == true and pDefendingUnit ~= nil then
 					local plot = Map.GetPlot(pDefendingUnit:GetX(), pDefendingUnit:GetY())
@@ -135,10 +135,10 @@ function OnCombatOccurred(attackerPlayerID :number, attackerUnitID :number, defe
 					-- Is Gilga also at war with Defender ?
 					local pDiploGilga = pCheckedPlayer:GetDiplomacy()
 					if (pDiploGilga:IsAtWarWith(attackerPlayerID) == true) then
-					
+
 					-- does Gilgamesh has one his unit nearby ?
 					local playerGilgaUnits;
-					playerGilgaUnits = pCheckedPlayer:GetUnits();	
+					playerGilgaUnits = pCheckedPlayer:GetUnits();
 					for k, unit in playerGilgaUnits:Members() do
 						local unitGilgaPlot = Map.GetPlot(unit:GetX(), unit:GetY())
 						local iGilgaPlotIndex = unitGilgaPlot:GetIndex()
@@ -149,13 +149,13 @@ function OnCombatOccurred(attackerPlayerID :number, attackerUnitID :number, defe
 								ApplyGilgameshTrait_XP(iPlayerID,unit,unitGilgaPlot,false)
 							end
 						end
-					end	
 					end
 					end
-				end				
+					end
+				end
 			end
 		end
-	end	
+	end
 
 	-- Gilga XP Sharing, Gilga is attacker or defender
 	if PlayerConfigurations[attackerPlayerID]:GetLeaderTypeName() == "LEADER_GILGAMESH" then
@@ -170,7 +170,7 @@ function OnCombatOccurred(attackerPlayerID :number, attackerUnitID :number, defe
 						local iPlotIndex = plot:GetIndex()
 					-- has the ally some unit nearby
 						local playerGilgaUnits;
-						playerGilgaUnits = pCheckedPlayer:GetUnits();	
+						playerGilgaUnits = pCheckedPlayer:GetUnits();
 						for k, unit in playerGilgaUnits:Members() do
 							local unitGilgaPlot = Map.GetPlot(unit:GetX(), unit:GetY())
 							local iGilgaPlotIndex = unitGilgaPlot:GetIndex()
@@ -181,14 +181,14 @@ function OnCombatOccurred(attackerPlayerID :number, attackerUnitID :number, defe
 									ApplyGilgameshTrait_XP(iPlayerID,unit,unitGilgaPlot,true)
 								end
 							end
-						end	
+						end
 						end
 					end
 				end
 			end
 		end
 	end
-	
+
 	if PlayerConfigurations[defenderPlayerID]:GetLeaderTypeName() == "LEADER_GILGAMESH" then
 		for _, iPlayerID in ipairs(PlayerManager.GetAliveMajorIDs()) do
 			local pCheckedPlayer = Players[iPlayerID]
@@ -201,7 +201,7 @@ function OnCombatOccurred(attackerPlayerID :number, attackerUnitID :number, defe
 						local iPlotIndex = plot:GetIndex()
 					-- has the ally some unit nearby
 						local playerGilgaUnits;
-						playerGilgaUnits = pCheckedPlayer:GetUnits();	
+						playerGilgaUnits = pCheckedPlayer:GetUnits();
 						for k, unit in playerGilgaUnits:Members() do
 							local unitGilgaPlot = Map.GetPlot(unit:GetX(), unit:GetY())
 							local iGilgaPlotIndex = unitGilgaPlot:GetIndex()
@@ -213,7 +213,7 @@ function OnCombatOccurred(attackerPlayerID :number, attackerUnitID :number, defe
 								end
 							end
 						end
-						end		
+						end
 					end
 				end
 			end
@@ -660,8 +660,8 @@ end
 -- ===========================================================================
 --	Barbarians
 -- ===========================================================================
-local iBarbs_Original_Weight = 0.50;
-local iBarbs_Naval_Weight = 0.30;
+local iBarbs_Original_Weight = 0.55;
+local iBarbs_Naval_Weight = 0.4;
 local iBarbs_Minimum_Horse_Turn = 15;
 
 function Check_Barbarians()
@@ -710,14 +710,7 @@ end
 
 function AddBarbCamps()
 	print("		AddBarbCamps()")			
-	local seed = Game.GetCurrentGameTurn()
-	math.randomseed(seed)
-	local rng_table = {}
-	for i=1, Game.GetCurrentGameTurn() do
-		rng_table[i] = math.random(1,100)
-	end
-	local rng = rng_table[Game.GetCurrentGameTurn()]
-	rng = rng / 100
+	local rng = TerrainBuilder.GetRandomNumber(100,"Barb Type")/100
 	local iCount = Map.GetPlotCount();
 	local validPlots = {};
 	local currentTurn = Game.GetCurrentGameTurn()
@@ -1060,14 +1053,7 @@ function PlaceOriginalBarbCamps()
 			for i, playerID in ipairs(PlayerManager.GetAliveMajorIDs()) do
 				if Players[playerID] ~= nil then
 					if (Players[playerID]:IsMajor()) and PlayerConfigurations[playerID]:GetLeaderTypeName() ~= "LEADER_SPECTATOR" then
-							local seed = Game.GetCurrentGameTurn()
-							math.randomseed(seed)
-							local rng_table = {}
-							for i=1, Game.GetCurrentGameTurn() do
-								rng_table[i] = math.random(1,100)
-							end
-							local rng = rng_table[Game.GetCurrentGameTurn()]
-							rng = rng / 100
+						local rng = TerrainBuilder.GetRandomNumber(100,"Barb Placement")/100
 						if rng < iBarbs_Original_Weight then
 							for j, plotTable in ipairs(validPlots) do
 								if plotTable.id == playerID then
@@ -2257,19 +2243,19 @@ function Initialize()
 	
 	
 	-- turn 0 effects:
-	if currentTurn == startTurn then
-		ApplyGilgameshTrait()
-		InitBarbData()
-	end
+	--if currentTurn == startTurn then
+	--	ApplyGilgameshTrait()
+	--	InitBarbData()
+	--end
 	
 	-- turn checked effects:
 	GameEvents.OnGameTurnStarted.Add(OnGameTurnStarted);
 
 	-- combat effect:
-	GameEvents.OnCombatOccurred.Add(OnCombatOccurred);
+	--GameEvents.OnCombatOccurred.Add(OnCombatOccurred);
 	
 	-- pillage effect:
-	GameEvents.OnPillage.Add(OnPillage)
+	--GameEvents.OnPillage.Add(OnPillage)
 	
 	-- tech boost effect:
 	-- Events.TechBoostTriggered.Add(OnTechBoost);

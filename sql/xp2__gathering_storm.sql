@@ -7,215 +7,215 @@
 -- Reduce combat strength of mustangs due to them already having many extra combat bonuses over biplanes
 UPDATE Units SET Combat=90 , RangedCombat=90 WHERE UnitType='UNIT_AMERICAN_P51';
 -- rough rider is a cav replacement, so should cost horses
-INSERT OR IGNORE INTO Units_XP2 (UnitType , ResourceCost)
-	VALUES ('UNIT_AMERICAN_ROUGH_RIDER' , 10);
-UPDATE Units SET StrategicResource='RESOURCE_HORSES' WHERE UnitType='UNIT_AMERICAN_ROUGH_RIDER';
-
-
---==================
--- Arabia
---==================
--- Implemented by Firaxis
--- UPDATE UnitUpgrades SET UpgradeUnit='UNIT_CUIRASSIER' WHERE Unit='UNIT_ARABIAN_MAMLUK';
-
-
---==================
--- Canada
---==================
+-- INSERT OR IGNORE INTO Units_XP2 (UnitType , ResourceCost)
+-- 	VALUES ('UNIT_AMERICAN_ROUGH_RIDER' , 10);
+-- UPDATE Units SET StrategicResource='RESOURCE_HORSES' WHERE UnitType='UNIT_AMERICAN_ROUGH_RIDER';
+--
+--
+-- --==================
+-- -- Arabia
+-- --==================
+-- -- Implemented by Firaxis
+-- -- UPDATE UnitUpgrades SET UpgradeUnit='UNIT_CUIRASSIER' WHERE Unit='UNIT_ARABIAN_MAMLUK';
+--
+--
+-- --==================
+-- -- Canada
+-- --==================
+-- -- INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
+-- --	VALUES
+-- --	('TRAIT_LEADER_LAST_BEST_WEST'       , 'TUNDRA_EXTRA_FOOD_CPLMOD'           ),
+-- --	('TRAIT_LEADER_LAST_BEST_WEST'       , 'TUNDRA_HILLS_EXTRA_FOOD_CPLMOD'     ),
+-- --	('TRAIT_LEADER_LAST_BEST_WEST'       , 'NATIONAL_PARK_FOOD_YIELDS_CPLMOD'   ),
+-- --	('TRAIT_LEADER_LAST_BEST_WEST'       , 'NATIONAL_PARK_PROD_YIELDS_CPLMOD'   );
+-- --INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId , OwnerRequirementSetId)
+-- --	VALUES
+-- --	('TUNDRA_EXTRA_FOOD_CPLMOD'            , 'MODIFIER_PLAYER_ADJUST_PLOT_YIELD'               , 'PLOT_HAS_TUNDRA_REQUIREMENTS'        , NULL),
+-- --	('TUNDRA_HILLS_EXTRA_FOOD_CPLMOD'      , 'MODIFIER_PLAYER_ADJUST_PLOT_YIELD'               , 'PLOT_HAS_TUNDRA_HILLS_REQUIREMENTS'  , NULL),
+-- --	('NATIONAL_PARK_FOOD_YIELDS_CPLMOD'    , 'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE' , 'CITY_HAS_NATIONAL_PARK_REQUREMENTS'  , NULL),
+-- --	('NATIONAL_PARK_PROD_YIELDS_CPLMOD'    , 'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE' , 'CITY_HAS_NATIONAL_PARK_REQUREMENTS'  , NULL);
+-- --INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- --	VALUES
+-- --	('TUNDRA_EXTRA_FOOD_CPLMOD'            , 'YieldType' , 'YIELD_FOOD'      ),
+-- --	('TUNDRA_EXTRA_FOOD_CPLMOD'            , 'Amount'    , '1'               ),
+-- --	('TUNDRA_HILLS_EXTRA_FOOD_CPLMOD'      , 'YieldType' , 'YIELD_FOOD'      ),
+-- --	('TUNDRA_HILLS_EXTRA_FOOD_CPLMOD'      , 'Amount'    , '1'               ),
+-- --	('NATIONAL_PARK_FOOD_YIELDS_CPLMOD'    , 'YieldType' , 'YIELD_FOOD'      ),
+-- --	('NATIONAL_PARK_FOOD_YIELDS_CPLMOD'    , 'Amount'    , '4'               ),
+-- --	('NATIONAL_PARK_PROD_YIELDS_CPLMOD'    , 'YieldType' , 'YIELD_PRODUCTION'),
+-- --	('NATIONAL_PARK_PROD_YIELDS_CPLMOD'    , 'Amount'    , '4'               );
+-- -- Hockey rink at Civil Service
+-- UPDATE Improvements SET PrereqCivic='CIVIC_DIPLOMATIC_SERVICE' WHERE ImprovementType='IMPROVEMENT_ICE_HOCKEY_RINK';
+-- -- Mounties get a base combat buff and combat buff from nearby parks radius increased
+-- -- UPDATE Units SET Combat=70 , Cost=360 WHERE UnitType='UNIT_CANADA_MOUNTIE';
+-- UPDATE RequirementArguments SET Value='4' WHERE RequirementId='UNIT_PARK_REQUIREMENT'       AND Name='MaxDistance';
+-- UPDATE RequirementArguments SET Value='4' WHERE RequirementId='UNIT_OWNER_PARK_REQUIREMENT' AND Name='MaxDistance';
+--
+--
+-- --==================
+-- -- DIDO
+-- --==================
+-- UPDATE ModifierArguments SET Value='25' WHERE ModifierId='COTHON_NAVAL_UNIT_PRODUCTION' AND Name='Amount';
+-- UPDATE ModifierArguments SET Value='25' WHERE ModifierId='COTHON_SETTLER_PRODUCTION' AND Name='Amount';
+--
+--
+-- --==========
+-- -- EGYPT
+-- --==========
+-- INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType)
+-- 	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_GRASSLAND', 'REQUIREMENT_PLOT_FEATURE_TYPE_MATCHES');
+-- INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType)
+-- 	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_PLAINS', 'REQUIREMENT_PLOT_FEATURE_TYPE_MATCHES');
+-- INSERT OR IGNORE INTO RequirementArguments (RequirementId, Name, Value)
+-- 	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_GRASSLAND', 'FeatureType', 'FEATURE_FLOODPLAINS_GRASSLAND');
+-- INSERT OR IGNORE INTO RequirementArguments (RequirementId, Name, Value)
+-- 	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_PLAINS', 'FeatureType', 'FEATURE_FLOODPLAINS_PLAINS');
+-- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId)
+-- 	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_CPL', 'REQUIRES_PLOT_HAS_FLOODPLAINS_GRASSLAND');
+-- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId)
+-- 	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_CPL', 'REQUIRES_PLOT_HAS_FLOODPLAINS_PLAINS');
+--
+--
+--
+-- --==========
+-- -- ELEANOR
+-- --==========
 -- INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
---	VALUES
---	('TRAIT_LEADER_LAST_BEST_WEST'       , 'TUNDRA_EXTRA_FOOD_CPLMOD'           ),
---	('TRAIT_LEADER_LAST_BEST_WEST'       , 'TUNDRA_HILLS_EXTRA_FOOD_CPLMOD'     ),
---	('TRAIT_LEADER_LAST_BEST_WEST'       , 'NATIONAL_PARK_FOOD_YIELDS_CPLMOD'   ),
---	('TRAIT_LEADER_LAST_BEST_WEST'       , 'NATIONAL_PARK_PROD_YIELDS_CPLMOD'   );
---INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId , OwnerRequirementSetId)
---	VALUES
---	('TUNDRA_EXTRA_FOOD_CPLMOD'            , 'MODIFIER_PLAYER_ADJUST_PLOT_YIELD'               , 'PLOT_HAS_TUNDRA_REQUIREMENTS'        , NULL),
---	('TUNDRA_HILLS_EXTRA_FOOD_CPLMOD'      , 'MODIFIER_PLAYER_ADJUST_PLOT_YIELD'               , 'PLOT_HAS_TUNDRA_HILLS_REQUIREMENTS'  , NULL),
---	('NATIONAL_PARK_FOOD_YIELDS_CPLMOD'    , 'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE' , 'CITY_HAS_NATIONAL_PARK_REQUREMENTS'  , NULL),
---	('NATIONAL_PARK_PROD_YIELDS_CPLMOD'    , 'MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_CHANGE' , 'CITY_HAS_NATIONAL_PARK_REQUREMENTS'  , NULL);
---INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
---	VALUES
---	('TUNDRA_EXTRA_FOOD_CPLMOD'            , 'YieldType' , 'YIELD_FOOD'      ),
---	('TUNDRA_EXTRA_FOOD_CPLMOD'            , 'Amount'    , '1'               ),
---	('TUNDRA_HILLS_EXTRA_FOOD_CPLMOD'      , 'YieldType' , 'YIELD_FOOD'      ),
---	('TUNDRA_HILLS_EXTRA_FOOD_CPLMOD'      , 'Amount'    , '1'               ),
---	('NATIONAL_PARK_FOOD_YIELDS_CPLMOD'    , 'YieldType' , 'YIELD_FOOD'      ),
---	('NATIONAL_PARK_FOOD_YIELDS_CPLMOD'    , 'Amount'    , '4'               ),
---	('NATIONAL_PARK_PROD_YIELDS_CPLMOD'    , 'YieldType' , 'YIELD_PRODUCTION'),
---	('NATIONAL_PARK_PROD_YIELDS_CPLMOD'    , 'Amount'    , '4'               );
--- Hockey rink at Civil Service
-UPDATE Improvements SET PrereqCivic='CIVIC_DIPLOMATIC_SERVICE' WHERE ImprovementType='IMPROVEMENT_ICE_HOCKEY_RINK';
--- Mounties get a base combat buff and combat buff from nearby parks radius increased
--- UPDATE Units SET Combat=70 , Cost=360 WHERE UnitType='UNIT_CANADA_MOUNTIE';
-UPDATE RequirementArguments SET Value='4' WHERE RequirementId='UNIT_PARK_REQUIREMENT'       AND Name='MaxDistance';
-UPDATE RequirementArguments SET Value='4' WHERE RequirementId='UNIT_OWNER_PARK_REQUIREMENT' AND Name='MaxDistance';
-
-
---==================
--- DIDO
---==================
-UPDATE ModifierArguments SET Value='25' WHERE ModifierId='COTHON_NAVAL_UNIT_PRODUCTION' AND Name='Amount';
-UPDATE ModifierArguments SET Value='25' WHERE ModifierId='COTHON_SETTLER_PRODUCTION' AND Name='Amount';
-
-
---==========
--- EGYPT
---==========
-INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType)
-	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_GRASSLAND', 'REQUIREMENT_PLOT_FEATURE_TYPE_MATCHES');
-INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType)
-	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_PLAINS', 'REQUIREMENT_PLOT_FEATURE_TYPE_MATCHES');
-INSERT OR IGNORE INTO RequirementArguments (RequirementId, Name, Value)
-	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_GRASSLAND', 'FeatureType', 'FEATURE_FLOODPLAINS_GRASSLAND');
-INSERT OR IGNORE INTO RequirementArguments (RequirementId, Name, Value)
-	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_PLAINS', 'FeatureType', 'FEATURE_FLOODPLAINS_PLAINS');
-INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId)
-	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_CPL', 'REQUIRES_PLOT_HAS_FLOODPLAINS_GRASSLAND');
-INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId)
-	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_CPL', 'REQUIRES_PLOT_HAS_FLOODPLAINS_PLAINS');
-
-
-
---==========
--- ELEANOR
---==========
-INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
-	VALUES
-	('TRAIT_LEADER_ELEANOR_LOYALTY' , 'THEATER_BUILDING_PRODUCTION_BONUS_CPLMOD');
-INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId , OwnerRequirementSetId)
-	VALUES
-	('THEATER_BUILDING_PRODUCTION_BONUS_CPLMOD' , 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_PRODUCTION' , NULL , NULL);
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES
-	('THEATER_BUILDING_PRODUCTION_BONUS_CPLMOD' , 'DistrictType' , 'DISTRICT_THEATER'),
-	('THEATER_BUILDING_PRODUCTION_BONUS_CPLMOD' , 'Amount'       , '100'                     );
-
-
---==========
--- FRANCE
---==========
-UPDATE Units_XP2 SET ResourceCost=10 WHERE UnitType='UNIT_FRENCH_GARDE_IMPERIALE';
-
-
---==================
--- Hungary
---==================
--- only 1 envoy from levying city-states units
-UPDATE ModifierArguments SET Value='1' WHERE ModifierId='LEVY_MILITARY_TWO_FREE_ENVOYS';
--- no combat bonus for levied units
--- DELETE FROM ModifierArguments WHERE ModifierId='RAVEN_LEVY_COMBAT' AND Name='Amount' AND Value='5';
--- Huszars only +2 combat strength from each alliance instead of 3
-UPDATE ModifierArguments SET Value='1' WHERE ModifierId='HUSZAR_ALLIES_COMBAT_BONUS';
--- Black Army only +2 combat strength from adjacent levied units
-UPDATE ModifierArguments SET Value='2' WHERE ModifierId='BLACK_ARMY_ADJACENT_LEVY';
--- Only 1 extra movement for levied units
-UPDATE ModifierArguments SET Value='1' WHERE ModifierId='RAVEN_LEVY_MOVEMENT';
-
-
-
---==========
--- Inca
---==========
-UPDATE Units SET RangedCombat=30 WHERE UnitType='UNIT_INCA_WARAKAQ';
-
-
-
---==========
--- India
---==========
--- Varu upgrades to
--- 23/04/2021: Implemented by Firaxis
---UPDATE UnitUpgrades SET UpgradeUnit='UNIT_CUIRASSIER' WHERE Unit='UNIT_INDIAN_VARU';
-
-
-
---==================
--- Kongo
---==================
-UPDATE Units_XP2 SET ResourceCost=10 WHERE UnitType='UNIT_KONGO_SHIELD_BEARER';
-
-
---==========
--- Mali
---==========
-
-
-
---==================
--- Maori
---==================
-DELETE FROM TraitModifiers WHERE TraitType='TRAIT_LEADER_KUPES_VOYAGE' AND ModifierId='BUILDER_PRESETTLEMENT';
-UPDATE Modifiers SET SubjectRequirementSetId='UNIT_IS_DOMAIN_LAND' WHERE ModifierId='TRAIT_MAORI_MANA_OCEAN';
-INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId) VALUES 
-	('VARU_ADJACENT_AT_WAR_REQUIREMENTS', 'REQUIRES_UNIT_IS_DOMAIN_LAND');
--- UPDATE Units SET Maintenance=2, Combat=40 WHERE UnitType='UNIT_MAORI_TOA';
-
-
-
---==================
--- Ottoman
---==================
--- Great Bazaar is now a Market replacement
-DELETE FROM BuildingPrereqs WHERE Building='BUILDING_GRAND_BAZAAR';
-UPDATE BuildingReplaces SET ReplacesBuildingType='BUILDING_MARKET' WHERE CivUniqueBuildingType='BUILDING_GRAND_BAZAAR'; 
-UPDATE Building_YieldChanges SET YieldChange=3 WHERE BuildingType='BUILDING_GRAND_BAZAAR';
-UPDATE Buildings SET PrereqTech='TECH_CURRENCY', Cost=100 WHERE BuildingType='BUILDING_GRAND_BAZAAR';
-INSERT OR IGNORE INTO BuildingModifiers (BuildingType, ModifierId)
-	VALUES ('BUILDING_GRAND_BAZAAR', 'MARKET_TRADE_ROUTE_CAPACITY');
-
-
---==================
--- Persia
---==================
-UPDATE Units_XP2 SET ResourceCost=20 WHERE UnitType='UNIT_PERSIAN_IMMORTAL';
-
-
-
---==================
--- Rome
---==================
-UPDATE Units_XP2 SET ResourceCost=20 WHERE UnitType='UNIT_ROMAN_LEGION';
-
-
-
---==================
--- Sumeria
---==================
-/* REVERT TO BASE GAME
-INSERT OR IGNORE INTO Units_XP2 (UnitType, ResourceCost) VALUES
-	('UNIT_SUMERIAN_WAR_CART', 10);
-
-*/
-
---==================
--- Sweden
---==================
--- open air museum moved to diplo service
-UPDATE Improvements SET PrereqCivic='CIVIC_DIPLOMATIC_SERVICE' WHERE ImprovementType='IMPROVEMENT_OPEN_AIR_MUSEUM';
--- +50% prod towards libraries, universities, workshops, and factories
-INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
-	VALUES
-	('TRAIT_CIVILIZATION_NOBEL_PRIZE' , 'NOBEL_PRIZE_UNIVERISTY_BOOST' ),
-	('TRAIT_CIVILIZATION_NOBEL_PRIZE' , 'NOBEL_PRIZE_LIBRARY_BOOST' ),
-	('TRAIT_CIVILIZATION_NOBEL_PRIZE' , 'NOBEL_PRIZE_WORKSHOP_BOOST' ),
-	('TRAIT_CIVILIZATION_NOBEL_PRIZE' , 'NOBEL_PRIZE_FACTORY_BOOST' );
-INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
-	VALUES
-	('NOBEL_PRIZE_LIBRARY_BOOST' , 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_PRODUCTION' , null),
-	('NOBEL_PRIZE_UNIVERISTY_BOOST' , 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_PRODUCTION' , null),
-	('NOBEL_PRIZE_WORKSHOP_BOOST' , 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_PRODUCTION' , null),
-	('NOBEL_PRIZE_FACTORY_BOOST' , 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_PRODUCTION' , null);
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value , Extra , SecondExtra)
-	VALUES 
-	('NOBEL_PRIZE_LIBRARY_BOOST' , 'BuildingType' , 'BUILDING_LIBRARY' , null , null),
-	('NOBEL_PRIZE_LIBRARY_BOOST' , 'Amount'       , '50'                  , null , null),
-	('NOBEL_PRIZE_UNIVERISTY_BOOST' , 'BuildingType' , 'BUILDING_UNIVERSITY' , null , null),
-	('NOBEL_PRIZE_UNIVERISTY_BOOST' , 'Amount'       , '50'                  , null , null),
-	('NOBEL_PRIZE_WORKSHOP_BOOST' , 'BuildingType' , 'BUILDING_WORKSHOP' , null , null),
-	('NOBEL_PRIZE_WORKSHOP_BOOST' , 'Amount'       , '50'                  , null , null),
-	('NOBEL_PRIZE_FACTORY_BOOST'    , 'BuildingType' , 'BUILDING_FACTORY'    , null , null),
-	('NOBEL_PRIZE_FACTORY_BOOST'    , 'Amount'       , '50'                  , null , null);
+-- 	VALUES
+-- 	('TRAIT_LEADER_ELEANOR_LOYALTY' , 'THEATER_BUILDING_PRODUCTION_BONUS_CPLMOD');
+-- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId , OwnerRequirementSetId)
+-- 	VALUES
+-- 	('THEATER_BUILDING_PRODUCTION_BONUS_CPLMOD' , 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_PRODUCTION' , NULL , NULL);
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES
+-- 	('THEATER_BUILDING_PRODUCTION_BONUS_CPLMOD' , 'DistrictType' , 'DISTRICT_THEATER'),
+-- 	('THEATER_BUILDING_PRODUCTION_BONUS_CPLMOD' , 'Amount'       , '100'                     );
+--
+--
+-- --==========
+-- -- FRANCE
+-- --==========
+-- UPDATE Units_XP2 SET ResourceCost=10 WHERE UnitType='UNIT_FRENCH_GARDE_IMPERIALE';
+--
+--
+-- --==================
+-- -- Hungary
+-- --==================
+-- -- only 1 envoy from levying city-states units
+-- UPDATE ModifierArguments SET Value='1' WHERE ModifierId='LEVY_MILITARY_TWO_FREE_ENVOYS';
+-- -- no combat bonus for levied units
+-- -- DELETE FROM ModifierArguments WHERE ModifierId='RAVEN_LEVY_COMBAT' AND Name='Amount' AND Value='5';
+-- -- Huszars only +2 combat strength from each alliance instead of 3
+-- UPDATE ModifierArguments SET Value='1' WHERE ModifierId='HUSZAR_ALLIES_COMBAT_BONUS';
+-- -- Black Army only +2 combat strength from adjacent levied units
+-- UPDATE ModifierArguments SET Value='2' WHERE ModifierId='BLACK_ARMY_ADJACENT_LEVY';
+-- -- Only 1 extra movement for levied units
+-- UPDATE ModifierArguments SET Value='1' WHERE ModifierId='RAVEN_LEVY_MOVEMENT';
+--
+--
+--
+-- --==========
+-- -- Inca
+-- --==========
+-- UPDATE Units SET RangedCombat=30 WHERE UnitType='UNIT_INCA_WARAKAQ';
+--
+--
+--
+-- --==========
+-- -- India
+-- --==========
+-- -- Varu upgrades to
+-- -- 23/04/2021: Implemented by Firaxis
+-- --UPDATE UnitUpgrades SET UpgradeUnit='UNIT_CUIRASSIER' WHERE Unit='UNIT_INDIAN_VARU';
+--
+--
+--
+-- --==================
+-- -- Kongo
+-- --==================
+-- UPDATE Units_XP2 SET ResourceCost=10 WHERE UnitType='UNIT_KONGO_SHIELD_BEARER';
+--
+--
+-- --==========
+-- -- Mali
+-- --==========
+--
+--
+--
+-- --==================
+-- -- Maori
+-- --==================
+-- DELETE FROM TraitModifiers WHERE TraitType='TRAIT_LEADER_KUPES_VOYAGE' AND ModifierId='BUILDER_PRESETTLEMENT';
+-- UPDATE Modifiers SET SubjectRequirementSetId='UNIT_IS_DOMAIN_LAND' WHERE ModifierId='TRAIT_MAORI_MANA_OCEAN';
+-- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId) VALUES
+-- 	('VARU_ADJACENT_AT_WAR_REQUIREMENTS', 'REQUIRES_UNIT_IS_DOMAIN_LAND');
+-- -- UPDATE Units SET Maintenance=2, Combat=40 WHERE UnitType='UNIT_MAORI_TOA';
+--
+--
+--
+-- --==================
+-- -- Ottoman
+-- --==================
+-- -- Great Bazaar is now a Market replacement
+-- DELETE FROM BuildingPrereqs WHERE Building='BUILDING_GRAND_BAZAAR';
+-- UPDATE BuildingReplaces SET ReplacesBuildingType='BUILDING_MARKET' WHERE CivUniqueBuildingType='BUILDING_GRAND_BAZAAR';
+-- UPDATE Building_YieldChanges SET YieldChange=3 WHERE BuildingType='BUILDING_GRAND_BAZAAR';
+-- UPDATE Buildings SET PrereqTech='TECH_CURRENCY', Cost=100 WHERE BuildingType='BUILDING_GRAND_BAZAAR';
+-- INSERT OR IGNORE INTO BuildingModifiers (BuildingType, ModifierId)
+-- 	VALUES ('BUILDING_GRAND_BAZAAR', 'MARKET_TRADE_ROUTE_CAPACITY');
+--
+--
+-- --==================
+-- -- Persia
+-- --==================
+-- UPDATE Units_XP2 SET ResourceCost=20 WHERE UnitType='UNIT_PERSIAN_IMMORTAL';
+--
+--
+--
+-- --==================
+-- -- Rome
+-- --==================
+-- UPDATE Units_XP2 SET ResourceCost=20 WHERE UnitType='UNIT_ROMAN_LEGION';
+--
+--
+--
+-- --==================
+-- -- Sumeria
+-- --==================
+-- /* REVERT TO BASE GAME
+-- INSERT OR IGNORE INTO Units_XP2 (UnitType, ResourceCost) VALUES
+-- 	('UNIT_SUMERIAN_WAR_CART', 10);
+--
+-- */
+--
+-- --==================
+-- -- Sweden
+-- --==================
+-- -- open air museum moved to diplo service
+-- UPDATE Improvements SET PrereqCivic='CIVIC_DIPLOMATIC_SERVICE' WHERE ImprovementType='IMPROVEMENT_OPEN_AIR_MUSEUM';
+-- -- +50% prod towards libraries, universities, workshops, and factories
+-- INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
+-- 	VALUES
+-- 	('TRAIT_CIVILIZATION_NOBEL_PRIZE' , 'NOBEL_PRIZE_UNIVERISTY_BOOST' ),
+-- 	('TRAIT_CIVILIZATION_NOBEL_PRIZE' , 'NOBEL_PRIZE_LIBRARY_BOOST' ),
+-- 	('TRAIT_CIVILIZATION_NOBEL_PRIZE' , 'NOBEL_PRIZE_WORKSHOP_BOOST' ),
+-- 	('TRAIT_CIVILIZATION_NOBEL_PRIZE' , 'NOBEL_PRIZE_FACTORY_BOOST' );
+-- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
+-- 	VALUES
+-- 	('NOBEL_PRIZE_LIBRARY_BOOST' , 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_PRODUCTION' , null),
+-- 	('NOBEL_PRIZE_UNIVERISTY_BOOST' , 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_PRODUCTION' , null),
+-- 	('NOBEL_PRIZE_WORKSHOP_BOOST' , 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_PRODUCTION' , null),
+-- 	('NOBEL_PRIZE_FACTORY_BOOST' , 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_PRODUCTION' , null);
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value , Extra , SecondExtra)
+-- 	VALUES
+-- 	('NOBEL_PRIZE_LIBRARY_BOOST' , 'BuildingType' , 'BUILDING_LIBRARY' , null , null),
+-- 	('NOBEL_PRIZE_LIBRARY_BOOST' , 'Amount'       , '50'                  , null , null),
+-- 	('NOBEL_PRIZE_UNIVERISTY_BOOST' , 'BuildingType' , 'BUILDING_UNIVERSITY' , null , null),
+-- 	('NOBEL_PRIZE_UNIVERISTY_BOOST' , 'Amount'       , '50'                  , null , null),
+-- 	('NOBEL_PRIZE_WORKSHOP_BOOST' , 'BuildingType' , 'BUILDING_WORKSHOP' , null , null),
+-- 	('NOBEL_PRIZE_WORKSHOP_BOOST' , 'Amount'       , '50'                  , null , null),
+-- 	('NOBEL_PRIZE_FACTORY_BOOST'    , 'BuildingType' , 'BUILDING_FACTORY'    , null , null),
+-- 	('NOBEL_PRIZE_FACTORY_BOOST'    , 'Amount'       , '50'                  , null , null);
 
 
 
@@ -306,11 +306,11 @@ UPDATE ModifierArguments SET Value='4' WHERE ModifierId='COLLECTIVIZATION_INTERN
 DELETE FROM BeliefModifiers WHERE ModifierId='RELIGIOUS_SETTLEMENTS_SETTLER';
 -- reeds and marshes works with all floodplains (see egypt for ReqArgs) and remains only 1 prod
 UPDATE ModifierArguments SET Value='1' WHERE ModifierId='LADY_OF_THE_REEDS_PRODUCTION2_MODIFIER' AND Name='Amount';
-INSERT OR IGNORE INTO RequirementSetRequirements 
-    (RequirementSetId, RequirementId)
-    VALUES
-    ('PLOT_HAS_REEDS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_FLOODPLAINS_GRASSLAND'),
-    ('PLOT_HAS_REEDS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_FLOODPLAINS_PLAINS');
+-- INSERT OR IGNORE INTO RequirementSetRequirements
+--     (RequirementSetId, RequirementId)
+--     VALUES
+--     ('PLOT_HAS_REEDS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_FLOODPLAINS_GRASSLAND'),
+--     ('PLOT_HAS_REEDS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_FLOODPLAINS_PLAINS');
 -- more faith for fire goddess and no district dmg from eruptions
 UPDATE ModifierArguments SET Value='4' WHERE ModifierId='GODDESS_OF_FIRE_FEATURES_FAITH_MODIFIER' AND Name='Amount';
 
@@ -561,8 +561,8 @@ INSERT OR IGNORE INTO Resource_ValidFeatures (ResourceType , FeatureType)
 	VALUES ('RESOURCE_NITER' , 'FEATURE_FLOODPLAINS');
 
 -- citizen yields
-UPDATE District_CitizenYieldChanges SET YieldChange=3 WHERE YieldType='YIELD_GOLD' AND DistrictType="DISTRICT_COTHON";
-UPDATE District_CitizenYieldChanges SET YieldChange=4 WHERE YieldType='YIELD_GOLD' AND DistrictType="DISTRICT_SUGUBA";
+UPDATE District_CitizenYieldChanges SET YieldChange=3 WHERE YieldType='YIELD_GOLD' AND DistrictType='DISTRICT_COTHON';
+UPDATE District_CitizenYieldChanges SET YieldChange=4 WHERE YieldType='YIELD_GOLD' AND DistrictType='DISTRICT_SUGUBA';
 
 -- GATHERING STORM WAR GOSSIP --
 DELETE FROM Gossips WHERE GossipType='GOSSIP_MAKE_DOW';
@@ -574,9 +574,9 @@ UPDATE Improvements SET PrereqTech='TECH_REFINING' WHERE ImprovementType='IMPROV
 --==============================================================
 --******				C O N G R E S S	  			  	  ******
 --==============================================================
-DELETE FROM ModifierArguments WHERE ModifierId="APPLY_RES_UNIT_COMBAT_DEBUFF";
+DELETE FROM ModifierArguments WHERE ModifierId='APPLY_RES_UNIT_COMBAT_DEBUFF';
 INSERT INTO ModifierArguments (ModifierId, Name, Value) VALUES
-	("APPLY_RES_UNIT_COMBAT_DEBUFF","ModifierId", "WC_RES_UNIT_COMBAT_DEBUFF");
+	('APPLY_RES_UNIT_COMBAT_DEBUFF','ModifierId', 'WC_RES_UNIT_COMBAT_DEBUFF');
 
 --==============================================================
 --******				G O V E R N O R S				  ******
@@ -615,7 +615,7 @@ UPDATE GovernorPromotionPrereqs SET PrereqGovernorPromotion='GOVERNOR_PROMOTION_
 
 -- 2020/12/21 - Moved Moska Citadel fix from new_bbg_nfp_babylon.sql here (was 25)
 -- Related to https://github.com/iElden/BetterBalancedGame/issues/48
-UPDATE ModifierArguments SET Value=24 WHERE ModifierId="CARDINAL_CITADEL_OF_GOD_FAITH_FINISH_BUILDINGS" AND Name="BuildingProductionPercent";
+UPDATE ModifierArguments SET Value=24 WHERE ModifierId='CARDINAL_CITADEL_OF_GOD_FAITH_FINISH_BUILDINGS' AND Name='BuildingProductionPercent';
 
 
 -- move Pingala's 100% GPP to first on left ability
@@ -899,11 +899,11 @@ INSERT OR IGNORE INTO RequirementSets ( RequirementSetId, RequirementSetType ) V
 INSERT OR IGNORE INTO RequirementSetRequirements ( RequirementSetId, RequirementId ) VALUES
 	( 'REQUIRES_PLOT_HAS_VOLCANIC_SOIL_BBG', 'PLOT_VOLCANIC_SOIL_REQUIREMENT' );
 INSERT OR IGNORE INTO Modifiers ( ModifierId, ModifierType, SubjectRequirementSetId ) VALUES
-	( 'REINFORCED_INFRASTRUCTURE_FLOODPLAINS_PROD_BBG', 'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD', 'REQUIRES_PLOT_HAS_FLOODPLAINS_CPL' ),
+-- 	( 'REINFORCED_INFRASTRUCTURE_FLOODPLAINS_PROD_BBG', 'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD', 'REQUIRES_PLOT_HAS_FLOODPLAINS_CPL' ),
 	( 'REINFORCED_INFRASTRUCTURE_VOLCANO_PROD_BBG', 'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD', 'REQUIRES_PLOT_HAS_VOLCANIC_SOIL_BBG' );
 INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value) VALUES
-	('REINFORCED_INFRASTRUCTURE_FLOODPLAINS_PROD_BBG' , 'YieldType' , 'YIELD_PRODUCTION'),
-	('REINFORCED_INFRASTRUCTURE_FLOODPLAINS_PROD_BBG' , 'Amount' , '1'),
+-- 	('REINFORCED_INFRASTRUCTURE_FLOODPLAINS_PROD_BBG' , 'YieldType' , 'YIELD_PRODUCTION'),
+-- 	('REINFORCED_INFRASTRUCTURE_FLOODPLAINS_PROD_BBG' , 'Amount' , '1'),
 	('REINFORCED_INFRASTRUCTURE_VOLCANO_PROD_BBG' , 'YieldType' , 'YIELD_PRODUCTION'),
 	('REINFORCED_INFRASTRUCTURE_VOLCANO_PROD_BBG' , 'Amount' , '1');
 UPDATE GovernorPromotions SET Level=1 WHERE GovernorPromotionType='GOVERNOR_PROMOTION_REINFORCED_INFRASTRUCTURE';

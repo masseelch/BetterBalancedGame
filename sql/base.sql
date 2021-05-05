@@ -52,629 +52,629 @@ INSERT OR IGNORE INTO RequirementSetRequirements ( RequirementSetId, Requirement
 UPDATE Modifiers SET SubjectRequirementSetId='SPECIAL_DISTRICT_ON_COAST_BBG' WHERE ModifierId='MINOR_CIV_NAN_MADOL_DISTRICTS_CULTURE_BONUS';
 
 
---==================
--- America
---==================
--- Film Studios tourism bonus reduced from 100% to 50%
-UPDATE ModifierArguments SET Value='50' WHERE ModifierId='FILMSTUDIO_ENHANCEDLATETOURISM' AND Name='Modifier';
--- American Rough Riders will now be a cav replacement
--- UPDATE Units SET Combat=62, Cost=340, PromotionClass='PROMOTION_CLASS_LIGHT_CAVALRY', PrereqTech='TECH_MILITARY_SCIENCE' WHERE UnitType='UNIT_AMERICAN_ROUGH_RIDER';
--- UPDATE UnitUpgrades SET UpgradeUnit='UNIT_HELICOPTER' WHERE Unit='UNIT_AMERICAN_ROUGH_RIDER';
--- INSERT OR IGNORE INTO UnitReplaces VALUES ('UNIT_AMERICAN_ROUGH_RIDER' , 'UNIT_CAVALRY');
--- UPDATE ModifierArguments SET Value='5' WHERE ModifierId='ROUGH_RIDER_BONUS_ON_HILLS';
--- Continent combat bonus: +5 attack on foreign continent, +5 defense on home continent
-INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) VALUES
-	('TRAIT_COMBAT_BONUS_FOREIGN_CONTINENT_BBG',    'MODIFIER_PLAYER_UNITS_ATTACH_MODIFIER', 'UNIT_IS_DOMAIN_LAND'),
-	('COMBAT_BONUS_FOREIGN_CONTINENT_MODIFIER_BBG', 'MODIFIER_UNIT_ADJUST_COMBAT_STRENGTH', 'REQUIREMENTS_UNIT_ON_FOREIGN_CONTINENT_BBG');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES
-	('TRAIT_COMBAT_BONUS_FOREIGN_CONTINENT_BBG', 'ModifierId', 'COMBAT_BONUS_FOREIGN_CONTINENT_MODIFIER_BBG'),
-	('COMBAT_BONUS_FOREIGN_CONTINENT_MODIFIER_BBG', 'Amount', '5');
-INSERT OR IGNORE INTO ModifierStrings (ModifierId, Context, Text) VALUES
-	('COMBAT_BONUS_FOREIGN_CONTINENT_MODIFIER_BBG', 'Preview', 'LOC_PROMOTION_COMBAT_FOREIGN_CONTINENT_DESCRIPTION');
-INSERT OR IGNORE INTO TraitModifiers (TraitType, ModifierId) VALUES
-	('TRAIT_LEADER_ROOSEVELT_COROLLARY', 'TRAIT_COMBAT_BONUS_FOREIGN_CONTINENT_BBG');
-INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId) VALUES
-	('REQUIREMENTS_UNIT_ON_HOME_CONTINENT',    'PLAYER_IS_DEFENDER_REQUIREMENTS'),
-	('REQUIREMENTS_UNIT_ON_FOREIGN_CONTINENT_BBG', 'PLAYER_IS_ATTACKER_REQUIREMENTS'),
-	('REQUIREMENTS_UNIT_ON_FOREIGN_CONTINENT_BBG', 'REQUIRES_UNIT_ON_FOREIGN_CONTINENT_BBG');
-INSERT OR IGNORE INTO RequirementSets (RequirementSetId, RequirementSetType) VALUES
-	('REQUIREMENTS_UNIT_ON_FOREIGN_CONTINENT_BBG', 'REQUIREMENTSET_TEST_ALL');
-INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType, Inverse) VALUES
-	('REQUIRES_UNIT_ON_FOREIGN_CONTINENT_BBG', 'REQUIREMENT_UNIT_ON_HOME_CONTINENT', 1);
-
-
---==================
--- Arabia
---==================
--- Arabia's Worship Building Bonus increased from 10% to 20%
-UPDATE ModifierArguments SET Value='20' WHERE ModifierId='TRAIT_RELIGIOUS_BUILDING_MULTIPLIER_CULTURE' AND Name='Multiplier';
-UPDATE ModifierArguments SET Value='20' WHERE ModifierId='TRAIT_RELIGIOUS_BUILDING_MULTIPLIER_FAITH' AND Name='Multiplier';
-UPDATE ModifierArguments SET Value='20' WHERE ModifierId='TRAIT_RELIGIOUS_BUILDING_MULTIPLIER_SCIENCE' AND Name='Multiplier';
--- Arabia gets +1 Great Prophet point per turn after researching astrology
-INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType, SubjectRequirementSetId)
-    VALUES ('TRAIT_BONUS_GREAT_PROPHET_POINT_CPLMOD' , 'MODIFIER_PLAYER_ADJUST_GREAT_PERSON_POINTS' , 'PLAYER_HAS_ASTROLOGY_REQUIREMENTS_CPLMOD');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-    VALUES ('TRAIT_BONUS_GREAT_PROPHET_POINT_CPLMOD' , 'GreatPersonClassType' , 'GREAT_PERSON_CLASS_PROPHET');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-    VALUES ('TRAIT_BONUS_GREAT_PROPHET_POINT_CPLMOD' , 'Amount' , '1');
---UPDATE TraitModifiers SET ModifierId='TRAIT_BONUS_GREAT_PROPHET_POINT_CPLMOD' WHERE ModifierId='TRAIT_GUARANTEE_ONE_PROPHET';
-INSERT OR IGNORE INTO TraitModifiers (TraitType, ModifierId) VALUES ('TRAIT_CIVILIZATION_LAST_PROPHET', 'TRAIT_BONUS_GREAT_PROPHET_POINT_CPLMOD');
-INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
-	VALUES ('PLAYER_HAS_ASTROLOGY_REQUIREMENTS_CPLMOD' , 'REQUIREMENTSET_TEST_ALL');
-INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
-	VALUES ('PLAYER_HAS_ASTROLOGY_REQUIREMENTS_CPLMOD' , 'REQUIRES_PLAYER_HAS_ASTROLOGY_CPLMOD');
-INSERT OR IGNORE INTO Requirements (RequirementId , RequirementType)
-	VALUES ('REQUIRES_PLAYER_HAS_ASTROLOGY_CPLMOD' , 'REQUIREMENT_PLAYER_HAS_TECHNOLOGY');
-INSERT OR IGNORE INTO RequirementArguments (RequirementId , Name , Value)
-	VALUES ('REQUIRES_PLAYER_HAS_ASTROLOGY_CPLMOD' , 'TechnologyType' , 'TECH_ASTROLOGY');
-
-
-
---==================
--- China
---==================
--- +1 all yields per wonder
-INSERT OR IGNORE INTO RequirementSetRequirements VALUES
-	('DYNASTIC_CYCLE_TRAIT_REQUIREMENTS_BBG', 'REQUIRES_PLAYER_HAS_DYNASTIC_CYCLE_TRAIT_BBG');
-INSERT OR IGNORE INTO RequirementSets VALUES
-	('DYNASTIC_CYCLE_TRAIT_REQUIREMENTS_BBG', 'REQUIREMENTSET_TEST_ALL');
-INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType) VALUES
-	('REQUIRES_PLAYER_HAS_DYNASTIC_CYCLE_TRAIT_BBG', 'REQUIREMENT_PLAYER_HAS_CIVILIZATION_OR_LEADER_TRAIT');
-INSERT OR IGNORE INTO RequirementArguments (RequirementId, Name, Value) VALUES
-	('REQUIRES_PLAYER_HAS_DYNASTIC_CYCLE_TRAIT_BBG', 'TraitType', 'TRAIT_CIVILIZATION_DYNASTIC_CYCLE');
-INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType) VALUES
-	('TRAIT_ATTACH_WONDER_FOOD_BBG', 'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER'),
-	('TRAIT_ATTACH_WONDER_PROD_BBG', 'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER');
-	--('TRAIT_ATTACH_WONDER_FAITH_BBG', 'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER'),
-	--('TRAIT_ATTACH_WONDER_GOLD_BBG', 'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER'),
-	--('TRAIT_ATTACH_WONDER_SCI_BBG', 'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER'),
-	--('TRAIT_ATTACH_WONDER_CUL_BBG', 'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES
-	('TRAIT_ATTACH_WONDER_FOOD_BBG', 'ModifierId', 'TRAIT_WONDER_FOOD_BBG'),
-	('TRAIT_ATTACH_WONDER_PROD_BBG', 'ModifierId', 'TRAIT_WONDER_PROD_BBG');
-	--('TRAIT_ATTACH_WONDER_FAITH_BBG', 'ModifierId', 'TRAIT_WONDER_FAITH_BBG'),
-	--('TRAIT_ATTACH_WONDER_GOLD_BBG', 'ModifierId', 'TRAIT_WONDER_GOLD_BBG'),
-	--('TRAIT_ATTACH_WONDER_SCI_BBG', 'ModifierId', 'TRAIT_WONDER_SCI_BBG'),
-	--('TRAIT_ATTACH_WONDER_CUL_BBG', 'ModifierId', 'TRAIT_WONDER_CUL_BBG');
-INSERT OR IGNORE INTO TraitModifiers VALUES
-	('TRAIT_CIVILIZATION_DYNASTIC_CYCLE', 'TRAIT_ATTACH_WONDER_FOOD_BBG'),
-	('TRAIT_CIVILIZATION_DYNASTIC_CYCLE', 'TRAIT_ATTACH_WONDER_PROD_BBG');
-	--('TRAIT_CIVILIZATION_DYNASTIC_CYCLE', 'TRAIT_ATTACH_WONDER_FAITH_BBG'),
-	--('TRAIT_CIVILIZATION_DYNASTIC_CYCLE', 'TRAIT_ATTACH_WONDER_GOLD_BBG'),
-	--('TRAIT_CIVILIZATION_DYNASTIC_CYCLE', 'TRAIT_ATTACH_WONDER_SCI_BBG'),
-	--('TRAIT_CIVILIZATION_DYNASTIC_CYCLE', 'TRAIT_ATTACH_WONDER_CUL_BBG');
-INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType) VALUES
-	('TRAIT_WONDER_FOOD_BBG', 'MODIFIER_SINGLE_CITY_ADJUST_WONDER_YIELD_CHANGE'),
-	('TRAIT_WONDER_PROD_BBG', 'MODIFIER_SINGLE_CITY_ADJUST_WONDER_YIELD_CHANGE');
---	('TRAIT_WONDER_FAITH_BBG', 'MODIFIER_SINGLE_CITY_ADJUST_WONDER_YIELD_CHANGE'),
---	('TRAIT_WONDER_GOLD_BBG', 'MODIFIER_SINGLE_CITY_ADJUST_WONDER_YIELD_CHANGE'),
---	('TRAIT_WONDER_SCI_BBG', 'MODIFIER_SINGLE_CITY_ADJUST_WONDER_YIELD_CHANGE'),
---	('TRAIT_WONDER_CUL_BBG', 'MODIFIER_SINGLE_CITY_ADJUST_WONDER_YIELD_CHANGE');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES
-	('TRAIT_WONDER_FOOD_BBG', 'Amount', '1'),
-	('TRAIT_WONDER_FOOD_BBG', 'YieldType', 'YIELD_FOOD'),
-	('TRAIT_WONDER_PROD_BBG', 'Amount', '1'),
-	('TRAIT_WONDER_PROD_BBG', 'YieldType', 'YIELD_PRODUCTION');
-	--('TRAIT_WONDER_FAITH_BBG', 'Amount', '1'),
-	--('TRAIT_WONDER_FAITH_BBG', 'YieldType', 'YIELD_FAITH'),
-	--('TRAIT_WONDER_GOLD_BBG', 'Amount', '1'),
-	--('TRAIT_WONDER_GOLD_BBG', 'YieldType', 'YIELD_GOLD'),
-	--('TRAIT_WONDER_SCI_BBG', 'Amount', '1'),
-	--('TRAIT_WONDER_SCI_BBG', 'YieldType', 'YIELD_SCIENCE'),
-	--('TRAIT_WONDER_CUL_BBG', 'Amount', '1'),
-	--('TRAIT_WONDER_CUL_BBG', 'YieldType', 'YIELD_CULTURE');
--- great wall gets +1 prod, no initial gold, lowered gold and lowered culture per adj after castles
-INSERT OR IGNORE INTO Improvement_YieldChanges VALUES ('IMPROVEMENT_GREAT_WALL', 'YIELD_PRODUCTION', 1);
-UPDATE Improvement_YieldChanges SET YieldChange=0 WHERE ImprovementType='IMPROVEMENT_GREAT_WALL' AND YieldType='YIELD_GOLD';
-UPDATE Adjacency_YieldChanges SET YieldChange=1 WHERE ID='GreatWall_Culture';
-UPDATE Adjacency_YieldChanges SET YieldChange=1 WHERE ID='GreatWall_Gold';
--- Crouching Tiger now a crossbowman replacement that gets +7 when adjacent to an enemy unit
-INSERT OR IGNORE INTO UnitReplaces (CivUniqueUnitType , ReplacesUnitType)
-	VALUES ('UNIT_CHINESE_CROUCHING_TIGER' , 'UNIT_CROSSBOWMAN');
-UPDATE Units SET Cost=190 , RangedCombat=40 , Range=2 WHERE UnitType='UNIT_CHINESE_CROUCHING_TIGER';
-
-INSERT OR IGNORE INTO Tags (Tag , Vocabulary)
-	VALUES ('CLASS_CROUCHING_TIGER' , 'ABILITY_CLASS');
-INSERT OR IGNORE INTO TypeTags (Type , Tag)
-	VALUES ('UNIT_CHINESE_CROUCHING_TIGER' , 'CLASS_CROUCHING_TIGER');
-INSERT OR IGNORE INTO Types (Type , Kind)
-	VALUES ('ABILITY_TIGER_ADJACENCY_DAMAGE_CPLMOD' , 'KIND_ABILITY');
-INSERT OR IGNORE INTO TypeTags (Type , Tag)
-	VALUES ('ABILITY_TIGER_ADJACENCY_DAMAGE_CPLMOD' , 'CLASS_CROUCHING_TIGER');
-INSERT OR IGNORE INTO UnitAbilities (UnitAbilityType , Name , Description)
-	VALUES ('ABILITY_TIGER_ADJACENCY_DAMAGE_CPLMOD' , 'LOC_ABILITY_TIGER_ADJACENCY_NAME' , 'LOC_ABILITY_TIGER_ADJACENCY_DESCRIPTION');
-INSERT OR IGNORE INTO UnitAbilityModifiers (UnitAbilityType , ModifierId)
-	VALUES ('ABILITY_TIGER_ADJACENCY_DAMAGE_CPLMOD' , 'TIGER_ADJACENCY_DAMAGE');
-INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
-	VALUES ('TIGER_ADJACENCY_DAMAGE' , 'MODIFIER_UNIT_ADJUST_COMBAT_STRENGTH' , 'TIGER_ADJACENCY_REQUIREMENTS');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES ('TIGER_ADJACENCY_DAMAGE', 'Amount' , '7'); 
-INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
-	VALUES ('TIGER_ADJACENCY_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
-INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
-	VALUES ('TIGER_ADJACENCY_REQUIREMENTS' , 'PLAYER_IS_ATTACKER_REQUIREMENTS');
-INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
-	VALUES ('TIGER_ADJACENCY_REQUIREMENTS' , 'ADJACENT_UNIT_REQUIREMENT');
-INSERT OR IGNORE INTO ModifierStrings (ModifierId , Context , Text)
-    VALUES ('TIGER_ADJACENCY_DAMAGE' , 'Preview' , 'LOC_ABILITY_TIGER_ADJACENCY_DESCRIPTION');
-
---==================
--- Egypt
---==================
--- wonder and district on rivers bonus increased to 25%
-UPDATE ModifierArguments SET Value='25' WHERE ModifierId='TRAIT_RIVER_FASTER_BUILDTIME_WONDER';
-UPDATE ModifierArguments SET Value='25' WHERE ModifierId='TRAIT_RIVER_FASTER_BUILDTIME_DISTRICT';
+-- --==================
+-- -- America
+-- --==================
+-- -- Film Studios tourism bonus reduced from 100% to 50%
+-- UPDATE ModifierArguments SET Value='50' WHERE ModifierId='FILMSTUDIO_ENHANCEDLATETOURISM' AND Name='Modifier';
+-- -- American Rough Riders will now be a cav replacement
+-- -- UPDATE Units SET Combat=62, Cost=340, PromotionClass='PROMOTION_CLASS_LIGHT_CAVALRY', PrereqTech='TECH_MILITARY_SCIENCE' WHERE UnitType='UNIT_AMERICAN_ROUGH_RIDER';
+-- -- UPDATE UnitUpgrades SET UpgradeUnit='UNIT_HELICOPTER' WHERE Unit='UNIT_AMERICAN_ROUGH_RIDER';
+-- -- INSERT OR IGNORE INTO UnitReplaces VALUES ('UNIT_AMERICAN_ROUGH_RIDER' , 'UNIT_CAVALRY');
+-- -- UPDATE ModifierArguments SET Value='5' WHERE ModifierId='ROUGH_RIDER_BONUS_ON_HILLS';
+-- -- Continent combat bonus: +5 attack on foreign continent, +5 defense on home continent
+-- INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) VALUES
+-- 	('TRAIT_COMBAT_BONUS_FOREIGN_CONTINENT_BBG',    'MODIFIER_PLAYER_UNITS_ATTACH_MODIFIER', 'UNIT_IS_DOMAIN_LAND'),
+-- 	('COMBAT_BONUS_FOREIGN_CONTINENT_MODIFIER_BBG', 'MODIFIER_UNIT_ADJUST_COMBAT_STRENGTH', 'REQUIREMENTS_UNIT_ON_FOREIGN_CONTINENT_BBG');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES
+-- 	('TRAIT_COMBAT_BONUS_FOREIGN_CONTINENT_BBG', 'ModifierId', 'COMBAT_BONUS_FOREIGN_CONTINENT_MODIFIER_BBG'),
+-- 	('COMBAT_BONUS_FOREIGN_CONTINENT_MODIFIER_BBG', 'Amount', '5');
+-- INSERT OR IGNORE INTO ModifierStrings (ModifierId, Context, Text) VALUES
+-- 	('COMBAT_BONUS_FOREIGN_CONTINENT_MODIFIER_BBG', 'Preview', 'LOC_PROMOTION_COMBAT_FOREIGN_CONTINENT_DESCRIPTION');
+-- INSERT OR IGNORE INTO TraitModifiers (TraitType, ModifierId) VALUES
+-- 	('TRAIT_LEADER_ROOSEVELT_COROLLARY', 'TRAIT_COMBAT_BONUS_FOREIGN_CONTINENT_BBG');
+-- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId) VALUES
+-- 	('REQUIREMENTS_UNIT_ON_HOME_CONTINENT',    'PLAYER_IS_DEFENDER_REQUIREMENTS'),
+-- 	('REQUIREMENTS_UNIT_ON_FOREIGN_CONTINENT_BBG', 'PLAYER_IS_ATTACKER_REQUIREMENTS'),
+-- 	('REQUIREMENTS_UNIT_ON_FOREIGN_CONTINENT_BBG', 'REQUIRES_UNIT_ON_FOREIGN_CONTINENT_BBG');
+-- INSERT OR IGNORE INTO RequirementSets (RequirementSetId, RequirementSetType) VALUES
+-- 	('REQUIREMENTS_UNIT_ON_FOREIGN_CONTINENT_BBG', 'REQUIREMENTSET_TEST_ALL');
+-- INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType, Inverse) VALUES
+-- 	('REQUIRES_UNIT_ON_FOREIGN_CONTINENT_BBG', 'REQUIREMENT_UNIT_ON_HOME_CONTINENT', 1);
 --
-INSERT OR IGNORE INTO RequirementSets (RequirementSetId, RequirementSetType)
-	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_CPL', 'REQUIREMENTSET_TEST_ANY');
-INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId)
-	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_CPL', 'REQUIRES_PLOT_HAS_FLOODPLAINS');
--- Sphinx base Faith Increased to 2 (from 1)
-UPDATE Improvement_YieldChanges SET YieldChange=2 WHERE ImprovementType='IMPROVEMENT_SPHINX' AND YieldType='YIELD_FAITH';
--- +1 Faith and +1 Culture if adjacent to a wonder, instead of 2 Faith.
-UPDATE ModifierArguments SET Value='1' WHERE ModifierId='SPHINX_WONDERADJACENCY_FAITH' AND Name='Amount';
-INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
-	VALUES ('SPHINX_WONDERADJACENCY_CULTURE_CPLMOD' , 'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS' , 'PLOT_ADJACENT_TO_WONDER_REQUIREMENTS');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES ('SPHINX_WONDERADJACENCY_CULTURE_CPLMOD' , 'YieldType' , 'YIELD_CULTURE');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES ('SPHINX_WONDERADJACENCY_CULTURE_CPLMOD' , 'Amount' , 1);
-INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
-	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_WONDERADJACENCY_CULTURE_CPLMOD');
--- Increased +1 Culture moved to Diplomatic Service (Was Natural History)
-UPDATE Improvement_BonusYieldChanges SET PrereqCivic = 'CIVIC_DIPLOMATIC_SERVICE' WHERE Id = 18;
--- Now grants 1 food and 1 production on desert tiles without floodplains. Go Go Gadget bad-start fixer.
-INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
-	VALUES ('SPHINX_DESERT_FOOD_MODIFIER' , 'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS', 'SPHINX_FOOD_PLOT_HAS_DESERT_REQUIREMENTS');
-INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
-	VALUES ('SPHINX_DESERT_HILLS_FOOD_MODIFIER' , 'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS', 'SPHINX_FOOD_PLOT_HAS_DESERT_HILLS_REQUIREMENTS');
-INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
-	VALUES ('SPHINX_DESERT_PRODUCTION_MODIFIER' , 'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS' ,'SPHINX_PRODUCTION_PLOT_HAS_DESERT_REQUIREMENTS');
-INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
-	VALUES ('SPHINX_DESERT_HILLS_PRODUCTION_MODIFIER' , 'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS' ,'SPHINX_PRODUCTION_PLOT_HAS_DESERT_HILLS_REQUIREMENTS');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES ('SPHINX_DESERT_FOOD_MODIFIER' , 'YieldType' , 'YIELD_FOOD');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES ('SPHINX_DESERT_FOOD_MODIFIER' , 'Amount' , '1');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES ('SPHINX_DESERT_HILLS_FOOD_MODIFIER' , 'YieldType' , 'YIELD_FOOD');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES ('SPHINX_DESERT_HILLS_FOOD_MODIFIER' , 'Amount' , '1');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES ('SPHINX_DESERT_PRODUCTION_MODIFIER' , 'YieldType' , 'YIELD_PRODUCTION');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES ('SPHINX_DESERT_PRODUCTION_MODIFIER' , 'Amount' , '1');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES ('SPHINX_DESERT_HILLS_PRODUCTION_MODIFIER' , 'YieldType' , 'YIELD_PRODUCTION');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES ('SPHINX_DESERT_HILLS_PRODUCTION_MODIFIER' , 'Amount' , '1');
-INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
-	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
-INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
-	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
-INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
-	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
-INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
-	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
-INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
-	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_DESERT_FOOD_MODIFIER');
-INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
-	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_DESERT_HILLS_FOOD_MODIFIER');
-INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
-	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_DESERT_PRODUCTION_MODIFIER');
-INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
-	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_DESERT_HILLS_PRODUCTION_MODIFIER');
--- No prod nor food bonus on Floodplains
-INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
-	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_NO_FLOODPLAINS');
-INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
-	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_NO_FLOODPLAINS');
-INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
-	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_NO_FLOODPLAINS');
-INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
-	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_NO_FLOODPLAINS');
--- Requires Desert or Desert Hills
-INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
-	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_DESERT');
-INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
-	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_DESERT_HILLS');
-INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
-	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_DESERT');
-INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
-	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_DESERT_HILLS');
-
-
---==================
--- England
---==================
--- Sea Dog available at Exploration now
-UPDATE Units SET PrereqCivic='CIVIC_EXPLORATION' WHERE UnitType='UNIT_ENGLISH_SEADOG';
-
-
---==================
--- France
---==================
--- move spies buffs to france and off catherine for eleanor france buff
-UPDATE TraitModifiers SET TraitType='TRAIT_CIVILIZATION_WONDER_TOURISM' WHERE TraitType='FLYING_SQUADRON_TRAIT' AND ModifierId='UNIQUE_LEADER_ADD_SPY_CAPACITY';
-UPDATE TraitModifiers SET TraitType='TRAIT_CIVILIZATION_WONDER_TOURISM' WHERE TraitType='FLYING_SQUADRON_TRAIT' AND ModifierId='UNIQUE_LEADER_ADD_SPY_UNIT';
-UPDATE TraitModifiers SET TraitType='TRAIT_CIVILIZATION_WONDER_TOURISM' WHERE TraitType='FLYING_SQUADRON_TRAIT' AND ModifierId='UNIQUE_LEADER_SPIES_START_PROMOTED';
--- Reduce tourism bonus for wonders
-UPDATE ModifierArguments SET Value='150' WHERE ModifierId='TRAIT_WONDER_DOUBLETOURISM' AND Name='ScalingFactor';
--- Chateau now gives 1 housing at Feudalism, and ajacent luxes now give stacking food in addition to stacking gold 
---INSERT OR IGNORE INTO Improvement_YieldChanges (ImprovementType , YieldType , YieldChange)
---	VALUES ('IMPROVEMENT_CHATEAU' , 'YIELD_FOOD' , '0');
 --
---INSERT OR IGNORE INTO Improvement_Adjacencies (ImprovementType , YieldChangeId)
---	VALUES ('IMPROVEMENT_CHATEAU' , 'Chateau_Luxury_Food');
+-- --==================
+-- -- Arabia
+-- --==================
+-- -- Arabia's Worship Building Bonus increased from 10% to 20%
+-- UPDATE ModifierArguments SET Value='20' WHERE ModifierId='TRAIT_RELIGIOUS_BUILDING_MULTIPLIER_CULTURE' AND Name='Multiplier';
+-- UPDATE ModifierArguments SET Value='20' WHERE ModifierId='TRAIT_RELIGIOUS_BUILDING_MULTIPLIER_FAITH' AND Name='Multiplier';
+-- UPDATE ModifierArguments SET Value='20' WHERE ModifierId='TRAIT_RELIGIOUS_BUILDING_MULTIPLIER_SCIENCE' AND Name='Multiplier';
+-- -- Arabia gets +1 Great Prophet point per turn after researching astrology
+-- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType, SubjectRequirementSetId)
+--     VALUES ('TRAIT_BONUS_GREAT_PROPHET_POINT_CPLMOD' , 'MODIFIER_PLAYER_ADJUST_GREAT_PERSON_POINTS' , 'PLAYER_HAS_ASTROLOGY_REQUIREMENTS_CPLMOD');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+--     VALUES ('TRAIT_BONUS_GREAT_PROPHET_POINT_CPLMOD' , 'GreatPersonClassType' , 'GREAT_PERSON_CLASS_PROPHET');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+--     VALUES ('TRAIT_BONUS_GREAT_PROPHET_POINT_CPLMOD' , 'Amount' , '1');
+-- --UPDATE TraitModifiers SET ModifierId='TRAIT_BONUS_GREAT_PROPHET_POINT_CPLMOD' WHERE ModifierId='TRAIT_GUARANTEE_ONE_PROPHET';
+-- INSERT OR IGNORE INTO TraitModifiers (TraitType, ModifierId) VALUES ('TRAIT_CIVILIZATION_LAST_PROPHET', 'TRAIT_BONUS_GREAT_PROPHET_POINT_CPLMOD');
+-- INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
+-- 	VALUES ('PLAYER_HAS_ASTROLOGY_REQUIREMENTS_CPLMOD' , 'REQUIREMENTSET_TEST_ALL');
+-- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+-- 	VALUES ('PLAYER_HAS_ASTROLOGY_REQUIREMENTS_CPLMOD' , 'REQUIRES_PLAYER_HAS_ASTROLOGY_CPLMOD');
+-- INSERT OR IGNORE INTO Requirements (RequirementId , RequirementType)
+-- 	VALUES ('REQUIRES_PLAYER_HAS_ASTROLOGY_CPLMOD' , 'REQUIREMENT_PLAYER_HAS_TECHNOLOGY');
+-- INSERT OR IGNORE INTO RequirementArguments (RequirementId , Name , Value)
+-- 	VALUES ('REQUIRES_PLAYER_HAS_ASTROLOGY_CPLMOD' , 'TechnologyType' , 'TECH_ASTROLOGY');
 --
---INSERT OR IGNORE INTO Adjacency_YieldChanges (ID , Description , YieldType , YieldChange , TilesRequired , AdjacentResourceClass)
---	VALUES ('Chateau_Luxury_Food' , 'Placeholder' , 'YIELD_FOOD' , '1' , '1' , 'RESOURCECLASS_LUXURY');
 --
---UPDATE Improvements SET Housing='1' , PreReqCivic='CIVIC_FEUDALISM' WHERE ImprovementType='IMPROVEMENT_CHATEAU';
-
-
---==================
--- Germany
---==================
--- Extra district comes at Guilds
-INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
-    VALUES ('PLAYER_HAS_GUILDS_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
-INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType)
-    VALUES ('REQUIRES_PLAYER_HAS_GUILDS' , 'REQUIREMENT_PLAYER_HAS_CIVIC');
-INSERT OR IGNORE INTO RequirementArguments (RequirementId , Name , Value)
-    VALUES ('REQUIRES_PLAYER_HAS_GUILDS' , 'CivicType' , 'CIVIC_GUILDS');
-INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
-    VALUES ('PLAYER_HAS_GUILDS_REQUIREMENTS' , 'REQUIRES_PLAYER_HAS_GUILDS');
-UPDATE Modifiers SET SubjectRequirementSetId='PLAYER_HAS_GUILDS_REQUIREMENTS' WHERE ModifierId='TRAIT_EXTRA_DISTRICT_EACH_CITY';
-
-
---==================
--- Greece
---==================
--- Greece gets their extra envoy at amphitheater instead of acropolis
-DELETE FROM DistrictModifiers WHERE DistrictType='DISTRICT_ACROPOLIS';
-INSERT OR IGNORE INTO TraitModifiers
-	VALUES ('TRAIT_CIVILIZATION_PLATOS_REPUBLIC' , 'AMPHITHEATER_AWARD_1_INFLUENCE_TOKEN');
-INSERT OR IGNORE INTO RequirementSets (RequirementSetId, RequirementSetType)
-	VALUES ('BUILDING_IS_AMPHITHEATER_CPLMOD', 'REQUIREMENTSET_TEST_ALL');
-INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId)
-	VALUES ('BUILDING_IS_AMPHITHEATER_CPLMOD', 'REQUIRES_CITY_HAS_AMPHITHEATER_CPLMOD');
-INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType)
-	VALUES ('REQUIRES_CITY_HAS_AMPHITHEATER_CPLMOD', 'REQUIREMENT_CITY_HAS_BUILDING');
-INSERT OR IGNORE INTO RequirementArguments (RequirementId, Name, Value)
-	VALUES ('REQUIRES_CITY_HAS_AMPHITHEATER_CPLMOD', 'BuildingType', 'BUILDING_AMPHITHEATER');
-INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSetId)
-    VALUES ('AMPHITHEATER_AWARD_1_INFLUENCE_TOKEN' , 'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER', 'BUILDING_IS_AMPHITHEATER_CPLMOD');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value)
-    VALUES ('AMPHITHEATER_AWARD_1_INFLUENCE_TOKEN' , 'ModifierId' , 'AMPHITHEATER_AWARD_1_INFLUENCE_TOKEN_MOD');
-INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType)
-    VALUES ('AMPHITHEATER_AWARD_1_INFLUENCE_TOKEN_MOD' , 'MODIFIER_PLAYER_GRANT_INFLUENCE_TOKEN');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value)
-    VALUES ('AMPHITHEATER_AWARD_1_INFLUENCE_TOKEN_MOD' , 'Amount' , '1');
---Wildcard delayed to Political Philosophy
-UPDATE Modifiers SET OwnerRequirementSetId='PLAYER_HAS_POLITICAL_PHILOSOPHY_CPLMOD' WHERE ModifierId='TRAIT_WILDCARD_GOVERNMENT_SLOT';
-INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType)
-	VALUES ('REQUIRES_PLAYER_HAS_POLITICAL_PHILOSOPHY_CPLMOD', 'REQUIREMENT_PLAYER_HAS_CIVIC');
-INSERT OR IGNORE INTO RequirementArguments (RequirementId, Name, Value)
-	VALUES ('REQUIRES_PLAYER_HAS_POLITICAL_PHILOSOPHY_CPLMOD', 'CivicType', 'CIVIC_POLITICAL_PHILOSOPHY');
-INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId)
-	VALUES ('PLAYER_HAS_POLITICAL_PHILOSOPHY_CPLMOD', 'REQUIRES_PLAYER_HAS_POLITICAL_PHILOSOPHY_CPLMOD');
-INSERT OR IGNORE INTO RequirementSets (RequirementSetId, RequirementSetType)
-	VALUES ('PLAYER_HAS_POLITICAL_PHILOSOPHY_CPLMOD', 'REQUIREMENTSET_TEST_ALL');
-
---==================
--- Greece (Gorgo)
---==================
-
--- 37/03/2021 Give Gorgo 50% culture online speed
-UPDATE ModifierArguments SET Value=100 WHERE ModifierId='UNIQUE_LEADER_CULTURE_KILLS' AND Name='PercentDefeatedStrength';
-
---==================
--- India
---==================
--- Stepwell Unique Improvement gets +1 base Faith and +1 Food moved from Professional Sports to Feudalism
-UPDATE Improvement_YieldChanges SET YieldChange=1 WHERE ImprovementType='IMPROVEMENT_STEPWELL' AND YieldType='YIELD_FAITH'; 
-UPDATE Improvement_BonusYieldChanges SET PrereqCivic='CIVIC_FEUDALISM' WHERE Id='20';
--- Stepwells get +1 food per adajacent farm
-INSERT OR IGNORE INTO Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, TilesRequired, AdjacentImprovement)
-	VALUES ('STEPWELL_FOOD', 'Placeholder', 'YIELD_FOOD', 1, 1, 'IMPROVEMENT_FARM');
-INSERT OR IGNORE INTO Improvement_Adjacencies (ImprovementType, YieldChangeId)
-	VALUES ('IMPROVEMENT_STEPWELL', 'STEPWELL_FOOD');
-DELETE FROM ImprovementModifiers WHERE ModifierId='STEPWELL_FARMADJACENCY_FOOD';
-
-
---==================
--- India (Gandhi)
---==================
--- Extra belief when founding a Religion
-INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSetId)
-    VALUES ('EXTRA_BELIEF_MODIFIER', 'MODIFIER_PLAYER_ADD_BELIEF', 'HAS_A_RELIGION_BBG');
-INSERT OR IGNORE INTO TraitModifiers (TraitType, ModifierId)
-    VALUES ('TRAIT_LEADER_SATYAGRAHA', 'EXTRA_BELIEF_MODIFIER');
-INSERT OR IGNORE INTO RequirementSets (RequirementSetId, RequirementSetType)
-    VALUES ('HAS_A_RELIGION_BBG', 'REQUIREMENTSET_TEST_ALL');
-INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId)
-    VALUES ('HAS_A_RELIGION_BBG', 'REQUIRES_FOUNDED_RELIGION_BBG');
-INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType, Inverse)
-	VALUES ('REQUIRES_FOUNDED_RELIGION_BBG', 'REQUIREMENT_FOUNDED_NO_RELIGION', 1);
--- +1 movement to builders
-INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
-	VALUES ('TRAIT_LEADER_SATYAGRAHA' , 'GANDHI_FAST_BUILDERS');
-INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
-	VALUES ('GANDHI_FAST_BUILDERS' , 'MODIFIER_PLAYER_UNITS_ADJUST_MOVEMENT' , 'UNIT_IS_BUILDER');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES ('GANDHI_FAST_BUILDERS' , 'Amount' , '1');
--- +1 movement to settlers
-INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
-	VALUES ('TRAIT_LEADER_SATYAGRAHA' , 'GANDHI_FAST_SETTLERS');
-INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
-	VALUES ('GANDHI_FAST_SETTLERS' , 'MODIFIER_PLAYER_UNITS_ADJUST_MOVEMENT' , 'UNIT_IS_SETTLER');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES ('GANDHI_FAST_SETTLERS' , 'Amount' , '1');
-INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
-	VALUES ('UNIT_IS_SETTLER' , 'REQUIREMENT_UNIT_IS_SETTLER');
-INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
-	VALUES ('UNIT_IS_SETTLER' , 'REQUIREMENTSET_TEST_ALL');
-INSERT OR IGNORE INTO Requirements (RequirementId , RequirementType)
-	VALUES ('REQUIREMENT_UNIT_IS_SETTLER' , 'REQUIREMENT_UNIT_TYPE_MATCHES');
-INSERT OR IGNORE INTO RequirementArguments (RequirementId , Name , Value)
-	VALUES ('REQUIREMENT_UNIT_IS_SETTLER' , 'UnitType' , 'UNIT_SETTLER');
-
-
---==================
--- Japan
---==================
--- Commercial Hubs no longer get adjacency from rivers
-INSERT OR IGNORE INTO ExcludedAdjacencies (TraitType , YieldChangeId)
-    VALUES
-    ('TRAIT_CIVILIZATION_ADJACENT_DISTRICTS' , 'River_Gold');
--- Samurai come at Feudalism now
--- Implemented by Firaxis
--- UPDATE Units SET PrereqCivic='CIVIC_FEUDALISM' , PrereqTech=NULL WHERE UnitType='UNIT_JAPANESE_SAMURAI';
-
-
---==================
--- Kongo
---==================
--- +100% prod towards archealogists
-INSERT OR IGNORE INTO TraitModifiers (TraitType, ModifierId) VALUES
-	('TRAIT_CIVILIZATION_NKISI', 'TRAIT_ARCHAEOLOGIST_PROD_BBG');
-INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType) VALUES
-	('TRAIT_ARCHAEOLOGIST_PROD_BBG', 'MODIFIER_PLAYER_UNITS_ADJUST_UNIT_PRODUCTION');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES
-	('TRAIT_ARCHAEOLOGIST_PROD_BBG', 'UnitType', 'UNIT_ARCHAEOLOGIST'),
-	('TRAIT_ARCHAEOLOGIST_PROD_BBG', 'Amount', '100');
-
-
-
---==================
--- Norway
---==================
--- Berserker no longer gets +10 on attack and -5 on defense... simplified to be base on defense and +15 on attack
--- UPDATE ModifierArguments SET Value='15' WHERE ModifierId='UNIT_STRONG_WHEN_ATTACKING';
--- UPDATE ModifierArguments SET Value='0' WHERE ModifierId='UNIT_WEAK_WHEN_DEFENDING';
--- Berserker unit now gets unlocked at Feudalism instead of Military Tactics, and can be purchased with Faith
-UPDATE Units SET PrereqTech=NULL , PrereqCivic='CIVIC_FEUDALISM' WHERE UnitType='UNIT_NORWEGIAN_BERSERKER';
-INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
-	VALUES ('TRAIT_CIVILIZATION_UNIT_NORWEGIAN_BERSERKER' , 'BERSERKER_FAITH_PURCHASE_CPLMOD');
-INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType)
-	VALUES ('BERSERKER_FAITH_PURCHASE_CPLMOD' , 'MODIFIER_PLAYER_CITIES_ENABLE_UNIT_FAITH_PURCHASE');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES ('BERSERKER_FAITH_PURCHASE_CPLMOD' , 'Tag' , 'CLASS_MELEE_BERSERKER');
---Berserker Movement bonus extended to all water tiles
-UPDATE RequirementSets SET RequirementSetType='REQUIREMENTSET_TEST_ANY' WHERE RequirementSetId='BERSERKER_PLOT_IS_ENEMY_TERRITORY';
-INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
-	VALUES
-	('BERSERKER_PLOT_IS_ENEMY_TERRITORY' , 'REQUIRES_PLOT_HAS_COAST'),
-	('BERSERKER_PLOT_IS_ENEMY_TERRITORY' , 'REQUIRES_TERRAIN_OCEAN' );
--- Stave Church now gives +1 Faith to resource tiles in the city, instead of standard adjacency bonus for woods
-INSERT OR IGNORE INTO Modifiers (ModifierID , ModifierType , SubjectRequirementSetId)
-	VALUES ('STAVECHURCH_RESOURCE_FAITH' , 'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD' , 'STAVE_CHURCH_RESOURCE_REQUIREMENTS');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES ('STAVECHURCH_RESOURCE_FAITH' , 'YieldType' , 'YIELD_FAITH');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES ('STAVECHURCH_RESOURCE_FAITH' , 'Amount' , '1');
-INSERT OR IGNORE INTO BuildingModifiers (BuildingType , ModifierId)
-	VALUES ('BUILDING_STAVE_CHURCH' , 'STAVECHURCH_RESOURCE_FAITH');
-INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
-	VALUES ('STAVE_CHURCH_RESOURCE_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
-INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
-	VALUES ('STAVE_CHURCH_RESOURCE_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_VISIBLE_RESOURCE');
-UPDATE ModifierArguments SET Value='0' WHERE ModifierId='STAVE_CHURCH_FAITHWOODSADJACENCY' AND Name='Amount';
-
--- +2 gold harbor adjacency if adjacent to holy sites
-INSERT OR IGNORE INTO Adjacency_YieldChanges (ID , Description , YieldType , YieldChange , TilesRequired , AdjacentDistrict)
-    VALUES
-    ('District_HS_Gold_Positive' , 'LOC_HOLY_SITE_HARBOR_ADJACENCY_DESCRIPTION' , 'YIELD_GOLD' , '2'  , '1' , 'DISTRICT_HOLY_SITE'),
-    ('District_HS_Gold_Negative' , 'LOC_HOLY_SITE_HARBOR_ADJACENCY_DESCRIPTION' , 'YIELD_GOLD' , '-2' , '1' , 'DISTRICT_HOLY_SITE');
-INSERT OR IGNORE INTO District_Adjacencies (DistrictType , YieldChangeId)
-    VALUES
-    ('DISTRICT_HARBOR' , 'District_HS_Gold_Positive'),
-    ('DISTRICT_HARBOR' , 'District_HS_Gold_Negative');
-INSERT OR IGNORE INTO ExcludedAdjacencies (YieldChangeId , TraitType)
-    VALUES
-    ('District_HS_Gold_Negative' , 'TRAIT_LEADER_MELEE_COASTAL_RAIDS');
-
+--
+-- --==================
+-- -- China
+-- --==================
+-- -- +1 all yields per wonder
+-- INSERT OR IGNORE INTO RequirementSetRequirements VALUES
+-- 	('DYNASTIC_CYCLE_TRAIT_REQUIREMENTS_BBG', 'REQUIRES_PLAYER_HAS_DYNASTIC_CYCLE_TRAIT_BBG');
+-- INSERT OR IGNORE INTO RequirementSets VALUES
+-- 	('DYNASTIC_CYCLE_TRAIT_REQUIREMENTS_BBG', 'REQUIREMENTSET_TEST_ALL');
+-- INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType) VALUES
+-- 	('REQUIRES_PLAYER_HAS_DYNASTIC_CYCLE_TRAIT_BBG', 'REQUIREMENT_PLAYER_HAS_CIVILIZATION_OR_LEADER_TRAIT');
+-- INSERT OR IGNORE INTO RequirementArguments (RequirementId, Name, Value) VALUES
+-- 	('REQUIRES_PLAYER_HAS_DYNASTIC_CYCLE_TRAIT_BBG', 'TraitType', 'TRAIT_CIVILIZATION_DYNASTIC_CYCLE');
+-- INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType) VALUES
+-- 	('TRAIT_ATTACH_WONDER_FOOD_BBG', 'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER'),
+-- 	('TRAIT_ATTACH_WONDER_PROD_BBG', 'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER');
+-- 	--('TRAIT_ATTACH_WONDER_FAITH_BBG', 'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER'),
+-- 	--('TRAIT_ATTACH_WONDER_GOLD_BBG', 'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER'),
+-- 	--('TRAIT_ATTACH_WONDER_SCI_BBG', 'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER'),
+-- 	--('TRAIT_ATTACH_WONDER_CUL_BBG', 'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES
+-- 	('TRAIT_ATTACH_WONDER_FOOD_BBG', 'ModifierId', 'TRAIT_WONDER_FOOD_BBG'),
+-- 	('TRAIT_ATTACH_WONDER_PROD_BBG', 'ModifierId', 'TRAIT_WONDER_PROD_BBG');
+-- 	--('TRAIT_ATTACH_WONDER_FAITH_BBG', 'ModifierId', 'TRAIT_WONDER_FAITH_BBG'),
+-- 	--('TRAIT_ATTACH_WONDER_GOLD_BBG', 'ModifierId', 'TRAIT_WONDER_GOLD_BBG'),
+-- 	--('TRAIT_ATTACH_WONDER_SCI_BBG', 'ModifierId', 'TRAIT_WONDER_SCI_BBG'),
+-- 	--('TRAIT_ATTACH_WONDER_CUL_BBG', 'ModifierId', 'TRAIT_WONDER_CUL_BBG');
+-- INSERT OR IGNORE INTO TraitModifiers VALUES
+-- 	('TRAIT_CIVILIZATION_DYNASTIC_CYCLE', 'TRAIT_ATTACH_WONDER_FOOD_BBG'),
+-- 	('TRAIT_CIVILIZATION_DYNASTIC_CYCLE', 'TRAIT_ATTACH_WONDER_PROD_BBG');
+-- 	--('TRAIT_CIVILIZATION_DYNASTIC_CYCLE', 'TRAIT_ATTACH_WONDER_FAITH_BBG'),
+-- 	--('TRAIT_CIVILIZATION_DYNASTIC_CYCLE', 'TRAIT_ATTACH_WONDER_GOLD_BBG'),
+-- 	--('TRAIT_CIVILIZATION_DYNASTIC_CYCLE', 'TRAIT_ATTACH_WONDER_SCI_BBG'),
+-- 	--('TRAIT_CIVILIZATION_DYNASTIC_CYCLE', 'TRAIT_ATTACH_WONDER_CUL_BBG');
+-- INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType) VALUES
+-- 	('TRAIT_WONDER_FOOD_BBG', 'MODIFIER_SINGLE_CITY_ADJUST_WONDER_YIELD_CHANGE'),
+-- 	('TRAIT_WONDER_PROD_BBG', 'MODIFIER_SINGLE_CITY_ADJUST_WONDER_YIELD_CHANGE');
+-- --	('TRAIT_WONDER_FAITH_BBG', 'MODIFIER_SINGLE_CITY_ADJUST_WONDER_YIELD_CHANGE'),
+-- --	('TRAIT_WONDER_GOLD_BBG', 'MODIFIER_SINGLE_CITY_ADJUST_WONDER_YIELD_CHANGE'),
+-- --	('TRAIT_WONDER_SCI_BBG', 'MODIFIER_SINGLE_CITY_ADJUST_WONDER_YIELD_CHANGE'),
+-- --	('TRAIT_WONDER_CUL_BBG', 'MODIFIER_SINGLE_CITY_ADJUST_WONDER_YIELD_CHANGE');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES
+-- 	('TRAIT_WONDER_FOOD_BBG', 'Amount', '1'),
+-- 	('TRAIT_WONDER_FOOD_BBG', 'YieldType', 'YIELD_FOOD'),
+-- 	('TRAIT_WONDER_PROD_BBG', 'Amount', '1'),
+-- 	('TRAIT_WONDER_PROD_BBG', 'YieldType', 'YIELD_PRODUCTION');
+-- 	--('TRAIT_WONDER_FAITH_BBG', 'Amount', '1'),
+-- 	--('TRAIT_WONDER_FAITH_BBG', 'YieldType', 'YIELD_FAITH'),
+-- 	--('TRAIT_WONDER_GOLD_BBG', 'Amount', '1'),
+-- 	--('TRAIT_WONDER_GOLD_BBG', 'YieldType', 'YIELD_GOLD'),
+-- 	--('TRAIT_WONDER_SCI_BBG', 'Amount', '1'),
+-- 	--('TRAIT_WONDER_SCI_BBG', 'YieldType', 'YIELD_SCIENCE'),
+-- 	--('TRAIT_WONDER_CUL_BBG', 'Amount', '1'),
+-- 	--('TRAIT_WONDER_CUL_BBG', 'YieldType', 'YIELD_CULTURE');
+-- -- great wall gets +1 prod, no initial gold, lowered gold and lowered culture per adj after castles
+-- INSERT OR IGNORE INTO Improvement_YieldChanges VALUES ('IMPROVEMENT_GREAT_WALL', 'YIELD_PRODUCTION', 1);
+-- UPDATE Improvement_YieldChanges SET YieldChange=0 WHERE ImprovementType='IMPROVEMENT_GREAT_WALL' AND YieldType='YIELD_GOLD';
+-- UPDATE Adjacency_YieldChanges SET YieldChange=1 WHERE ID='GreatWall_Culture';
+-- UPDATE Adjacency_YieldChanges SET YieldChange=1 WHERE ID='GreatWall_Gold';
+-- -- Crouching Tiger now a crossbowman replacement that gets +7 when adjacent to an enemy unit
+-- INSERT OR IGNORE INTO UnitReplaces (CivUniqueUnitType , ReplacesUnitType)
+-- 	VALUES ('UNIT_CHINESE_CROUCHING_TIGER' , 'UNIT_CROSSBOWMAN');
+-- UPDATE Units SET Cost=190 , RangedCombat=40 , Range=2 WHERE UnitType='UNIT_CHINESE_CROUCHING_TIGER';
+--
+-- INSERT OR IGNORE INTO Tags (Tag , Vocabulary)
+-- 	VALUES ('CLASS_CROUCHING_TIGER' , 'ABILITY_CLASS');
+-- INSERT OR IGNORE INTO TypeTags (Type , Tag)
+-- 	VALUES ('UNIT_CHINESE_CROUCHING_TIGER' , 'CLASS_CROUCHING_TIGER');
+-- INSERT OR IGNORE INTO Types (Type , Kind)
+-- 	VALUES ('ABILITY_TIGER_ADJACENCY_DAMAGE_CPLMOD' , 'KIND_ABILITY');
+-- INSERT OR IGNORE INTO TypeTags (Type , Tag)
+-- 	VALUES ('ABILITY_TIGER_ADJACENCY_DAMAGE_CPLMOD' , 'CLASS_CROUCHING_TIGER');
+-- INSERT OR IGNORE INTO UnitAbilities (UnitAbilityType , Name , Description)
+-- 	VALUES ('ABILITY_TIGER_ADJACENCY_DAMAGE_CPLMOD' , 'LOC_ABILITY_TIGER_ADJACENCY_NAME' , 'LOC_ABILITY_TIGER_ADJACENCY_DESCRIPTION');
+-- INSERT OR IGNORE INTO UnitAbilityModifiers (UnitAbilityType , ModifierId)
+-- 	VALUES ('ABILITY_TIGER_ADJACENCY_DAMAGE_CPLMOD' , 'TIGER_ADJACENCY_DAMAGE');
+-- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
+-- 	VALUES ('TIGER_ADJACENCY_DAMAGE' , 'MODIFIER_UNIT_ADJUST_COMBAT_STRENGTH' , 'TIGER_ADJACENCY_REQUIREMENTS');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES ('TIGER_ADJACENCY_DAMAGE', 'Amount' , '7');
+-- INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
+-- 	VALUES ('TIGER_ADJACENCY_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
+-- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+-- 	VALUES ('TIGER_ADJACENCY_REQUIREMENTS' , 'PLAYER_IS_ATTACKER_REQUIREMENTS');
+-- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+-- 	VALUES ('TIGER_ADJACENCY_REQUIREMENTS' , 'ADJACENT_UNIT_REQUIREMENT');
+-- INSERT OR IGNORE INTO ModifierStrings (ModifierId , Context , Text)
+--     VALUES ('TIGER_ADJACENCY_DAMAGE' , 'Preview' , 'LOC_ABILITY_TIGER_ADJACENCY_DESCRIPTION');
+--
+-- --==================
+-- -- Egypt
+-- --==================
+-- -- wonder and district on rivers bonus increased to 25%
+-- UPDATE ModifierArguments SET Value='25' WHERE ModifierId='TRAIT_RIVER_FASTER_BUILDTIME_WONDER';
+-- UPDATE ModifierArguments SET Value='25' WHERE ModifierId='TRAIT_RIVER_FASTER_BUILDTIME_DISTRICT';
+-- --
+-- INSERT OR IGNORE INTO RequirementSets (RequirementSetId, RequirementSetType)
+-- 	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_CPL', 'REQUIREMENTSET_TEST_ANY');
+-- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId)
+-- 	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_CPL', 'REQUIRES_PLOT_HAS_FLOODPLAINS');
+-- -- Sphinx base Faith Increased to 2 (from 1)
+-- UPDATE Improvement_YieldChanges SET YieldChange=2 WHERE ImprovementType='IMPROVEMENT_SPHINX' AND YieldType='YIELD_FAITH';
+-- -- +1 Faith and +1 Culture if adjacent to a wonder, instead of 2 Faith.
+-- UPDATE ModifierArguments SET Value='1' WHERE ModifierId='SPHINX_WONDERADJACENCY_FAITH' AND Name='Amount';
+-- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
+-- 	VALUES ('SPHINX_WONDERADJACENCY_CULTURE_CPLMOD' , 'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS' , 'PLOT_ADJACENT_TO_WONDER_REQUIREMENTS');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES ('SPHINX_WONDERADJACENCY_CULTURE_CPLMOD' , 'YieldType' , 'YIELD_CULTURE');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES ('SPHINX_WONDERADJACENCY_CULTURE_CPLMOD' , 'Amount' , 1);
+-- INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
+-- 	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_WONDERADJACENCY_CULTURE_CPLMOD');
+-- -- Increased +1 Culture moved to Diplomatic Service (Was Natural History)
+-- UPDATE Improvement_BonusYieldChanges SET PrereqCivic = 'CIVIC_DIPLOMATIC_SERVICE' WHERE Id = 18;
+-- -- Now grants 1 food and 1 production on desert tiles without floodplains. Go Go Gadget bad-start fixer.
+-- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
+-- 	VALUES ('SPHINX_DESERT_FOOD_MODIFIER' , 'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS', 'SPHINX_FOOD_PLOT_HAS_DESERT_REQUIREMENTS');
+-- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
+-- 	VALUES ('SPHINX_DESERT_HILLS_FOOD_MODIFIER' , 'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS', 'SPHINX_FOOD_PLOT_HAS_DESERT_HILLS_REQUIREMENTS');
+-- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
+-- 	VALUES ('SPHINX_DESERT_PRODUCTION_MODIFIER' , 'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS' ,'SPHINX_PRODUCTION_PLOT_HAS_DESERT_REQUIREMENTS');
+-- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
+-- 	VALUES ('SPHINX_DESERT_HILLS_PRODUCTION_MODIFIER' , 'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS' ,'SPHINX_PRODUCTION_PLOT_HAS_DESERT_HILLS_REQUIREMENTS');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES ('SPHINX_DESERT_FOOD_MODIFIER' , 'YieldType' , 'YIELD_FOOD');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES ('SPHINX_DESERT_FOOD_MODIFIER' , 'Amount' , '1');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES ('SPHINX_DESERT_HILLS_FOOD_MODIFIER' , 'YieldType' , 'YIELD_FOOD');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES ('SPHINX_DESERT_HILLS_FOOD_MODIFIER' , 'Amount' , '1');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES ('SPHINX_DESERT_PRODUCTION_MODIFIER' , 'YieldType' , 'YIELD_PRODUCTION');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES ('SPHINX_DESERT_PRODUCTION_MODIFIER' , 'Amount' , '1');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES ('SPHINX_DESERT_HILLS_PRODUCTION_MODIFIER' , 'YieldType' , 'YIELD_PRODUCTION');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES ('SPHINX_DESERT_HILLS_PRODUCTION_MODIFIER' , 'Amount' , '1');
+-- INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
+-- 	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
+-- INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
+-- 	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
+-- INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
+-- 	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
+-- INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
+-- 	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
+-- INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
+-- 	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_DESERT_FOOD_MODIFIER');
+-- INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
+-- 	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_DESERT_HILLS_FOOD_MODIFIER');
+-- INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
+-- 	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_DESERT_PRODUCTION_MODIFIER');
+-- INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
+-- 	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_DESERT_HILLS_PRODUCTION_MODIFIER');
+-- -- No prod nor food bonus on Floodplains
+-- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+-- 	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_NO_FLOODPLAINS');
+-- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+-- 	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_NO_FLOODPLAINS');
+-- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+-- 	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_NO_FLOODPLAINS');
+-- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+-- 	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_NO_FLOODPLAINS');
+-- -- Requires Desert or Desert Hills
+-- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+-- 	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_DESERT');
+-- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+-- 	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_DESERT_HILLS');
+-- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+-- 	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_DESERT');
+-- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+-- 	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_DESERT_HILLS');
+--
+--
+-- --==================
+-- -- England
+-- --==================
+-- -- Sea Dog available at Exploration now
+-- UPDATE Units SET PrereqCivic='CIVIC_EXPLORATION' WHERE UnitType='UNIT_ENGLISH_SEADOG';
+--
+--
+-- --==================
+-- -- France
+-- --==================
+-- -- move spies buffs to france and off catherine for eleanor france buff
+-- UPDATE TraitModifiers SET TraitType='TRAIT_CIVILIZATION_WONDER_TOURISM' WHERE TraitType='FLYING_SQUADRON_TRAIT' AND ModifierId='UNIQUE_LEADER_ADD_SPY_CAPACITY';
+-- UPDATE TraitModifiers SET TraitType='TRAIT_CIVILIZATION_WONDER_TOURISM' WHERE TraitType='FLYING_SQUADRON_TRAIT' AND ModifierId='UNIQUE_LEADER_ADD_SPY_UNIT';
+-- UPDATE TraitModifiers SET TraitType='TRAIT_CIVILIZATION_WONDER_TOURISM' WHERE TraitType='FLYING_SQUADRON_TRAIT' AND ModifierId='UNIQUE_LEADER_SPIES_START_PROMOTED';
+-- -- Reduce tourism bonus for wonders
+-- UPDATE ModifierArguments SET Value='150' WHERE ModifierId='TRAIT_WONDER_DOUBLETOURISM' AND Name='ScalingFactor';
+-- -- Chateau now gives 1 housing at Feudalism, and ajacent luxes now give stacking food in addition to stacking gold
+-- --INSERT OR IGNORE INTO Improvement_YieldChanges (ImprovementType , YieldType , YieldChange)
+-- --	VALUES ('IMPROVEMENT_CHATEAU' , 'YIELD_FOOD' , '0');
+-- --
+-- --INSERT OR IGNORE INTO Improvement_Adjacencies (ImprovementType , YieldChangeId)
+-- --	VALUES ('IMPROVEMENT_CHATEAU' , 'Chateau_Luxury_Food');
+-- --
+-- --INSERT OR IGNORE INTO Adjacency_YieldChanges (ID , Description , YieldType , YieldChange , TilesRequired , AdjacentResourceClass)
+-- --	VALUES ('Chateau_Luxury_Food' , 'Placeholder' , 'YIELD_FOOD' , '1' , '1' , 'RESOURCECLASS_LUXURY');
+-- --
+-- --UPDATE Improvements SET Housing='1' , PreReqCivic='CIVIC_FEUDALISM' WHERE ImprovementType='IMPROVEMENT_CHATEAU';
+--
+--
+-- --==================
+-- -- Germany
+-- --==================
+-- -- Extra district comes at Guilds
+-- INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
+--     VALUES ('PLAYER_HAS_GUILDS_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
+-- INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType)
+--     VALUES ('REQUIRES_PLAYER_HAS_GUILDS' , 'REQUIREMENT_PLAYER_HAS_CIVIC');
+-- INSERT OR IGNORE INTO RequirementArguments (RequirementId , Name , Value)
+--     VALUES ('REQUIRES_PLAYER_HAS_GUILDS' , 'CivicType' , 'CIVIC_GUILDS');
+-- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+--     VALUES ('PLAYER_HAS_GUILDS_REQUIREMENTS' , 'REQUIRES_PLAYER_HAS_GUILDS');
+-- UPDATE Modifiers SET SubjectRequirementSetId='PLAYER_HAS_GUILDS_REQUIREMENTS' WHERE ModifierId='TRAIT_EXTRA_DISTRICT_EACH_CITY';
+--
+--
+-- --==================
+-- -- Greece
+-- --==================
+-- -- Greece gets their extra envoy at amphitheater instead of acropolis
+-- DELETE FROM DistrictModifiers WHERE DistrictType='DISTRICT_ACROPOLIS';
+-- INSERT OR IGNORE INTO TraitModifiers
+-- 	VALUES ('TRAIT_CIVILIZATION_PLATOS_REPUBLIC' , 'AMPHITHEATER_AWARD_1_INFLUENCE_TOKEN');
+-- INSERT OR IGNORE INTO RequirementSets (RequirementSetId, RequirementSetType)
+-- 	VALUES ('BUILDING_IS_AMPHITHEATER_CPLMOD', 'REQUIREMENTSET_TEST_ALL');
+-- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId)
+-- 	VALUES ('BUILDING_IS_AMPHITHEATER_CPLMOD', 'REQUIRES_CITY_HAS_AMPHITHEATER_CPLMOD');
+-- INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType)
+-- 	VALUES ('REQUIRES_CITY_HAS_AMPHITHEATER_CPLMOD', 'REQUIREMENT_CITY_HAS_BUILDING');
+-- INSERT OR IGNORE INTO RequirementArguments (RequirementId, Name, Value)
+-- 	VALUES ('REQUIRES_CITY_HAS_AMPHITHEATER_CPLMOD', 'BuildingType', 'BUILDING_AMPHITHEATER');
+-- INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSetId)
+--     VALUES ('AMPHITHEATER_AWARD_1_INFLUENCE_TOKEN' , 'MODIFIER_PLAYER_CITIES_ATTACH_MODIFIER', 'BUILDING_IS_AMPHITHEATER_CPLMOD');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value)
+--     VALUES ('AMPHITHEATER_AWARD_1_INFLUENCE_TOKEN' , 'ModifierId' , 'AMPHITHEATER_AWARD_1_INFLUENCE_TOKEN_MOD');
+-- INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType)
+--     VALUES ('AMPHITHEATER_AWARD_1_INFLUENCE_TOKEN_MOD' , 'MODIFIER_PLAYER_GRANT_INFLUENCE_TOKEN');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value)
+--     VALUES ('AMPHITHEATER_AWARD_1_INFLUENCE_TOKEN_MOD' , 'Amount' , '1');
+-- --Wildcard delayed to Political Philosophy
+-- UPDATE Modifiers SET OwnerRequirementSetId='PLAYER_HAS_POLITICAL_PHILOSOPHY_CPLMOD' WHERE ModifierId='TRAIT_WILDCARD_GOVERNMENT_SLOT';
+-- INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType)
+-- 	VALUES ('REQUIRES_PLAYER_HAS_POLITICAL_PHILOSOPHY_CPLMOD', 'REQUIREMENT_PLAYER_HAS_CIVIC');
+-- INSERT OR IGNORE INTO RequirementArguments (RequirementId, Name, Value)
+-- 	VALUES ('REQUIRES_PLAYER_HAS_POLITICAL_PHILOSOPHY_CPLMOD', 'CivicType', 'CIVIC_POLITICAL_PHILOSOPHY');
+-- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId)
+-- 	VALUES ('PLAYER_HAS_POLITICAL_PHILOSOPHY_CPLMOD', 'REQUIRES_PLAYER_HAS_POLITICAL_PHILOSOPHY_CPLMOD');
+-- INSERT OR IGNORE INTO RequirementSets (RequirementSetId, RequirementSetType)
+-- 	VALUES ('PLAYER_HAS_POLITICAL_PHILOSOPHY_CPLMOD', 'REQUIREMENTSET_TEST_ALL');
+--
+-- --==================
+-- -- Greece (Gorgo)
+-- --==================
+--
+-- -- 37/03/2021 Give Gorgo 50% culture online speed
+-- UPDATE ModifierArguments SET Value=100 WHERE ModifierId='UNIQUE_LEADER_CULTURE_KILLS' AND Name='PercentDefeatedStrength';
+--
+-- --==================
+-- -- India
+-- --==================
+-- -- Stepwell Unique Improvement gets +1 base Faith and +1 Food moved from Professional Sports to Feudalism
+-- UPDATE Improvement_YieldChanges SET YieldChange=1 WHERE ImprovementType='IMPROVEMENT_STEPWELL' AND YieldType='YIELD_FAITH';
+-- UPDATE Improvement_BonusYieldChanges SET PrereqCivic='CIVIC_FEUDALISM' WHERE Id='20';
+-- -- Stepwells get +1 food per adajacent farm
+-- INSERT OR IGNORE INTO Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, TilesRequired, AdjacentImprovement)
+-- 	VALUES ('STEPWELL_FOOD', 'Placeholder', 'YIELD_FOOD', 1, 1, 'IMPROVEMENT_FARM');
+-- INSERT OR IGNORE INTO Improvement_Adjacencies (ImprovementType, YieldChangeId)
+-- 	VALUES ('IMPROVEMENT_STEPWELL', 'STEPWELL_FOOD');
+-- DELETE FROM ImprovementModifiers WHERE ModifierId='STEPWELL_FARMADJACENCY_FOOD';
+--
+--
+-- --==================
+-- -- India (Gandhi)
+-- --==================
+-- -- Extra belief when founding a Religion
+-- INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSetId)
+--     VALUES ('EXTRA_BELIEF_MODIFIER', 'MODIFIER_PLAYER_ADD_BELIEF', 'HAS_A_RELIGION_BBG');
+-- INSERT OR IGNORE INTO TraitModifiers (TraitType, ModifierId)
+--     VALUES ('TRAIT_LEADER_SATYAGRAHA', 'EXTRA_BELIEF_MODIFIER');
+-- INSERT OR IGNORE INTO RequirementSets (RequirementSetId, RequirementSetType)
+--     VALUES ('HAS_A_RELIGION_BBG', 'REQUIREMENTSET_TEST_ALL');
+-- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId)
+--     VALUES ('HAS_A_RELIGION_BBG', 'REQUIRES_FOUNDED_RELIGION_BBG');
+-- INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType, Inverse)
+-- 	VALUES ('REQUIRES_FOUNDED_RELIGION_BBG', 'REQUIREMENT_FOUNDED_NO_RELIGION', 1);
+-- -- +1 movement to builders
+-- INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
+-- 	VALUES ('TRAIT_LEADER_SATYAGRAHA' , 'GANDHI_FAST_BUILDERS');
+-- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
+-- 	VALUES ('GANDHI_FAST_BUILDERS' , 'MODIFIER_PLAYER_UNITS_ADJUST_MOVEMENT' , 'UNIT_IS_BUILDER');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES ('GANDHI_FAST_BUILDERS' , 'Amount' , '1');
+-- -- +1 movement to settlers
+-- INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
+-- 	VALUES ('TRAIT_LEADER_SATYAGRAHA' , 'GANDHI_FAST_SETTLERS');
+-- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
+-- 	VALUES ('GANDHI_FAST_SETTLERS' , 'MODIFIER_PLAYER_UNITS_ADJUST_MOVEMENT' , 'UNIT_IS_SETTLER');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES ('GANDHI_FAST_SETTLERS' , 'Amount' , '1');
+-- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+-- 	VALUES ('UNIT_IS_SETTLER' , 'REQUIREMENT_UNIT_IS_SETTLER');
+-- INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
+-- 	VALUES ('UNIT_IS_SETTLER' , 'REQUIREMENTSET_TEST_ALL');
+-- INSERT OR IGNORE INTO Requirements (RequirementId , RequirementType)
+-- 	VALUES ('REQUIREMENT_UNIT_IS_SETTLER' , 'REQUIREMENT_UNIT_TYPE_MATCHES');
+-- INSERT OR IGNORE INTO RequirementArguments (RequirementId , Name , Value)
+-- 	VALUES ('REQUIREMENT_UNIT_IS_SETTLER' , 'UnitType' , 'UNIT_SETTLER');
+--
+--
+-- --==================
+-- -- Japan
+-- --==================
+-- -- Commercial Hubs no longer get adjacency from rivers
+-- INSERT OR IGNORE INTO ExcludedAdjacencies (TraitType , YieldChangeId)
+--     VALUES
+--     ('TRAIT_CIVILIZATION_ADJACENT_DISTRICTS' , 'River_Gold');
+-- -- Samurai come at Feudalism now
+-- -- Implemented by Firaxis
+-- -- UPDATE Units SET PrereqCivic='CIVIC_FEUDALISM' , PrereqTech=NULL WHERE UnitType='UNIT_JAPANESE_SAMURAI';
+--
+--
+-- --==================
+-- -- Kongo
+-- --==================
+-- -- +100% prod towards archealogists
+-- INSERT OR IGNORE INTO TraitModifiers (TraitType, ModifierId) VALUES
+-- 	('TRAIT_CIVILIZATION_NKISI', 'TRAIT_ARCHAEOLOGIST_PROD_BBG');
+-- INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType) VALUES
+-- 	('TRAIT_ARCHAEOLOGIST_PROD_BBG', 'MODIFIER_PLAYER_UNITS_ADJUST_UNIT_PRODUCTION');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES
+-- 	('TRAIT_ARCHAEOLOGIST_PROD_BBG', 'UnitType', 'UNIT_ARCHAEOLOGIST'),
+-- 	('TRAIT_ARCHAEOLOGIST_PROD_BBG', 'Amount', '100');
+--
+--
+--
+-- --==================
+-- -- Norway
+-- --==================
+-- -- Berserker no longer gets +10 on attack and -5 on defense... simplified to be base on defense and +15 on attack
+-- -- UPDATE ModifierArguments SET Value='15' WHERE ModifierId='UNIT_STRONG_WHEN_ATTACKING';
+-- -- UPDATE ModifierArguments SET Value='0' WHERE ModifierId='UNIT_WEAK_WHEN_DEFENDING';
+-- -- Berserker unit now gets unlocked at Feudalism instead of Military Tactics, and can be purchased with Faith
+-- UPDATE Units SET PrereqTech=NULL , PrereqCivic='CIVIC_FEUDALISM' WHERE UnitType='UNIT_NORWEGIAN_BERSERKER';
+-- INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
+-- 	VALUES ('TRAIT_CIVILIZATION_UNIT_NORWEGIAN_BERSERKER' , 'BERSERKER_FAITH_PURCHASE_CPLMOD');
+-- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType)
+-- 	VALUES ('BERSERKER_FAITH_PURCHASE_CPLMOD' , 'MODIFIER_PLAYER_CITIES_ENABLE_UNIT_FAITH_PURCHASE');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES ('BERSERKER_FAITH_PURCHASE_CPLMOD' , 'Tag' , 'CLASS_MELEE_BERSERKER');
+-- --Berserker Movement bonus extended to all water tiles
+-- UPDATE RequirementSets SET RequirementSetType='REQUIREMENTSET_TEST_ANY' WHERE RequirementSetId='BERSERKER_PLOT_IS_ENEMY_TERRITORY';
+-- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+-- 	VALUES
+-- 	('BERSERKER_PLOT_IS_ENEMY_TERRITORY' , 'REQUIRES_PLOT_HAS_COAST'),
+-- 	('BERSERKER_PLOT_IS_ENEMY_TERRITORY' , 'REQUIRES_TERRAIN_OCEAN' );
+-- -- Stave Church now gives +1 Faith to resource tiles in the city, instead of standard adjacency bonus for woods
+-- INSERT OR IGNORE INTO Modifiers (ModifierID , ModifierType , SubjectRequirementSetId)
+-- 	VALUES ('STAVECHURCH_RESOURCE_FAITH' , 'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD' , 'STAVE_CHURCH_RESOURCE_REQUIREMENTS');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES ('STAVECHURCH_RESOURCE_FAITH' , 'YieldType' , 'YIELD_FAITH');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES ('STAVECHURCH_RESOURCE_FAITH' , 'Amount' , '1');
+-- INSERT OR IGNORE INTO BuildingModifiers (BuildingType , ModifierId)
+-- 	VALUES ('BUILDING_STAVE_CHURCH' , 'STAVECHURCH_RESOURCE_FAITH');
+-- INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
+-- 	VALUES ('STAVE_CHURCH_RESOURCE_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
+-- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+-- 	VALUES ('STAVE_CHURCH_RESOURCE_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_VISIBLE_RESOURCE');
+-- UPDATE ModifierArguments SET Value='0' WHERE ModifierId='STAVE_CHURCH_FAITHWOODSADJACENCY' AND Name='Amount';
+--
+-- -- +2 gold harbor adjacency if adjacent to holy sites
 -- INSERT OR IGNORE INTO Adjacency_YieldChanges (ID , Description , YieldType , YieldChange , TilesRequired , AdjacentDistrict)
 --     VALUES
---     ('District_HS_Gold_Positive' , 'LOC_HOLY_SITE_HARBOR_ADJACENCY_DESCRIPTION' , 'YIELD_GOLD' , '2'  , '1' , 'DISTRICT_HOLY_SITE');
+--     ('District_HS_Gold_Positive' , 'LOC_HOLY_SITE_HARBOR_ADJACENCY_DESCRIPTION' , 'YIELD_GOLD' , '2'  , '1' , 'DISTRICT_HOLY_SITE'),
+--     ('District_HS_Gold_Negative' , 'LOC_HOLY_SITE_HARBOR_ADJACENCY_DESCRIPTION' , 'YIELD_GOLD' , '-2' , '1' , 'DISTRICT_HOLY_SITE');
 -- INSERT OR IGNORE INTO District_Adjacencies (DistrictType , YieldChangeId)
 --     VALUES
---     ('DISTRICT_HARBOR' , 'District_HS_Gold_Positive');
--- INSERT OR IGNORE INTO ExcludedAdjacencies 
--- 	SELECT DISTINCT TraitType, 'District_HS_Gold_Positive'
--- 	FROM (SELECT * FROM LeaderTraits WHERE TraitType LIKE 'TRAIT_LEADER_%' GROUP BY LeaderType) 
--- 	WHERE LeaderType!='LEADER_HARDRADA' AND TraitType!='TRAIT_LEADER_MAJOR_CIV';
-
--- Holy Sites coastal adjacency
-INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType)
-	VALUES
-	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'MODIFIER_PLAYER_CITIES_TERRAIN_ADJACENCY');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES
-	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'DistrictType' , 'DISTRICT_HOLY_SITE'             			 ),
-	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'TerrainType'  , 'TERRAIN_COAST'                  			 ),
-	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'YieldType'    , 'YIELD_FAITH'                    			 ),
-	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'Amount'       , '1'                              			 ),
-	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'TilesRequired', '1'                              			 ),
-	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'Description'  , 'LOC_DISTRICT_HOLY_SITE_NORWAY_COAST_FAITH');
-INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
-	VALUES
-	('TRAIT_LEADER_MELEE_COASTAL_RAIDS' , 'TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY');
--- +50% production towards Holy Sites and associated Buildings
-INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
-	VALUES
-	('TRAIT_LEADER_MELEE_COASTAL_RAIDS'          , 'THUNDERBOLT_HOLY_SITE_DISTRICT_BOOST'              );
---	('TRAIT_LEADER_MELEE_COASTAL_RAIDS'          , 'THUNDERBOLT_HOLY_SITE_BUILDING_BOOST'              );
-INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
-	VALUES
-	('THUNDERBOLT_HOLY_SITE_DISTRICT_BOOST'               , 'MODIFIER_PLAYER_CITIES_ADJUST_DISTRICT_PRODUCTION'                 , null);
---	('THUNDERBOLT_HOLY_SITE_BUILDING_BOOST'               , 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_PRODUCTION'                 , null)
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value , Extra , SecondExtra)
-	VALUES
-	('THUNDERBOLT_HOLY_SITE_DISTRICT_BOOST'               , 'DistrictType' , 'DISTRICT_HOLY_SITE' , null , null),
-	('THUNDERBOLT_HOLY_SITE_DISTRICT_BOOST'               , 'Amount'       , '50'                 , null , null);
---	('THUNDERBOLT_HOLY_SITE_BUILDING_BOOST'               , 'DistrictType' , 'DISTRICT_HOLY_SITE' , null , null),
---	('THUNDERBOLT_HOLY_SITE_BUILDING_BOOST'               , 'Amount'       , '50'                 , null , null);
-
-
---==================
--- Rome
---==================
--- free city center building after code of laws
-UPDATE Modifiers SET SubjectRequirementSetId='HAS_CODE_OF_LAWS_SET_BBG' WHERE ModifierId='TRAIT_ADJUST_NON_CAPITAL_FREE_CHEAPEST_BUILDING';
-INSERT OR IGNORE INTO RequirementSets VALUES ('HAS_CODE_OF_LAWS_SET_BBG', 'REQUIREMENTSET_TEST_ALL');
-INSERT OR IGNORE INTO RequirementSetRequirements VALUES ('HAS_CODE_OF_LAWS_SET_BBG', 'HAS_CODE_OF_LAWS_BBG');
-INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType) VALUES
-	('HAS_CODE_OF_LAWS_BBG', 'REQUIREMENT_PLAYER_HAS_CIVIC');
-INSERT OR IGNORE INTO RequirementArguments (RequirementId, Name, Value) VALUES
-	('HAS_CODE_OF_LAWS_BBG', 'CivicType', 'CIVIC_CODE_OF_LAWS');
--- Baths get Culture minor adjacency bonus added
-INSERT OR IGNORE INTO District_Adjacencies (DistrictType , YieldChangeId)
-	VALUES ('DISTRICT_BATH' , 'District_Culture');
-
-
---==================
--- Russia
---==================
--- Lavra only gets 1 Great Prophet Point per turn
-UPDATE District_GreatPersonPoints SET PointsPerTurn=1 WHERE DistrictType='DISTRICT_LAVRA' AND GreatPersonClassType='GREAT_PERSON_CLASS_PROPHET';
--- Only gets 2 extra tiles when founding a new city instead of 8 
---UPDATE ModifierArguments SET Value='2' WHERE ModifierId='TRAIT_INCREASED_TILES';
--- Cossacks have same base strength as cavalry instead of +5
-UPDATE Units SET Combat=62 WHERE UnitType='UNIT_RUSSIAN_COSSACK';
-
--- 2020/12/15 - Found in 4.1.2: Fix corner case where Cossacks don't work on borders
-UPDATE Modifiers SET SubjectRequirementSetId=NULL WHERE ModifierId="COSSACK_LOCAL_COMBAT";
-UPDATE Modifiers SET OwnerRequirementSetId="COSSACK_PLOT_IS_OWNER_OR_ADJACENT_REQUIREMENTS" WHERE ModifierId="COSSACK_LOCAL_COMBAT";
-
--- 23/04/2021 iElden: Applied Firaxis patch
--- Lavra district does not acrue Great Person Points unless city has a theater
---UPDATE District_GreatPersonPoints SET PointsPerTurn='0' WHERE DistrictType='DISTRICT_LAVRA' AND GreatPersonClassType='GREAT_PERSON_CLASS_ARTIST';
---UPDATE District_GreatPersonPoints SET PointsPerTurn='0' WHERE DistrictType='DISTRICT_LAVRA' AND GreatPersonClassType='GREAT_PERSON_CLASS_MUSICIAN';
---UPDATE District_GreatPersonPoints SET PointsPerTurn='0' WHERE DistrictType='DISTRICT_LAVRA' AND GreatPersonClassType='GREAT_PERSON_CLASS_WRITER';
---INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
---    VALUES ('DELAY_LAVRA_GPP_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
---INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
---    VALUES
---	('DELAY_LAVRA_GPP_REQUIREMENTS' , 'REQUIRES_DISTRICT_IS_LAVRA'),
---	('DELAY_LAVRA_GPP_REQUIREMENTS' , 'REQUIRES_CITY_HAS_THEATER_DISTRICT');
---INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType)
---	VALUES ('REQUIRES_DISTRICT_IS_LAVRA' , 'REQUIREMENT_DISTRICT_TYPE_MATCHES');
---INSERT OR IGNORE INTO RequirementArguments (RequirementId, Name, Value)
---	VALUES ('REQUIRES_DISTRICT_IS_LAVRA', 'DistrictType', 'DISTRICT_LAVRA');
---INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
---    VALUES
---	('DELAY_LAVRA_ARTIST_GPP_MODIFIER' , 'MODIFIER_SINGLE_CITY_DISTRICTS_ADJUST_GREAT_PERSON_POINTS' , 'DELAY_LAVRA_GPP_REQUIREMENTS'),
---    ('DELAY_LAVRA_MUSICIAN_GPP_MODIFIER' , 'MODIFIER_SINGLE_CITY_DISTRICTS_ADJUST_GREAT_PERSON_POINTS' , 'DELAY_LAVRA_GPP_REQUIREMENTS'),
---	('DELAY_LAVRA_WRITER_GPP_MODIFIER' , 'MODIFIER_SINGLE_CITY_DISTRICTS_ADJUST_GREAT_PERSON_POINTS' , 'DELAY_LAVRA_GPP_REQUIREMENTS');
---INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
---    VALUES
---	('DELAY_LAVRA_ARTIST_GPP_MODIFIER' , 'GreatPersonClassType' , 'GREAT_PERSON_CLASS_ARTIST'),
---    ('DELAY_LAVRA_MUSICIAN_GPP_MODIFIER' , 'GreatPersonClassType' , 'GREAT_PERSON_CLASS_MUSICIAN'),
---	('DELAY_LAVRA_WRITER_GPP_MODIFIER' , 'GreatPersonClassType' , 'GREAT_PERSON_CLASS_WRITER'),
---	('DELAY_LAVRA_ARTIST_GPP_MODIFIER' , 'Amount' , '1'),
---    ('DELAY_LAVRA_MUSICIAN_GPP_MODIFIER' , 'Amount' , '1'),
---    ('DELAY_LAVRA_WRITER_GPP_MODIFIER' , 'Amount' , '1');
---INSERT OR IGNORE INTO DistrictModifiers ( DistrictType , ModifierId )
---	VALUES
---	( 'DISTRICT_LAVRA' , 'DELAY_LAVRA_ARTIST_GPP_MODIFIER' ),
---	( 'DISTRICT_LAVRA' , 'DELAY_LAVRA_MUSICIAN_GPP_MODIFIER' ),
---	( 'DISTRICT_LAVRA' , 'DELAY_LAVRA_WRITER_GPP_MODIFIER' );
-
-
---==================
--- Scythia
---==================
--- Scythia no longer gets an extra light cavalry unit when building/buying one
-UPDATE ModifierArguments SET Value='0' WHERE ModifierId='TRAIT_EXTRASAKAHORSEARCHER' and NAME='Amount';
-UPDATE ModifierArguments SET Value='0' WHERE ModifierId='TRAIT_EXTRALIGHTCAVALRY' and NAME='Amount';
--- Scythian Horse Archer gets a little more offense and defense, less maintenance, and can upgrade to Crossbowman before Field Cannon now
--- 23/04/2021: Implemented by Firaxis
--- UPDATE UnitUpgrades SET UpgradeUnit='UNIT_CROSSBOWMAN' WHERE Unit='UNIT_SCYTHIAN_HORSE_ARCHER';
-UPDATE Units SET Range=2, Cost=70 WHERE UnitType='UNIT_SCYTHIAN_HORSE_ARCHER';
--- Adjacent Pastures now give +1 production in addition to faith
-INSERT OR IGNORE INTO Improvement_Adjacencies (ImprovementType , YieldChangeId)
-	VALUES ('IMPROVEMENT_KURGAN' , 'KURGAN_PASTURE_PRODUCTION');
-INSERT OR IGNORE INTO Adjacency_YieldChanges (ID , Description , YieldType , YieldChange , TilesRequired , AdjacentImprovement)
-	VALUES ('KURGAN_PASTURE_PRODUCTION' , 'Placeholder' , 'YIELD_PRODUCTION' , 1 , 1 , 'IMPROVEMENT_PASTURE');
-INSERT OR IGNORE INTO Improvement_YieldChanges (ImprovementType , YieldType , YieldChange)
-	VALUES ('IMPROVEMENT_KURGAN' , 'YIELD_PRODUCTION' , 0);
-INSERT OR IGNORE INTO Improvement_ValidTerrains (ImprovementType, TerrainType) VALUES
-	('IMPROVEMENT_KURGAN', 'TERRAIN_PLAINS_HILLS'),
-	('IMPROVEMENT_KURGAN', 'TERRAIN_GRASS_HILLS'),
-	('IMPROVEMENT_KURGAN', 'TERRAIN_DESERT_HILLS'),
-	('IMPROVEMENT_KURGAN', 'TERRAIN_SNOW_HILLS'),
-	('IMPROVEMENT_KURGAN', 'TERRAIN_TUNDRA_HILLS');
-
--- Can now purchase cavalry units with faith
-INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
-	VALUES ('TRAIT_CIVILIZATION_EXTRA_LIGHT_CAVALRY' , 'SCYTHIA_FAITH_PURCHASE_LCAVALRY_CPLMOD');
-INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
-	VALUES ('TRAIT_CIVILIZATION_EXTRA_LIGHT_CAVALRY' , 'SCYTHIA_FAITH_PURCHASE_HCAVALRY_CPLMOD');
-INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
-	VALUES ('TRAIT_CIVILIZATION_EXTRA_LIGHT_CAVALRY' , 'SCYTHIA_FAITH_PURCHASE_RCAVALRY_CPLMOD');
-INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType)
-	VALUES ('SCYTHIA_FAITH_PURCHASE_LCAVALRY_CPLMOD' , 'MODIFIER_PLAYER_CITIES_ENABLE_UNIT_FAITH_PURCHASE');
-INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType)
-	VALUES ('SCYTHIA_FAITH_PURCHASE_HCAVALRY_CPLMOD' , 'MODIFIER_PLAYER_CITIES_ENABLE_UNIT_FAITH_PURCHASE');
-INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType)
-	VALUES ('SCYTHIA_FAITH_PURCHASE_RCAVALRY_CPLMOD' , 'MODIFIER_PLAYER_CITIES_ENABLE_UNIT_FAITH_PURCHASE');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES ('SCYTHIA_FAITH_PURCHASE_LCAVALRY_CPLMOD' , 'Tag' , 'CLASS_LIGHT_CAVALRY'); 
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES ('SCYTHIA_FAITH_PURCHASE_HCAVALRY_CPLMOD' , 'Tag' , 'CLASS_HEAVY_CAVALRY');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES ('SCYTHIA_FAITH_PURCHASE_RCAVALRY_CPLMOD' , 'Tag' , 'CLASS_RANGED_CAVALRY'); 
-
-
---==================
--- Spain
---==================
--- missions get +1 housing on home continent
-INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType) VALUES
-	('REQUIRES_PLOT_IS_OWNER_CAPITAL_CONTINENT_BBG', 'REQUIREMENT_PLOT_IS_OWNER_CAPITAL_CONTINENT');
-INSERT OR IGNORE INTO RequirementSets VALUES
-	('PLOT_CAPITAL_CONTINENT_REQUIREMENTS_BBG', 'REQUIREMENTSET_TEST_ALL');
-INSERT OR IGNORE INTO RequirementSetRequirements VALUES
-	('PLOT_CAPITAL_CONTINENT_REQUIREMENTS_BBG', 'REQUIRES_PLOT_IS_OWNER_CAPITAL_CONTINENT_BBG');
-INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
-	VALUES ('MISSION_HOMECONTINENT_HOUSING_BBG' , 'MODIFIER_SINGLE_CITY_ADJUST_IMPROVEMENT_HOUSING', 'PLOT_CAPITAL_CONTINENT_REQUIREMENTS_BBG');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES ('MISSION_HOMECONTINENT_HOUSING_BBG' , 'Amount' , 1);
-INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
-	VALUES ('IMPROVEMENT_MISSION' , 'MISSION_HOMECONTINENT_HOUSING_BBG');
--- Missions cannot be placed next to each other
-UPDATE Improvements SET SameAdjacentValid=0 WHERE ImprovementType='IMPROVEMENT_MISSION';
--- Missions moved to Theology
-UPDATE Improvements SET PrereqTech=NULL, PrereqCivic='CIVIC_THEOLOGY' WHERE ImprovementType='IMPROVEMENT_MISSION';
--- Missions get bonus science at Enlightenment instead of cultural heritage
-UPDATE Improvement_BonusYieldChanges SET PrereqCivic='CIVIC_THE_ENLIGHTENMENT' WHERE Id='17';
--- Early Fleets moved to Mercenaries
-UPDATE ModifierArguments SET Value='CIVIC_MERCENARIES' WHERE Name='CivicType' AND ModifierId='TRAIT_NAVAL_CORPS_EARLY';
--- 30% discount on missionaries
-INSERT OR IGNORE INTO TraitModifiers ( TraitType , ModifierId )
-	VALUES ('TRAIT_LEADER_EL_ESCORIAL' , 'HOLY_ORDER_MISSIONARY_DISCOUNT_MODIFIER');
+--     ('DISTRICT_HARBOR' , 'District_HS_Gold_Positive'),
+--     ('DISTRICT_HARBOR' , 'District_HS_Gold_Negative');
+-- INSERT OR IGNORE INTO ExcludedAdjacencies (YieldChangeId , TraitType)
+--     VALUES
+--     ('District_HS_Gold_Negative' , 'TRAIT_LEADER_MELEE_COASTAL_RAIDS');
+--
+-- -- INSERT OR IGNORE INTO Adjacency_YieldChanges (ID , Description , YieldType , YieldChange , TilesRequired , AdjacentDistrict)
+-- --     VALUES
+-- --     ('District_HS_Gold_Positive' , 'LOC_HOLY_SITE_HARBOR_ADJACENCY_DESCRIPTION' , 'YIELD_GOLD' , '2'  , '1' , 'DISTRICT_HOLY_SITE');
+-- -- INSERT OR IGNORE INTO District_Adjacencies (DistrictType , YieldChangeId)
+-- --     VALUES
+-- --     ('DISTRICT_HARBOR' , 'District_HS_Gold_Positive');
+-- -- INSERT OR IGNORE INTO ExcludedAdjacencies
+-- -- 	SELECT DISTINCT TraitType, 'District_HS_Gold_Positive'
+-- -- 	FROM (SELECT * FROM LeaderTraits WHERE TraitType LIKE 'TRAIT_LEADER_%' GROUP BY LeaderType)
+-- -- 	WHERE LeaderType!='LEADER_HARDRADA' AND TraitType!='TRAIT_LEADER_MAJOR_CIV';
+--
+-- -- Holy Sites coastal adjacency
+-- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType)
+-- 	VALUES
+-- 	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'MODIFIER_PLAYER_CITIES_TERRAIN_ADJACENCY');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES
+-- 	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'DistrictType' , 'DISTRICT_HOLY_SITE'             			 ),
+-- 	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'TerrainType'  , 'TERRAIN_COAST'                  			 ),
+-- 	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'YieldType'    , 'YIELD_FAITH'                    			 ),
+-- 	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'Amount'       , '1'                              			 ),
+-- 	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'TilesRequired', '1'                              			 ),
+-- 	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'Description'  , 'LOC_DISTRICT_HOLY_SITE_NORWAY_COAST_FAITH');
+-- INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
+-- 	VALUES
+-- 	('TRAIT_LEADER_MELEE_COASTAL_RAIDS' , 'TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY');
+-- -- +50% production towards Holy Sites and associated Buildings
+-- INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
+-- 	VALUES
+-- 	('TRAIT_LEADER_MELEE_COASTAL_RAIDS'          , 'THUNDERBOLT_HOLY_SITE_DISTRICT_BOOST'              );
+-- --	('TRAIT_LEADER_MELEE_COASTAL_RAIDS'          , 'THUNDERBOLT_HOLY_SITE_BUILDING_BOOST'              );
+-- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
+-- 	VALUES
+-- 	('THUNDERBOLT_HOLY_SITE_DISTRICT_BOOST'               , 'MODIFIER_PLAYER_CITIES_ADJUST_DISTRICT_PRODUCTION'                 , null);
+-- --	('THUNDERBOLT_HOLY_SITE_BUILDING_BOOST'               , 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_PRODUCTION'                 , null)
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value , Extra , SecondExtra)
+-- 	VALUES
+-- 	('THUNDERBOLT_HOLY_SITE_DISTRICT_BOOST'               , 'DistrictType' , 'DISTRICT_HOLY_SITE' , null , null),
+-- 	('THUNDERBOLT_HOLY_SITE_DISTRICT_BOOST'               , 'Amount'       , '50'                 , null , null);
+-- --	('THUNDERBOLT_HOLY_SITE_BUILDING_BOOST'               , 'DistrictType' , 'DISTRICT_HOLY_SITE' , null , null),
+-- --	('THUNDERBOLT_HOLY_SITE_BUILDING_BOOST'               , 'Amount'       , '50'                 , null , null);
+--
+--
+-- --==================
+-- -- Rome
+-- --==================
+-- -- free city center building after code of laws
+-- UPDATE Modifiers SET SubjectRequirementSetId='HAS_CODE_OF_LAWS_SET_BBG' WHERE ModifierId='TRAIT_ADJUST_NON_CAPITAL_FREE_CHEAPEST_BUILDING';
+-- INSERT OR IGNORE INTO RequirementSets VALUES ('HAS_CODE_OF_LAWS_SET_BBG', 'REQUIREMENTSET_TEST_ALL');
+-- INSERT OR IGNORE INTO RequirementSetRequirements VALUES ('HAS_CODE_OF_LAWS_SET_BBG', 'HAS_CODE_OF_LAWS_BBG');
+-- INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType) VALUES
+-- 	('HAS_CODE_OF_LAWS_BBG', 'REQUIREMENT_PLAYER_HAS_CIVIC');
+-- INSERT OR IGNORE INTO RequirementArguments (RequirementId, Name, Value) VALUES
+-- 	('HAS_CODE_OF_LAWS_BBG', 'CivicType', 'CIVIC_CODE_OF_LAWS');
+-- -- Baths get Culture minor adjacency bonus added
+-- INSERT OR IGNORE INTO District_Adjacencies (DistrictType , YieldChangeId)
+-- 	VALUES ('DISTRICT_BATH' , 'District_Culture');
+--
+--
+-- --==================
+-- -- Russia
+-- --==================
+-- -- Lavra only gets 1 Great Prophet Point per turn
+-- UPDATE District_GreatPersonPoints SET PointsPerTurn=1 WHERE DistrictType='DISTRICT_LAVRA' AND GreatPersonClassType='GREAT_PERSON_CLASS_PROPHET';
+-- -- Only gets 2 extra tiles when founding a new city instead of 8
+-- --UPDATE ModifierArguments SET Value='2' WHERE ModifierId='TRAIT_INCREASED_TILES';
+-- -- Cossacks have same base strength as cavalry instead of +5
+-- UPDATE Units SET Combat=62 WHERE UnitType='UNIT_RUSSIAN_COSSACK';
+--
+-- -- 2020/12/15 - Found in 4.1.2: Fix corner case where Cossacks don't work on borders
+-- UPDATE Modifiers SET SubjectRequirementSetId=NULL WHERE ModifierId='COSSACK_LOCAL_COMBAT';
+-- UPDATE Modifiers SET OwnerRequirementSetId='COSSACK_PLOT_IS_OWNER_OR_ADJACENT_REQUIREMENTS' WHERE ModifierId='COSSACK_LOCAL_COMBAT';
+--
+-- -- 23/04/2021 iElden: Applied Firaxis patch
+-- -- Lavra district does not acrue Great Person Points unless city has a theater
+-- --UPDATE District_GreatPersonPoints SET PointsPerTurn='0' WHERE DistrictType='DISTRICT_LAVRA' AND GreatPersonClassType='GREAT_PERSON_CLASS_ARTIST';
+-- --UPDATE District_GreatPersonPoints SET PointsPerTurn='0' WHERE DistrictType='DISTRICT_LAVRA' AND GreatPersonClassType='GREAT_PERSON_CLASS_MUSICIAN';
+-- --UPDATE District_GreatPersonPoints SET PointsPerTurn='0' WHERE DistrictType='DISTRICT_LAVRA' AND GreatPersonClassType='GREAT_PERSON_CLASS_WRITER';
+-- --INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
+-- --    VALUES ('DELAY_LAVRA_GPP_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
+-- --INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+-- --    VALUES
+-- --	('DELAY_LAVRA_GPP_REQUIREMENTS' , 'REQUIRES_DISTRICT_IS_LAVRA'),
+-- --	('DELAY_LAVRA_GPP_REQUIREMENTS' , 'REQUIRES_CITY_HAS_THEATER_DISTRICT');
+-- --INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType)
+-- --	VALUES ('REQUIRES_DISTRICT_IS_LAVRA' , 'REQUIREMENT_DISTRICT_TYPE_MATCHES');
+-- --INSERT OR IGNORE INTO RequirementArguments (RequirementId, Name, Value)
+-- --	VALUES ('REQUIRES_DISTRICT_IS_LAVRA', 'DistrictType', 'DISTRICT_LAVRA');
+-- --INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
+-- --    VALUES
+-- --	('DELAY_LAVRA_ARTIST_GPP_MODIFIER' , 'MODIFIER_SINGLE_CITY_DISTRICTS_ADJUST_GREAT_PERSON_POINTS' , 'DELAY_LAVRA_GPP_REQUIREMENTS'),
+-- --    ('DELAY_LAVRA_MUSICIAN_GPP_MODIFIER' , 'MODIFIER_SINGLE_CITY_DISTRICTS_ADJUST_GREAT_PERSON_POINTS' , 'DELAY_LAVRA_GPP_REQUIREMENTS'),
+-- --	('DELAY_LAVRA_WRITER_GPP_MODIFIER' , 'MODIFIER_SINGLE_CITY_DISTRICTS_ADJUST_GREAT_PERSON_POINTS' , 'DELAY_LAVRA_GPP_REQUIREMENTS');
+-- --INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- --    VALUES
+-- --	('DELAY_LAVRA_ARTIST_GPP_MODIFIER' , 'GreatPersonClassType' , 'GREAT_PERSON_CLASS_ARTIST'),
+-- --    ('DELAY_LAVRA_MUSICIAN_GPP_MODIFIER' , 'GreatPersonClassType' , 'GREAT_PERSON_CLASS_MUSICIAN'),
+-- --	('DELAY_LAVRA_WRITER_GPP_MODIFIER' , 'GreatPersonClassType' , 'GREAT_PERSON_CLASS_WRITER'),
+-- --	('DELAY_LAVRA_ARTIST_GPP_MODIFIER' , 'Amount' , '1'),
+-- --    ('DELAY_LAVRA_MUSICIAN_GPP_MODIFIER' , 'Amount' , '1'),
+-- --    ('DELAY_LAVRA_WRITER_GPP_MODIFIER' , 'Amount' , '1');
+-- --INSERT OR IGNORE INTO DistrictModifiers ( DistrictType , ModifierId )
+-- --	VALUES
+-- --	( 'DISTRICT_LAVRA' , 'DELAY_LAVRA_ARTIST_GPP_MODIFIER' ),
+-- --	( 'DISTRICT_LAVRA' , 'DELAY_LAVRA_MUSICIAN_GPP_MODIFIER' ),
+-- --	( 'DISTRICT_LAVRA' , 'DELAY_LAVRA_WRITER_GPP_MODIFIER' );
+--
+--
+-- --==================
+-- -- Scythia
+-- --==================
+-- -- Scythia no longer gets an extra light cavalry unit when building/buying one
+-- UPDATE ModifierArguments SET Value='0' WHERE ModifierId='TRAIT_EXTRASAKAHORSEARCHER' and NAME='Amount';
+-- UPDATE ModifierArguments SET Value='0' WHERE ModifierId='TRAIT_EXTRALIGHTCAVALRY' and NAME='Amount';
+-- -- Scythian Horse Archer gets a little more offense and defense, less maintenance, and can upgrade to Crossbowman before Field Cannon now
+-- -- 23/04/2021: Implemented by Firaxis
+-- -- UPDATE UnitUpgrades SET UpgradeUnit='UNIT_CROSSBOWMAN' WHERE Unit='UNIT_SCYTHIAN_HORSE_ARCHER';
+-- UPDATE Units SET Range=2, Cost=70 WHERE UnitType='UNIT_SCYTHIAN_HORSE_ARCHER';
+-- -- Adjacent Pastures now give +1 production in addition to faith
+-- INSERT OR IGNORE INTO Improvement_Adjacencies (ImprovementType , YieldChangeId)
+-- 	VALUES ('IMPROVEMENT_KURGAN' , 'KURGAN_PASTURE_PRODUCTION');
+-- INSERT OR IGNORE INTO Adjacency_YieldChanges (ID , Description , YieldType , YieldChange , TilesRequired , AdjacentImprovement)
+-- 	VALUES ('KURGAN_PASTURE_PRODUCTION' , 'Placeholder' , 'YIELD_PRODUCTION' , 1 , 1 , 'IMPROVEMENT_PASTURE');
+-- INSERT OR IGNORE INTO Improvement_YieldChanges (ImprovementType , YieldType , YieldChange)
+-- 	VALUES ('IMPROVEMENT_KURGAN' , 'YIELD_PRODUCTION' , 0);
+-- INSERT OR IGNORE INTO Improvement_ValidTerrains (ImprovementType, TerrainType) VALUES
+-- 	('IMPROVEMENT_KURGAN', 'TERRAIN_PLAINS_HILLS'),
+-- 	('IMPROVEMENT_KURGAN', 'TERRAIN_GRASS_HILLS'),
+-- 	('IMPROVEMENT_KURGAN', 'TERRAIN_DESERT_HILLS'),
+-- 	('IMPROVEMENT_KURGAN', 'TERRAIN_SNOW_HILLS'),
+-- 	('IMPROVEMENT_KURGAN', 'TERRAIN_TUNDRA_HILLS');
+--
+-- -- Can now purchase cavalry units with faith
+-- INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
+-- 	VALUES ('TRAIT_CIVILIZATION_EXTRA_LIGHT_CAVALRY' , 'SCYTHIA_FAITH_PURCHASE_LCAVALRY_CPLMOD');
+-- INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
+-- 	VALUES ('TRAIT_CIVILIZATION_EXTRA_LIGHT_CAVALRY' , 'SCYTHIA_FAITH_PURCHASE_HCAVALRY_CPLMOD');
+-- INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
+-- 	VALUES ('TRAIT_CIVILIZATION_EXTRA_LIGHT_CAVALRY' , 'SCYTHIA_FAITH_PURCHASE_RCAVALRY_CPLMOD');
+-- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType)
+-- 	VALUES ('SCYTHIA_FAITH_PURCHASE_LCAVALRY_CPLMOD' , 'MODIFIER_PLAYER_CITIES_ENABLE_UNIT_FAITH_PURCHASE');
+-- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType)
+-- 	VALUES ('SCYTHIA_FAITH_PURCHASE_HCAVALRY_CPLMOD' , 'MODIFIER_PLAYER_CITIES_ENABLE_UNIT_FAITH_PURCHASE');
+-- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType)
+-- 	VALUES ('SCYTHIA_FAITH_PURCHASE_RCAVALRY_CPLMOD' , 'MODIFIER_PLAYER_CITIES_ENABLE_UNIT_FAITH_PURCHASE');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES ('SCYTHIA_FAITH_PURCHASE_LCAVALRY_CPLMOD' , 'Tag' , 'CLASS_LIGHT_CAVALRY');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES ('SCYTHIA_FAITH_PURCHASE_HCAVALRY_CPLMOD' , 'Tag' , 'CLASS_HEAVY_CAVALRY');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES ('SCYTHIA_FAITH_PURCHASE_RCAVALRY_CPLMOD' , 'Tag' , 'CLASS_RANGED_CAVALRY');
+--
+--
+-- --==================
+-- -- Spain
+-- --==================
+-- -- missions get +1 housing on home continent
+-- INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType) VALUES
+-- 	('REQUIRES_PLOT_IS_OWNER_CAPITAL_CONTINENT_BBG', 'REQUIREMENT_PLOT_IS_OWNER_CAPITAL_CONTINENT');
+-- INSERT OR IGNORE INTO RequirementSets VALUES
+-- 	('PLOT_CAPITAL_CONTINENT_REQUIREMENTS_BBG', 'REQUIREMENTSET_TEST_ALL');
+-- INSERT OR IGNORE INTO RequirementSetRequirements VALUES
+-- 	('PLOT_CAPITAL_CONTINENT_REQUIREMENTS_BBG', 'REQUIRES_PLOT_IS_OWNER_CAPITAL_CONTINENT_BBG');
+-- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
+-- 	VALUES ('MISSION_HOMECONTINENT_HOUSING_BBG' , 'MODIFIER_SINGLE_CITY_ADJUST_IMPROVEMENT_HOUSING', 'PLOT_CAPITAL_CONTINENT_REQUIREMENTS_BBG');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES ('MISSION_HOMECONTINENT_HOUSING_BBG' , 'Amount' , 1);
+-- INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
+-- 	VALUES ('IMPROVEMENT_MISSION' , 'MISSION_HOMECONTINENT_HOUSING_BBG');
+-- -- Missions cannot be placed next to each other
+-- UPDATE Improvements SET SameAdjacentValid=0 WHERE ImprovementType='IMPROVEMENT_MISSION';
+-- -- Missions moved to Theology
+-- UPDATE Improvements SET PrereqCivic='CIVIC_THEOLOGY' WHERE ImprovementType='IMPROVEMENT_MISSION';
+-- -- Missions get bonus science at Enlightenment instead of cultural heritage
+-- UPDATE Improvement_BonusYieldChanges SET PrereqCivic='CIVIC_THE_ENLIGHTENMENT' WHERE Id='17';
+-- -- Early Fleets moved to Mercenaries
+-- UPDATE ModifierArguments SET Value='CIVIC_MERCENARIES' WHERE Name='CivicType' AND ModifierId='TRAIT_NAVAL_CORPS_EARLY';
+-- -- 30% discount on missionaries
+-- INSERT OR IGNORE INTO TraitModifiers ( TraitType , ModifierId )
+-- 	VALUES ('TRAIT_LEADER_EL_ESCORIAL' , 'HOLY_ORDER_MISSIONARY_DISCOUNT_MODIFIER');
 
 
 --==============================================================
@@ -1039,7 +1039,7 @@ INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementI
 	VALUES
 	('GRAPE_SHOT_REQUIREMENTS',			'PLAYER_IS_ATTACKER_REQUIREMENTS'),
 	('SHRAPNEL_REQUIREMENTS',			'PLAYER_IS_ATTACKER_REQUIREMENTS');
-UPDATE Units SET PrereqTech='TECH_MILITARY_TACTICS' WHERE UnitType='UNIT_MAN_AT_ARMS';
+
 
 
 --==============================================================
@@ -1458,17 +1458,17 @@ INSERT OR IGNORE INTO Resource_YieldChanges (ResourceType, YieldType, YieldChang
 UPDATE Improvement_YieldChanges SET YieldChange=1 WHERE ImprovementType='IMPROVEMENT_FISHING_BOATS' AND YieldType='YIELD_PRODUCTION';
 
 -- Citizen specialists give +1 main yield
-UPDATE District_CitizenYieldChanges SET YieldChange=3 WHERE YieldType='YIELD_CULTURE' 		AND DistrictType="DISTRICT_ACROPOLIS";
-UPDATE District_CitizenYieldChanges SET YieldChange=3 WHERE YieldType='YIELD_SCIENCE' 		AND DistrictType="DISTRICT_CAMPUS";
-UPDATE District_CitizenYieldChanges SET YieldChange=4 WHERE YieldType='YIELD_GOLD' 			AND DistrictType="DISTRICT_COMMERCIAL_HUB";
-UPDATE District_CitizenYieldChanges SET YieldChange=2 WHERE YieldType='YIELD_PRODUCTION' 	AND DistrictType="DISTRICT_ENCAMPMENT";
-UPDATE District_CitizenYieldChanges SET YieldChange=3 WHERE YieldType='YIELD_PRODUCTION' 	AND DistrictType="DISTRICT_HANSA";
-UPDATE District_CitizenYieldChanges SET YieldChange=3 WHERE YieldType='YIELD_GOLD' 			AND DistrictType="DISTRICT_HARBOR";
-UPDATE District_CitizenYieldChanges SET YieldChange=3 WHERE YieldType='YIELD_FAITH' 		AND DistrictType="DISTRICT_HOLY_SITE";
-UPDATE District_CitizenYieldChanges SET YieldChange=3 WHERE YieldType='YIELD_PRODUCTION' 	AND DistrictType="DISTRICT_INDUSTRIAL_ZONE";
-UPDATE District_CitizenYieldChanges SET YieldChange=3 WHERE YieldType='YIELD_FAITH' 		AND DistrictType="DISTRICT_LAVRA";
-UPDATE District_CitizenYieldChanges SET YieldChange=3 WHERE YieldType='YIELD_GOLD' 			AND DistrictType="DISTRICT_ROYAL_NAVY_DOCKYARD";
-UPDATE District_CitizenYieldChanges SET YieldChange=3 WHERE YieldType='YIELD_CULTURE' 		AND DistrictType="DISTRICT_THEATER";
+UPDATE District_CitizenYieldChanges SET YieldChange=3 WHERE YieldType='YIELD_CULTURE' 		AND DistrictType='DISTRICT_ACROPOLIS';
+UPDATE District_CitizenYieldChanges SET YieldChange=3 WHERE YieldType='YIELD_SCIENCE' 		AND DistrictType='DISTRICT_CAMPUS';
+UPDATE District_CitizenYieldChanges SET YieldChange=4 WHERE YieldType='YIELD_GOLD' 			AND DistrictType='DISTRICT_COMMERCIAL_HUB';
+UPDATE District_CitizenYieldChanges SET YieldChange=2 WHERE YieldType='YIELD_PRODUCTION' 	AND DistrictType='DISTRICT_ENCAMPMENT';
+UPDATE District_CitizenYieldChanges SET YieldChange=3 WHERE YieldType='YIELD_PRODUCTION' 	AND DistrictType='DISTRICT_HANSA';
+UPDATE District_CitizenYieldChanges SET YieldChange=3 WHERE YieldType='YIELD_GOLD' 			AND DistrictType='DISTRICT_HARBOR';
+UPDATE District_CitizenYieldChanges SET YieldChange=3 WHERE YieldType='YIELD_FAITH' 		AND DistrictType='DISTRICT_HOLY_SITE';
+UPDATE District_CitizenYieldChanges SET YieldChange=3 WHERE YieldType='YIELD_PRODUCTION' 	AND DistrictType='DISTRICT_INDUSTRIAL_ZONE';
+UPDATE District_CitizenYieldChanges SET YieldChange=3 WHERE YieldType='YIELD_FAITH' 		AND DistrictType='DISTRICT_LAVRA';
+UPDATE District_CitizenYieldChanges SET YieldChange=3 WHERE YieldType='YIELD_GOLD' 			AND DistrictType='DISTRICT_ROYAL_NAVY_DOCKYARD';
+UPDATE District_CitizenYieldChanges SET YieldChange=3 WHERE YieldType='YIELD_CULTURE' 		AND DistrictType='DISTRICT_THEATER';
 
 
 --****		REQUIREMENTS		****--
