@@ -250,7 +250,7 @@
 			<Text>May reduce the presence of other Religions in their territory by 50%, and initiate theological combat with units of other Religions.</Text>
 		</Replace>-->
 		<Replace Tag="LOC_MOMENT_CATEGORY_CULTURAL_BONUS_GOLDEN_AGE" Language="en_US">
-			<Text>Pen, Brush, and Voice Golden Age:[NEWLINE][ICON_CivicBoosted] Inspirations provide an additional 10% of civic costs. Each city receives +2 [ICON_Culture] Culture and +1 [ICON_Gold] Gold for each specialty district.</Text>
+			<Text>Pen, Brush, and Voice (Golden Age):[NEWLINE][ICON_CivicBoosted] Inspirations provide an additional 10% of civic costs. Each city receives +2 [ICON_Culture] Culture and +1 [ICON_Gold] Gold for each specialty district.</Text>
 		</Replace>
 		<Replace Tag="LOC_PEDIA_CONCEPTS_PAGE_DEDICATIONS_CHAPTER_CONTENT_PARA_3" Language="en_US">
 			<Text>Pen, Brush, and Voice: Gain +1 Era Score each time you trigger an [ICON_CivicBoosted] Inspiration. +1 Era Score for constructing a building with a Great Work Slot. If chosen at the start of a Golden Age, [ICON_CivicBoosted] Inspirations provide an additional 10% of civic costs. Each city receives +2 [ICON_Culture] Culture and +1 [ICON_Gold] Gold for each specialty district.</Text>
@@ -365,12 +365,6 @@
 		<Replace Tag="LOC_FEATURE_DEAD_SEA_DESCRIPTION" Language="en_US">
 			<Text>Two tile natural wonder. It appears as a Lake and provides +2 [ICON_FOOD] Food, +2 [ICON_Faith] Faith, +2 [ICON_Culture] Culture. Units heal completely if they heal for one turn adjacent to the Dead Sea.</Text>
 		</Replace>
-		<Replace Tag="LOC_ALL_PARK_COMBAT_BONUS_DESCRIPTION" Language="en_US">
-			<Text>+{1_Amount} Combat Strength when within 4 tiles of a National Park</Text>
-		</Replace>
-		<Replace Tag="LOC_OWNER_PARK_COMBAT_BONUS_DESCRIPTION" Language="en_US">
-			<Text>+{1_Amount} Combat Strength when within 4 tiles of an Owned National Park</Text>
-		</Replace>
 		<Replace Tag="LOC_BUILDING_GOV_CONQUEST_DESCRIPTION" Language="en_US">
 			<Text>+25% [ICON_Production] Production towards all naval and land military units. Reduces the maintenance cost of units by 1 [ICON_GOLD] Gold.[NEWLINE]Awards +1 [Icon_Governor] Governor Title and increases Strategic Resources stockpiles by 15.</Text>
 		</Replace>
@@ -386,9 +380,6 @@
 		<Replace Tag="LOC_FEATURE_DEVILSTOWER_DESCRIPTION" Language="en_US">
 			<Text>One tile impassable natural wonder. Provides +2 [ICON_FAITH] Faith and +1 [ICON_Production] Production to adjacent tiles.</Text>
 		</Replace>
-		<Replace Tag="LOC_TRAIT_LEADER_ARTHASHASTRA_DESCRIPTION" Language="en_US">
-			<Text>All land combat and religious units receive +1 [ICON_Movement] Movement.</Text>
-		</Replace>
 		<!--<Replace Tag="LOC_POLICY_LIMES_DESCRIPTION" Language="en_US">
 			<Text>+100% [ICON_Production] Production toward Siege units and walls.</Text>
 		</Replace>-->
@@ -402,9 +393,6 @@
 			<Text>+50% [ICON_Tourism] Tourism across your empire.</Text>
 		</Replace>
 		<!--======== GATHERING STORM ========-->
-		<Row Tag="LOC_DISTRICT_HOLY_SITE_RIVER_FAITH" Language="en_US">
-			<Text>+{1_num} [ICON_Faith] Faith from the river.</Text>
-		</Row>
 		<Replace Tag="LOC_BELIEF_GOD_OF_WAR_NAME" Language="en_US">
 			<Text>God of War and Plunder</Text>
 		</Replace>
