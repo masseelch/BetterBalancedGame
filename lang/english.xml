@@ -5,7 +5,6 @@
 		<Replace Tag="LOC_BELIEF_RELIGIOUS_IDOLS_DESCRIPTION" Language="en_US">
 			<Text>+2 [ICON_Faith] Faith and +2 [ICON_GOLD] Gold from Mines over Luxury and Bonus resources.</Text>
 		</Replace>
-			</Replace>
 		<Row Tag='LOC_GOVERNOR_PROMOTION_MERCHANT_INVESTOR_DESCRIPTION' Language="en_US">
 			<Text>50% [ICON_GOLD] Gold discount on purchasing buildings and districts (if able) in the city.</Text>
 		</Row>
@@ -25,7 +24,6 @@
 		<!--<Replace Tag="LOC_UNIT_BYZANTINE_DROMON_DESCRIPTION" Language="en_US">
 			<Text>Byzantine unique Classical Era unit that replaces the Quadrireme and has additional range.</Text>
 		</Replace>-->
-		</Replace>
 		<Replace Tag="LOC_BUILDING_CHANCERY_DESCRIPTION" Language="en_US">
 			<Text>+3 Influence Points per turn. When this civilization captures or kills an enemy Spy, receive 200 [ICON_Science] Science (on Standard Speed) for every level of the enemy Spy.</Text>
 		</Replace>
@@ -151,11 +149,10 @@
 		<Replace Tag="LOC_BELIEF_STONE_CIRCLES_DESCRIPTION" Language="en_US">
 			<Text>+1 [ICON_Production] Production and +1 [ICON_Faith] Faith from Quarries.</Text>
 		</Replace>
-		</Replace>
 		<Row Tag="LOC_GOVERNOR_PROMOTION_EDUCATOR_KNOWLEDGE_DESCRIPTION" Language="en_US">
 			<Text>Domestic [ICON_TradeRoute] Trade Routes to Pingala's city provide +3 [ICON_SCIENCE] Science.</Text>
 		</Row>
-		Hier bin ich unsicher! --> Die nächsten zwei Einträge bitte überprüfen
+<!--		TODO: Hier bin ich unsicher! &ndash;&gt; Die nächsten zwei Einträge bitte überprüfen-->
 		<Replace Tag="LOC_PROMOTION_COMBAT_HOME_CONTINENT_DESCRIPTION" Language="en_US">
 			<Text>+5 Combat when defending on home continent.</Text>
 		</Replace>
@@ -267,9 +264,7 @@
 		<Replace Tag="LOC_GOVERNOR_PROMOTION_GARRISON_COMMANDER_DESCRIPTION" Language="en_US">
 			<Text>Units within the city's territory get +3 [ICON_Strength] Combat Strength. Your other cities within 9 tiles gain +4 Loyalty per turn towards your civilization.</Text>
 		</Replace>
-		Nächster Eintrag: Hier bin ich unsicher
-		</Replace>
-		</Replace>
+<!--		TODO: Nächster Eintrag: Hier bin ich unsicher-->
 		<Replace Tag="LOC_GOVERNOR_PROMOTION_RESOURCE_MANAGER_SURPLUS_LOGISTICS_DESCRIPTION" Language="en_US">
 			<Text>+20% [ICON_Food] Growth in the city. Your [ICON_TradeRoute] Trade Routes to Magnus' city provide +2 [ICON_Food] Food and +2 [ICON_PRODUCTION] Production to their starting city.</Text>
 		</Replace>
@@ -279,7 +274,6 @@
 		<Replace Tag="LOC_BELIEF_GODDESS_OF_FIRE_DESCRIPTION" Language="en_US">
 			<Text>+4 [ICON_FAITH] Faith from Geothermal Fissures and Volcanic Soil.</Text>
 		</Replace>
-		</Replace>		
 		<Replace Tag="LOC_SIEGE_RANGED_DEFENSE_DESCRIPTION" Language="en_US">
 			<Text>+10 Defense against ranged attacks.</Text>
 		</Replace>
@@ -318,7 +312,6 @@
 		</Replace>
 		<Replace Tag="LOC_TECH_STEEL_DESCRIPTION" Language="en_US">
 			<Text>+1 [ICON_Production] Production from the Lumber Mill improvement. Unlocks Urban Defenses, giving all of your cities an automatic 300 Fortification Strength and the ability to perform a ranged attack. All previous wall improvements become obsolete and siege support units are no longer effective.</Text>
-		</Replace>
 		</Replace>
 		<Replace Tag="LOC_BELIEF_INITIATION_RITES_DESCRIPTION" Language="en_US">
 			<Text>Receive 25% of a military land unit's production value in [ICON_FAITH] Faith when produced.</Text>

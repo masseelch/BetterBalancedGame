@@ -153,7 +153,6 @@
 		<Replace Tag="LOC_PEDIA_CONCEPTS_PAGE_DEDICATIONS_CHAPTER_CONTENT_PARA_6" Language="de_DE">
 			<Text>Hic Sunt Dracones: Gewährt +3 Zeitalterpunkte jedes Mal, wenn Ihr einen neuen Kontinent oder ein Naturwunder entdeckt. Erhaltet +1 Zeitalterpunkt, wenn Ihr eine nicht-barbarische Marineeinheit im Kampf besiegt. Wählt Ihr diese Widmung zu Beginn eines Goldenen Zeitalters, so erhaltet ihr +3 [ICON_Citizen] Startbevölkerung für neu gegründete Städte. +2 [ICON_Movement] Fortbewegung für Marine- oder gewasserte Einheiten. +2 Loyalität pro Runde für Städte, die nicht auf dem Kontinent Eurer ursprünglichen [ICON_Capital] Hauptstadt liegen Renaissance bis einschließlich Moderne.</Text>
 		</Replace>
-		</Replace>
 		<Replace Tag="LOC_BUILDING_ST_BASILS_CATHEDRAL_DESCRIPTION" Language="de_DE">
 			<Text>Gewährt 1 [ICON_GreatWork_Relic] Reliquie und 3 Plätze für [ICON_GreatWork_Relic] Relikte. +100% [ICON_Tourism] Religionstourismus von dieser Stadt. +1 [ICON_Food] Nahrung, +1 [ICON_Production] Produktion, and +1 [ICON_Culture] Kultur auf allen Tundra-Feldern dieser Stadt. Muss an ein Stadtzentrum angrenzen.</Text>
 		</Replace>
