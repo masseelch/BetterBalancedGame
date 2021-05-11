@@ -229,9 +229,6 @@ insert or ignore into Adjacency_YieldChanges (ID, Description, YieldType, YieldC
 	values ('SPHINX_WONDERADJACENCY_CULTURE_FTB', 'Placeholder', 'YIELD_CULTURE', 1, 1, 1);
 insert or ignore into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, TilesRequired, AdjacentWonder)
     values ('SPHINX_WONDERADJACENCY_FAITH_FTB', 'Placeholder', 'YIELD_FAITH', 1, 1, 1);
-INSERT OR IGNORE INTO Improvement_Adjacencies (ImprovementType, YieldChangeId)
-	VALUES ('IMPROVEMENT_STEPWELL', 'STEPWELL_FOOD');
-
 -- Increased +1 Culture moved to Diplomatic Service (Was Natural History)
 UPDATE Improvement_BonusYieldChanges SET PrereqCivic = 'CIVIC_DIPLOMATIC_SERVICE' WHERE Id = 18;
 -- Additional +1 culture when reaching 'natural history'-civic
