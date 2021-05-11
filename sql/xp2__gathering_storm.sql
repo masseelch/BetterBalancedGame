@@ -59,21 +59,21 @@ UPDATE Units SET Combat=90 , RangedCombat=90 WHERE UnitType='UNIT_AMERICAN_P51';
 -- UPDATE ModifierArguments SET Value='25' WHERE ModifierId='COTHON_SETTLER_PRODUCTION' AND Name='Amount';
 --
 --
--- --==========
--- -- EGYPT
--- --==========
--- INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType)
--- 	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_GRASSLAND', 'REQUIREMENT_PLOT_FEATURE_TYPE_MATCHES');
--- INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType)
--- 	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_PLAINS', 'REQUIREMENT_PLOT_FEATURE_TYPE_MATCHES');
--- INSERT OR IGNORE INTO RequirementArguments (RequirementId, Name, Value)
--- 	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_GRASSLAND', 'FeatureType', 'FEATURE_FLOODPLAINS_GRASSLAND');
--- INSERT OR IGNORE INTO RequirementArguments (RequirementId, Name, Value)
--- 	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_PLAINS', 'FeatureType', 'FEATURE_FLOODPLAINS_PLAINS');
--- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId)
--- 	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_CPL', 'REQUIRES_PLOT_HAS_FLOODPLAINS_GRASSLAND');
--- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId)
--- 	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_CPL', 'REQUIRES_PLOT_HAS_FLOODPLAINS_PLAINS');
+--==========
+-- EGYPT
+--==========
+INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType)
+	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_GRASSLAND', 'REQUIREMENT_PLOT_FEATURE_TYPE_MATCHES');
+INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType)
+	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_PLAINS', 'REQUIREMENT_PLOT_FEATURE_TYPE_MATCHES');
+INSERT OR IGNORE INTO RequirementArguments (RequirementId, Name, Value)
+	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_GRASSLAND', 'FeatureType', 'FEATURE_FLOODPLAINS_GRASSLAND');
+INSERT OR IGNORE INTO RequirementArguments (RequirementId, Name, Value)
+	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_PLAINS', 'FeatureType', 'FEATURE_FLOODPLAINS_PLAINS');
+INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId)
+	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_CPL', 'REQUIRES_PLOT_HAS_FLOODPLAINS_GRASSLAND');
+INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId)
+	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_CPL', 'REQUIRES_PLOT_HAS_FLOODPLAINS_PLAINS');
 --
 --
 --
@@ -306,11 +306,11 @@ UPDATE ModifierArguments SET Value='4' WHERE ModifierId='COLLECTIVIZATION_INTERN
 DELETE FROM BeliefModifiers WHERE ModifierId='RELIGIOUS_SETTLEMENTS_SETTLER';
 -- reeds and marshes works with all floodplains (see egypt for ReqArgs) and remains only 1 prod
 UPDATE ModifierArguments SET Value='1' WHERE ModifierId='LADY_OF_THE_REEDS_PRODUCTION2_MODIFIER' AND Name='Amount';
--- INSERT OR IGNORE INTO RequirementSetRequirements
---     (RequirementSetId, RequirementId)
---     VALUES
---     ('PLOT_HAS_REEDS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_FLOODPLAINS_GRASSLAND'),
---     ('PLOT_HAS_REEDS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_FLOODPLAINS_PLAINS');
+INSERT OR IGNORE INTO RequirementSetRequirements
+    (RequirementSetId, RequirementId)
+    VALUES
+    ('PLOT_HAS_REEDS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_FLOODPLAINS_GRASSLAND'),
+    ('PLOT_HAS_REEDS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_FLOODPLAINS_PLAINS');
 -- more faith for fire goddess and no district dmg from eruptions
 UPDATE ModifierArguments SET Value='4' WHERE ModifierId='GODDESS_OF_FIRE_FEATURES_FAITH_MODIFIER' AND Name='Amount';
 
