@@ -211,16 +211,27 @@ INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementI
 	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_CPL', 'REQUIRES_PLOT_HAS_FLOODPLAINS');
 -- Sphinx base Faith Increased to 2 (from 1)
 UPDATE Improvement_YieldChanges SET YieldChange=2 WHERE ImprovementType='IMPROVEMENT_SPHINX' AND YieldType='YIELD_FAITH';
--- +1 Faith and +1 Culture if adjacent to a wonder, instead of 2 Faith.
-UPDATE ModifierArguments SET Value='1' WHERE ModifierId='SPHINX_WONDERADJACENCY_FAITH' AND Name='Amount';
-INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
-	VALUES ('SPHINX_WONDERADJACENCY_CULTURE_CPLMOD' , 'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS' , 'PLOT_ADJACENT_TO_WONDER_REQUIREMENTS');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES ('SPHINX_WONDERADJACENCY_CULTURE_CPLMOD' , 'YieldType' , 'YIELD_CULTURE');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
-	VALUES ('SPHINX_WONDERADJACENCY_CULTURE_CPLMOD' , 'Amount' , 1);
-INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
-	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_WONDERADJACENCY_CULTURE_CPLMOD');
+-- -- +1 Faith and +1 Culture if adjacent to a wonder, instead of 2 Faith.
+-- UPDATE ModifierArguments SET Value='1' WHERE ModifierId='SPHINX_WONDERADJACENCY_FAITH' AND Name='Amount';
+-- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
+-- 	VALUES ('SPHINX_WONDERADJACENCY_CULTURE_CPLMOD' , 'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS' , 'PLOT_ADJACENT_TO_WONDER_REQUIREMENTS');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES ('SPHINX_WONDERADJACENCY_CULTURE_CPLMOD' , 'YieldType' , 'YIELD_CULTURE');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+-- 	VALUES ('SPHINX_WONDERADJACENCY_CULTURE_CPLMOD' , 'Amount' , 1);
+-- INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
+-- 	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_WONDERADJACENCY_CULTURE_CPLMOD');
+
+-- -- +1 Faith and +1 Culture per adjacent to wonder. Remove faith adjacency.
+delete from ImprovementModifiers where ModifierID = 'SPHINX_WONDERADJACENCY_FAITH';
+delete from ModifierArguments WHERE ModifierId='SPHINX_WONDERADJACENCY_FAITH';
+insert or ignore into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, TilesRequired, AdjacentWonder)
+	values ('SPHINX_WONDERADJACENCY_CULTURE_FTB', 'Placeholder', 'YIELD_CULTURE', 1, 1, 1);
+insert or ignore into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, TilesRequired, AdjacentWonder)
+    values ('SPHINX_WONDERADJACENCY_FAITH_FTB', 'Placeholder', 'YIELD_FAITH', 1, 1, 1);
+INSERT OR IGNORE INTO Improvement_Adjacencies (ImprovementType, YieldChangeId)
+	VALUES ('IMPROVEMENT_STEPWELL', 'STEPWELL_FOOD');
+
 -- Increased +1 Culture moved to Diplomatic Service (Was Natural History)
 UPDATE Improvement_BonusYieldChanges SET PrereqCivic = 'CIVIC_DIPLOMATIC_SERVICE' WHERE Id = 18;
 -- Additional +1 culture when reaching 'natural history'-civic
