@@ -222,13 +222,21 @@ UPDATE Improvement_YieldChanges SET YieldChange=2 WHERE ImprovementType='IMPROVE
 -- INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
 -- 	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_WONDERADJACENCY_CULTURE_CPLMOD');
 
--- -- +1 Faith and +1 Culture per adjacent to wonder. Remove faith adjacency.
+-- Remove default +2 faith adjacency for a wonder.
 delete from ImprovementModifiers where ModifierID = 'SPHINX_WONDERADJACENCY_FAITH';
 delete from ModifierArguments WHERE ModifierId='SPHINX_WONDERADJACENCY_FAITH';
+
+-- +1 Faith and +1 Culture per adjacent to wonder.
 insert or ignore into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, TilesRequired, AdjacentWonder)
 	values ('SPHINX_WONDERADJACENCY_CULTURE_FTB', 'Placeholder', 'YIELD_CULTURE', 1, 1, 1);
 insert or ignore into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, TilesRequired, AdjacentWonder)
     values ('SPHINX_WONDERADJACENCY_FAITH_FTB', 'Placeholder', 'YIELD_FAITH', 1, 1, 1);
+insert or ignore into Improvement_Adjacencies (ImprovementType, YieldChangeId)  values  ('IMPROVEMENT_SPHINX', 'SPHINX_WONDERADJACENCY_CULTURE_FTB');
+insert or ignore into Improvement_Adjacencies (ImprovementType, YieldChangeId)  values  ('IMPROVEMENT_SPHINX', 'SPHINX_WONDERADJACENCY_FAITH_FTB');
+
+-- INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
+-- 	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_WONDERADJACENCY_CULTURE_CPLMOD');
+
 -- Increased +1 Culture moved to Diplomatic Service (Was Natural History)
 UPDATE Improvement_BonusYieldChanges SET PrereqCivic = 'CIVIC_DIPLOMATIC_SERVICE' WHERE Id = 18;
 -- Additional +1 culture when reaching 'natural history'-civic
