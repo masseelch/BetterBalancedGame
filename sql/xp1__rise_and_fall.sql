@@ -169,22 +169,22 @@
 -- 	VALUES ('205' , 'IMPROVEMENT_GOLF_COURSE' , 'YIELD_CULTURE' , '1' , 'CIVIC_THE_ENLIGHTENMENT');
 --
 --
--- --==================
--- -- Sumeria
--- --==================
---
--- -- alpine training from matterhorn bugfix
--- INSERT OR IGNORE INTO TypeTags (Type, Tag) VALUES ('ABILITY_ALPINE_TRAINING', 'CLASS_WAR_CART');
--- -- REVERT TO BASE GAME
--- -- extra +3 envoys points per turn
--- --INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value)
--- --	VALUES ('SUMERIA_ENVOY_POINTS_FROM_MILITARY_ALLIANCE', 'Amount', '3');
--- --INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType)
--- --	VALUES ('SUMERIA_ENVOY_POINTS_FROM_MILITARY_ALLIANCE', 'MODIFIER_PLAYER_ADJUST_INFLUENCE_POINTS_PER_TURN');
--- --INSERT OR IGNORE INTO TraitModifiers (TraitType, ModifierId)
--- --	VALUES ('TRAIT_CIVILIZATION_FIRST_CIVILIZATION', 'SUMERIA_ENVOY_POINTS_FROM_MILITARY_ALLIANCE');
---
---
+--==================
+-- Sumeria
+--==================
+
+-- alpine training from matterhorn bugfix
+INSERT OR IGNORE INTO TypeTags (Type, Tag) VALUES ('ABILITY_ALPINE_TRAINING', 'CLASS_WAR_CART');
+-- REVERT TO BASE GAME
+-- extra +3 envoys points per turn
+--INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value)
+--	VALUES ('SUMERIA_ENVOY_POINTS_FROM_MILITARY_ALLIANCE', 'Amount', '3');
+--INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType)
+--	VALUES ('SUMERIA_ENVOY_POINTS_FROM_MILITARY_ALLIANCE', 'MODIFIER_PLAYER_ADJUST_INFLUENCE_POINTS_PER_TURN');
+--INSERT OR IGNORE INTO TraitModifiers (TraitType, ModifierId)
+--	VALUES ('TRAIT_CIVILIZATION_FIRST_CIVILIZATION', 'SUMERIA_ENVOY_POINTS_FROM_MILITARY_ALLIANCE');
+
+
 -- --==================
 -- -- Zulu
 -- --==================
