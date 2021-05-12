@@ -79,6 +79,10 @@ insert into Improvement_YieldChanges
     ( ImprovementType, YieldType, YieldChange )
 values ( 'IMPROVEMENT_ZIGGURAT', 'YIELD_FAITH', 0 );
 
+insert into Improvement_YieldChanges
+    ( ImprovementType, YieldType, YieldChange )
+values ( 'IMPROVEMENT_ZIGGURAT', 'YIELD_FOOD', 1 );
+
 -- +1 faith for every 2 adjacent farms. +1 faith for each adjacent District.
 insert into Improvement_Adjacencies
     ( ImprovementType, YieldChangeId )
