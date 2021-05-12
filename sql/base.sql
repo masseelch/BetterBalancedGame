@@ -234,14 +234,10 @@ insert or ignore into Adjacency_YieldChanges (ID, Description, YieldType, YieldC
 insert or ignore into Improvement_Adjacencies (ImprovementType, YieldChangeId)  values  ('IMPROVEMENT_SPHINX', 'SPHINX_WONDERADJACENCY_CULTURE_FTB');
 insert or ignore into Improvement_Adjacencies (ImprovementType, YieldChangeId)  values  ('IMPROVEMENT_SPHINX', 'SPHINX_WONDERADJACENCY_FAITH_FTB');
 
--- INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
--- 	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_WONDERADJACENCY_CULTURE_CPLMOD');
-
--- Increased +1 Culture moved to Diplomatic Service (Was Natural History)
-UPDATE Improvement_BonusYieldChanges SET PrereqCivic = 'CIVIC_DIPLOMATIC_SERVICE' WHERE Id = 18;
--- Additional +1 culture when reaching 'natural history'-civic
+-- Additional +1 culture when reaching 'Diplomatic Service'-civic
 INSERT OR IGNORE INTO Improvement_BonusYieldChanges (ImprovementType, YieldType, BonusYieldChange, PrereqCivic)
-    VALUES ('IMPROVEMENT_SPHINX' , 'YIELD_CULTURE' , 1, 'CIVIC_NATURAL_HISTORY');
+    VALUES ('IMPROVEMENT_SPHINX' , 'YIELD_CULTURE' , 1, 'CIVIC_DIPLOMATIC_SERVICE');
+
 -- Now grants 1 food and 1 production on desert tiles without floodplains. Go Go Gadget bad-start fixer.
 INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
 	VALUES ('SPHINX_DESERT_FOOD_MODIFIER' , 'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS', 'SPHINX_FOOD_PLOT_HAS_DESERT_REQUIREMENTS');
