@@ -5,28 +5,38 @@
 --==================
 -- Aztec
 --==================
-INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType) VALUES
-	('TRAIT_MELEE_PRODUCTION_BBG', 'MODIFIER_PLAYER_CITIES_ADJUST_UNIT_TAG_ERA_PRODUCTION');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES
-	('TRAIT_MELEE_PRODUCTION_BBG', 'UnitPromotionClass', 'PROMOTION_CLASS_MELEE'),
-	('TRAIT_MELEE_PRODUCTION_BBG', 'EraType', 'NO_ERA'),
-	('TRAIT_MELEE_PRODUCTION_BBG', 'Amount', '50');
-INSERT OR IGNORE INTO TraitModifiers VALUES
-	('TRAIT_CIVILIZATION_LEGEND_FIVE_SUNS', 'TRAIT_MELEE_PRODUCTION_BBG');
--- Aztec Tlachtli Unique Building is now slightly cheaper and is +3 Culture instead of +2 Faith/+1 Culture
-DELETE FROM Building_YieldChanges WHERE BuildingType='BUILDING_TLACHTLI' AND YieldType='YIELD_FAITH';
-UPDATE Building_YieldChanges SET YieldChange=3 WHERE BuildingType='BUILDING_TLACHTLI';
-UPDATE Buildings SET Cost=100 WHERE BuildingType='BUILDING_TLACHTLI';
+-- INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType) VALUES
+-- 	('TRAIT_MELEE_PRODUCTION_BBG', 'MODIFIER_PLAYER_CITIES_ADJUST_UNIT_TAG_ERA_PRODUCTION');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES
+-- 	('TRAIT_MELEE_PRODUCTION_BBG', 'UnitPromotionClass', 'PROMOTION_CLASS_MELEE'),
+-- 	('TRAIT_MELEE_PRODUCTION_BBG', 'EraType', 'NO_ERA'),
+-- 	('TRAIT_MELEE_PRODUCTION_BBG', 'Amount', '50');
+-- INSERT OR IGNORE INTO TraitModifiers VALUES
+-- 	('TRAIT_CIVILIZATION_LEGEND_FIVE_SUNS', 'TRAIT_MELEE_PRODUCTION_BBG');
+-- -- Aztec Tlachtli Unique Building is now slightly cheaper and is +3 Culture instead of +2 Faith/+1 Culture
+-- DELETE FROM Building_YieldChanges WHERE BuildingType='BUILDING_TLACHTLI' AND YieldType='YIELD_FAITH';
+-- UPDATE Building_YieldChanges SET YieldChange=3 WHERE BuildingType='BUILDING_TLACHTLI';
+-- UPDATE Buildings SET Cost=100 WHERE BuildingType='BUILDING_TLACHTLI';
+--
+-- -- Huey gives +2 culture to lake tiles
+-- INSERT OR IGNORE INTO BuildingModifiers (BuildingType, ModifierId)
+-- 	VALUES ('BUILDING_HUEY_TEOCALLI', 'HUEY_LAKE_CULTURE');
+-- INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSetId)
+-- 	VALUES
+-- 	('HUEY_LAKE_CULTURE', 'MODIFIER_ALL_CITIES_ATTACH_MODIFIER', 'FOODHUEY_PLAYER_REQUIREMENTS'),
+-- 	('HUEY_LAKE_CULTURE_MODIFIER', 'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD', 'FOODHUEY_PLOT_IS_LAKE_REQUIREMENTS');
+-- INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value)
+-- 	VALUES
+-- 	('HUEY_LAKE_CULTURE', 'ModifierId', 'HUEY_LAKE_CULTURE_MODIFIER'),
+-- 	('HUEY_LAKE_CULTURE_MODIFIER', 'Amount', '2'),
+-- 	('HUEY_LAKE_CULTURE_MODIFIER', 'YieldType', 'YIELD_CULTURE');
 
--- Huey gives +2 culture to lake tiles
-INSERT OR IGNORE INTO BuildingModifiers (BuildingType, ModifierId)
-	VALUES ('BUILDING_HUEY_TEOCALLI', 'HUEY_LAKE_CULTURE');
-INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSetId)
-	VALUES
-	('HUEY_LAKE_CULTURE', 'MODIFIER_ALL_CITIES_ATTACH_MODIFIER', 'FOODHUEY_PLAYER_REQUIREMENTS'),
-	('HUEY_LAKE_CULTURE_MODIFIER', 'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD', 'FOODHUEY_PLOT_IS_LAKE_REQUIREMENTS');
-INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value)
-	VALUES
-	('HUEY_LAKE_CULTURE', 'ModifierId', 'HUEY_LAKE_CULTURE_MODIFIER'),
-	('HUEY_LAKE_CULTURE_MODIFIER', 'Amount', '2'),
-	('HUEY_LAKE_CULTURE_MODIFIER', 'YieldType', 'YIELD_CULTURE');
+-- Tlachtli +3 Culture instead +2
+update Building_YieldChanges set YieldChange = 3 where BuildingType = 'BUILDING_TLACHTLI' and YieldType = 'YIELD_CULTURE';
+
+-- Eagle warrior no longer replaces warrior but swordsman (with all its values)
+update Units set Combat = 35, Cost = 90, Maintenance = 2, PrereqTech = 'TECH_IRON_WORKING' where UnitType = 'UNIT_AZTEC_EAGLE_WARRIOR';
+update UnitReplaces set ReplacesUnitType = 'UNIT_SWORDSMAN' where CivUniqueUnitType = 'UNIT_AZTEC_EAGLE_WARRIOR';
+
+-- Eagle warrior can see through forest / jungle and has no movement penalty (ability of kongos nagao unit).
+insert or ignore into TypeTags (Type, Tag) values ('UNIT_AZTEC_EAGLE_WARRIOR', 'CLASS_NAGAO');

@@ -200,12 +200,12 @@
 <!--            </Properties>-->
 <!--            <File>sql/dlc_australia.sql</File>-->
 <!--        </UpdateDatabase>-->
-<!--        <UpdateDatabase id="bbg_dlc_aztec" criteria="dlc_aztec">-->
-<!--            <Properties>-->
-<!--                <LoadOrder>11614</LoadOrder>-->
-<!--            </Properties>-->
-<!--            <File>sql/dlc_aztec.sql</File>-->
-<!--        </UpdateDatabase>-->
+        <UpdateDatabase id="bbg_dlc_aztec" criteria="dlc_aztec">
+            <Properties>
+                <LoadOrder>11614</LoadOrder>
+            </Properties>
+            <File>sql/dlc_aztec.sql</File>
+        </UpdateDatabase>
 <!--        <UpdateDatabase id="bbg_dlc_indo_khmer" criteria="dlc_indo_khmer">-->
 <!--            <Properties>-->
 <!--                <LoadOrder>11615</LoadOrder>-->
@@ -492,7 +492,7 @@
 <!--        <File>lang/chinese.xml</File>-->
         <File>sql/base.sql</File>
 <!--        <File>sql/dlc_australia.sql</File>-->
-<!--        <File>sql/dlc_aztec.sql</File>-->
+        <File>sql/dlc_aztec.sql</File>
 <!--        <File>sql/dlc_indo_khmer.sql</File>-->
 <!--        <File>sql/dlc_macedon_persia.sql</File>-->
 <!--        <File>sql/dlc_nubia.sql</File>-->
