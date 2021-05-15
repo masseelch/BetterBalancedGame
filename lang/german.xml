@@ -384,6 +384,27 @@
 		<!-- Korea -->
 		<!-- Mapuche -->
 		<!-- Norway -->
+		<Replace Tag="LOC_TRAIT_LEADER_THUNDERBOLT_DESCRIPTION" Language="de_DE">
+			<Text>Gewährt Küstenraubzüge und +50 % [ICON_PRODUCTION] Produktion für alle Nahkampf-Marineeinheiten.[NEWLINE][NEWLINE]Heilige Stätten und deren Gebäude erhalten einen Bonus von +50% [ICON_PRODUCTION] Produktion. Heilige Stätten erhalten außerdem einen Standard-Nachbarschaftsbonus durch Küstenfelder.[NEWLINE][NEWLINE]Hafen-Bezirke neben einem Heilige-Stätte-Bezirk erhalten zusätzlich einen Nachbarschaftsbonus von +2 [ICON_GOLD] Gold.</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_LEADER_THUNDERBOLT_EXPANSION2_DESCRIPTION" Language="de_DE">
+			<Text>Gewährt Küstenraubzüge und +50 % [ICON_PRODUCTION] Produktion für alle Nahkampf-Marineeinheiten. Erhaltet [ICON_SCIENCE] Wissenschaft durch Plündern von und Küstenraubzügen auf Minen zusätzlich zu [ICON_GOLD] Gold. Plündern von und Küstenraubzüge auf Steinbrüche, Weiden, Plantagen und Jagdlager gewähren zusätzlich zu [ICON_FAITH] Glauben auch [ICON_CULTURE]  Kultur.[NEWLINE][NEWLINE]+50% [ICON_PRODUCTION] auf Heilige Stätten. Heilige Stätten erhalten einen Standard-Nachbarschaftsbonus durch Küstenfelder.[NEWLINE][NEWLINE]Hafen-Bezirke neben einem Heilige-Stätte-Bezirk erhalten zusätzlich einen Nachbarschaftsbonus von +2 [ICON_GOLD] Gold.</Text>
+		</Replace>
+		<Replace Tag="LOC_BUILDING_STAVE_CHURCH_DESCRIPTION" Language="de_DE">
+            <Text>Einzigartiges Gebäude von Norwegen, dass den Tempel ersetzt. Erforderlich für den Erwerb von Aposteln und Inquisitoren mit Glauben. +1 [ICON_Faith] Glauben für jedes Reesource-Geländefeld in dieser Stadt. +1 [ICON_Production] Produktion für jedes Küstenressourcen-Geländefeld in dieser Stadt.</Text>
+        </Replace>
+        <Replace Tag="LOC_UNIT_NORWEGIAN_BERSERKER_DESCRIPTION" Language="de_DE">
+			<Text>Einzigartige norwegische Nahkampfeinheit des Mittelalters. +2 [ICON_Movement] Fortbewegungspunkte bei Start in feindlichem Gebiet. +15 [ICON_Strength] Kampfstärke beim Angreifen. Kann mit [ICON_Faith] gekauft werden.</Text>
+		</Replace>
+		<Replace Tag="LOC_ABILITY_BERSERKER_RAGE_DESCRIPTION" Language="de_DE">
+			<Text>+15 [ICON_Strength] Kampfstärke beim Angriff.</Text>
+		</Replace>
+		<Row Tag="LOC_DISTRICT_HOLY_SITE_RIVER_FAITH" Language="de_DE">
+			<Text>+{1_num} [ICON_Faith] Glaube von Flüssen.</Text>
+		</Row>
+		<Row Tag="LOC_DISTRICT_HOLY_SITE_NORWAY_COAST_FAITH" Language="de_DE">
+			<Text>+{1_num} [ICON_Faith] Glauben von Küste.</Text>
+		</Row>
 		<!-- Nubia -->
 		<!-- Persia -->
 		<!-- Poland -->
