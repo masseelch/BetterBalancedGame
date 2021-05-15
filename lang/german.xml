@@ -391,7 +391,37 @@
 		<!-- Scotland -->
 		<!-- Scythia -->
 		<!-- Spain -->
-		<!---->
+		<!-- Sumer -->
+			<Replace Tag="LOC_TRAIT_CIVILIZATION_FIRST_CIVILIZATION_NAME" Language="de_DE">
+			<Text>Wiege der Zivilisation</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_CIVILIZATION_FIRST_CIVILIZATION_DESCRIPTION" Language="de_DE">
+			<Text>Bauernhöfe erhalten +1 [ICON_Food] Nahrung, wenn sie an einen Fluss angrenzen. [NEWLINE]Bauernhöfe erhalten +1 [ICON_Production] Produktion, wenn sie nach der Entdeckung der Ausrichtung 'Frühes Reich' an einen Ziggurat angrenzen. </Text>
+		</Replace>
+		<Replace Tag="LOC_IMPROVEMENT_ZIGGURAT_DESCRIPTION" Language="de_DE">
+			<Text>Schaltet die Handwerker-Fähigkeit frei einen Ziggurat zu errichten, eine einzigartige Modernisierung der Sumerer.[NEWLINE][NEWLINE]+1 [ICON_Housing] Wohnraum, +2 [ICON_Science] Wissenschaft, +1 [ICON_Food] Nahrung. Weitere +1 [ICON_Culture] Kultur, wenn sie an einen Fluss angrenzen. +1 [ICON_Faith] Glauben, wenn sie an einen Bezirk oder zwei Bauernhöfe angrenzen. [NEWLINE]Können nicht auf Hügeln oder neben einem anderen Ziggurat errichtet werden.</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_LEADER_ADVENTURES_ENKIDU_NAME" Language="de_DE">
+			<Text>Shūtur eli sharrī</Text>
+		</Replace>
+		<Replace Tag="LOC_PEDIA_LEADERS_PAGE_LEADER_GILGAMESH_CHAPTER_CAPSULE_BODY" Language="de_DE">
+			<Text>Der König aller Könige ist ein mächtiger Anführer mit der Fähigkeit je nach Situation entweder früh die aggressive Auseinandersetzung zu suchen oder aber ein hoch entwickeltes Reich aufzubauen.</Text>
+		</Replace>	
+		<Replace Tag="LOC_PEDIA_LEADERS_PAGE_LEADER_GILGAMESH_CHAPTER_DETAILED_BODY" Language="de_DE">
+			<Text>Als erste entwickelte Zivilisation der Weltgeschichte, erleben die Sumerer eine frühe Blüte. Ihre Kriegswägen können vom ersten Zug an rekrutiert, ihre Ziggurats errichtet werden und dank der Fähigkeit 'Wiege der Zivilisation' habe die Sumerer das Potenzial für ein schnelles Wachstum. Gilgamesh wird früh Kriegswägen rekrutieren um Barbarenlager zu zerstören, damit er Nutzen aus der Fähigkeit 'Shūtur eli sharrī' ziehen kann ("König der Könige"). Er wird an den Läufen nahegelegener Flüsse Ziggurats errichten um früh mithilfe einer guten Stadtplanung in [ICON_Science] Wissenschaft, [ICON_Culture] Kultur und sogar [ICON_Faith] Glauben davonzuziehen.</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_LEADER_ADVENTURES_ENKIDU_DESCRIPTION" Language="de_DE">
+			<Text>Kann gegen jeden ohne Kriegstreiber-Mali den Krieg erklären, der mit Verbündeten bereits im Krieg liegt. Sobald Ihr im Krieg mit einem gemeinsamen Feind seid, Ihr und eure Verbündeten erhalten gleichermaßen Plünderbeute und Kampferfahrung, wenn entsprechende Einheiten Sumeriens und seiner Verbündeten nicht weiter als 5 Felder voneinander getrennt sind.[NEWLINE] Beginnt mit einem Kriegswagen in der Antike. [NEWLINE] Erhalte eine Stammesdorf-Belohnung bei der Eroberung eines Barbarenlagers zusätzlich zum üblichen [ICON_Gold] Gold. Zahle nur die Hälfte der üblichen Kosten, um die Einheiten von Stadtstaaten auszuheben.</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_LEADER_ADVENTURES_ENKIDU_EXPANSION1_DESCRIPTION" Language="de_DE">
+			<Text>Kann gegen jeden ohne Kriegstreiber-Mali den Krieg erklären, der mit Verbündeten bereits im Krieg liegt. Sobald Ihr im Krieg mit einem gemeinsamen Feind seid, Ihr und eure Verbündeten erhalten gleichermaßen Plünderbeute und Kampferfahrung, wenn entsprechende Einheiten Sumeriens und seiner Verbündeten nicht weiter als 5 Felder voneinander getrennt sind.[NEWLINE] Beginnt mit einem Kriegswagen in der Antike. Sumerien erhält zusätzliche Allianzpunkte, wenn es mit seinen Verbündeten gemeinsam im Krieg gegen einen äußeren Feind liegt.[NEWLINE] Erhalte eine Stammesdorf-Belohnung bei der Eroberung eines Barbarenlagers zusätzlich zum üblichen [ICON_Gold] Gold. Zahle nur die Hälfte der üblichen Kosten, um die Einheiten von Stadtstaaten auszuheben.</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_LEADER_ADVENTURES_ENKIDU_EXPANSION2_DESCRIPTION" Language="de_DE">
+			<Text>Sobald Ihr im Krieg mit einem gemeinsamen Feind seid, Ihr und eure Verbündeten erhalten gleichermaßen Plünderbeute und Kampferfahrung, wenn entsprechende Einheiten Sumeriens und seiner Verbündeten nicht weiter als 5 Felder voneinander getrennt sind.[NEWLINE] Beginnt mit einem Kriegswagen in der Antike. Sumerien erhält zusätzliche Allianzpunkte, wenn es mit seinen Verbündeten gemeinsam im Krieg gegen einen äußeren Feind liegt.[NEWLINE] Erhalte eine Stammesdorf-Belohnung bei der Eroberung eines Barbarenlagers zusätzlich zum üblichen [ICON_Gold] Gold. Zahle nur die Hälfte der üblichen Kosten, um die Einheiten von Stadtstaaten auszuheben.</Text>
+		</Replace>
+		<Replace Tag="LOC_ABILITY_WAR_CART_COMBAT_STRENGTH_VS_BARBS_DESCRIPTION_BBG" Language="de_DE">
+			<Text>+4 [ICON_Strength] Kampfstärke gegen Barbaren.</Text>
+		</Replace>	
 		<!---->
 		<!--===============   D E D I C A T I O N S   ===============-->
 		<!-- Pen, Brush and Voice -->
