@@ -371,6 +371,18 @@
 		<!-- Babylon -->
 		<!-- China -->
 		<!-- Egypt -->
+		<Replace Tag="LOC_IMPROVEMENT_SPHINX_EXPANSION2_DESCRIPTION" Language="de_DE">
+			<Text>Schaltet die Handwerker-Fähigkeit frei, eine Sphinx, die einzigartige Modernisierung Ägyptens, zu bauen.[NEWLINE][NEWLINE]+2 [ICON_Faith] Glauben und +1 [ICON_Culture] Kultur. +2 Anziehungskraft. +1  [ICON_Faith] Glauben und +1 [ICON_Culture] Kultur für jedes angrenzende Wunder. +1 [ICON_Culture] Nahrung und +1 [ICON_Production] Produktion beim Bau auf Wüstenfelder. +1 [ICON_Culture] Kultur beim Bau auf Schwemmland.[NEWLINE][NEWLINE]Gewährt weitere +1 Kultur jeweils nach der Entdeckung von "Dipomatischer Dienst" und "Naturgeschichte". Generiert Tourismus in Höhe des Kulturertrags nach der Erforschung von "Luftfahrt". Kann nicht auf Schnee oder Schneehügeln gebaut werden.</Text>
+		</Replace>
+		<Replace Tag="LOC_IMPROVEMENT_SPHINX_DESCRIPTION" Language="de_DE">
+			<Text>Schaltet die Handwerker-Fähigkeit frei, eine Sphinx, die einzigartige Modernisierung Ägyptens, zu bauen.[NEWLINE][NEWLINE]+2 [ICON_Faith] Glauben und +1 [ICON_Culture] Kultur. +2 Anziehungskraft. +1  [ICON_Faith] Glauben und +1 [ICON_Culture] Kultur für jedes angrenzende Wunder. +1 [ICON_Culture] Nahrung und +1 [ICON_Production] Produktion beim Bau auf Wüstenfelder. +1 [ICON_Culture] Kultur beim Bau auf Schwemmland.[NEWLINE][NEWLINE]Gewährt weitere +1 Kultur jeweils nach der Entdeckung von "Dipomatischer Dienst" und "Naturgeschichte". Generiert Tourismus in Höhe des Kulturertrags nach der Erforschung von "Luftfahrt". Kann nicht auf Schnee oder Schneehügeln gebaut werden.</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_CIVILIZATION_ITERU_DESCRIPTION" Language="de_DE">
+			<Text>+25% [ICON_Production] Produktion für Bezirke und Wunder, wenn sie neben einem Fluss platziert werden. Erleidet keinen Schaden durch Überschwemmungen.</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_CIVILIZATION_ITERU_EXPANSION2_DESCRIPTION" Language="de_DE">
+			<Text>+25% [ICON_Production] Produktion für Bezirke und Wunder, wenn sie neben einem Fluss platziert werden. Erleidet keinen Schaden durch Überschwemmungen.</Text>
+		</Replace>
 		<!-- France -->
 		<!-- Georgia -->
 		<!-- Germany -->
