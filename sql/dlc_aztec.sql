@@ -37,6 +37,7 @@ update Building_YieldChanges set YieldChange = 3 where BuildingType = 'BUILDING_
 -- Eagle warrior no longer replaces warrior but swordsman (with all its values)
 update Units set Combat = 35, Cost = 90, Maintenance = 2, PrereqTech = 'TECH_IRON_WORKING', MandatoryObsoleteTech = 'TECH_REPLACEABLE_PARTS' where UnitType = 'UNIT_AZTEC_EAGLE_WARRIOR';
 update UnitReplaces set ReplacesUnitType = 'UNIT_SWORDSMAN' where CivUniqueUnitType = 'UNIT_AZTEC_EAGLE_WARRIOR';
+update UnitUpgrades set UpgradeUnit = 'UNIT_MAN_AT_ARMS' where Unit = 'UNIT_AZTEC_EAGLE_WARRIOR';
 
 -- Eagle warrior can see through forest / jungle and has no movement penalty (ability of kongos nagao unit).
 insert or ignore into Modifiers select 'EAGLE_WARRIOR_FOREST_MOVEMENT', ModifierType, RunOnce, NewOnly, Permanent, Repeatable, OwnerRequirementSetId, SubjectRequirementSetId, OwnerStackLimit, SubjectStackLimit from Modifiers where ModifierId = 'NAGAO_FOREST_MOVEMENT';
