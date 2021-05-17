@@ -181,8 +181,8 @@
 <!--            <File>sql/new_bbg_mother_russia.sql</File>-->
 <!--            <File>sql/new_bbg_catherine_black_queen.sql</File>-->
 <!--            <File>sql/new_bbg_england.sql</File>-->
-<!--            <File>sql/new_bbg_sumer.sql</File>-->
-<!--            <File>sql/new_bbg_gilgamesh.sql</File>-->
+            <File>sql/new_bbg_sumer.sql</File>
+            <File>sql/new_bbg_gilgamesh.sql</File>
             <File>sql/new_bbg_citystates.sql</File>
             <File>sql/new_bbg_great_people.sql</File>
             <File>sql/new_bbg_great_works.sql</File>
@@ -250,7 +250,7 @@
             <File>sql/xp2__gathering_storm.sql</File>
             <File>sql/new_bbg_xp2_units.sql</File>
 <!--            <File>sql/new_bbg_hungary.sql</File>-->
-<!--            <File>sql/new_bbg_sumer_xp2.sql</File>-->
+            <File>sql/new_bbg_sumer_xp2.sql</File>
             <File>sql/new_bbg_citystates_xp2.sql</File>
 <!--            <File>sql/new_bbg_xp2_phoenician.sql</File>-->
             <File>sql/new_bbg_xp2_government.sql</File>
@@ -522,9 +522,9 @@
 <!--        <File>sql/new_bbg_mapuche.sql</File>-->
 <!--        <File>sql/new_bbg_england.sql</File>-->
 <!--        <File>sql/new_bbg_hungary.sql</File>-->
-<!--        <File>sql/new_bbg_sumer.sql</File>-->
-<!--        <File>sql/new_bbg_sumer_xp2.sql</File>-->
-<!--        <File>sql/new_bbg_gilgamesh.sql</File>-->
+        <File>sql/new_bbg_sumer.sql</File>
+        <File>sql/new_bbg_sumer_xp2.sql</File>
+        <File>sql/new_bbg_gilgamesh.sql</File>
         <File>sql/new_bbg_citystates.sql</File>
         <File>sql/new_bbg_citystates_xp2.sql</File>
 <!--        <File>sql/new_bbg_nfp_babylon.sql</File>-->

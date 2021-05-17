@@ -179,14 +179,14 @@ UPDATE Units SET Combat=90 , RangedCombat=90 WHERE UnitType='UNIT_AMERICAN_P51';
 --
 --
 --
--- --==================
--- -- Sumeria
--- --==================
--- /* REVERT TO BASE GAME
--- INSERT OR IGNORE INTO Units_XP2 (UnitType, ResourceCost) VALUES
--- 	('UNIT_SUMERIAN_WAR_CART', 10);
---
--- */
+--==================
+-- Sumeria
+--==================
+/* REVERT TO BASE GAME
+INSERT OR IGNORE INTO Units_XP2 (UnitType, ResourceCost) VALUES
+	('UNIT_SUMERIAN_WAR_CART', 10);
+
+*/
 --
 -- --==================
 -- -- Sweden
