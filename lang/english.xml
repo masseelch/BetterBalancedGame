@@ -409,7 +409,7 @@
 			<Text>Aztec unique Classic era unit that replaces the Swordsman. Suffers neither a [ICON_Movement] movement-penalty nor decreased sight for jungle- or wood-tiles. Has a chance to capture other civilizations' military units by turning them into Builders.</Text>
 		</Replace>
 		<Replace Tag="LOC_ABILITY_EAGLE_WARRIOR_NAME" Language="en_US">
-			<Text>Eagle Wings</Text>
+			<Text>By the Wings of an Eagle</Text>
 		</Replace>
 		<Replace Tag="LOC_ABILITY_EAGLE_WARRIOR_DESCRIPTION" Language="en_US">
 			<Text>Suffers neither a [ICON_Movement] movement-penalty nor decreased sight for jungle- or wood-tiles.</Text>
