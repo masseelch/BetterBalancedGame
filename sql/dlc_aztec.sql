@@ -6,13 +6,13 @@
 -- Aztec
 --==================
 -- INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType) VALUES
--- 	('TRAIT_MELEE_PRODUCTION_BBG', 'MODIFIER_PLAYER_CITIES_ADJUST_UNIT_TAG_ERA_PRODUCTION');
+-- 	('TRAIT_AZTECS_FIVE_SUNS_MELEE_PRODUCTION', 'MODIFIER_PLAYER_CITIES_ADJUST_UNIT_TAG_ERA_PRODUCTION');
 -- INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES
--- 	('TRAIT_MELEE_PRODUCTION_BBG', 'UnitPromotionClass', 'PROMOTION_CLASS_MELEE'),
--- 	('TRAIT_MELEE_PRODUCTION_BBG', 'EraType', 'NO_ERA'),
--- 	('TRAIT_MELEE_PRODUCTION_BBG', 'Amount', '50');
+-- 	('TRAIT_AZTECS_FIVE_SUNS_MELEE_PRODUCTION', 'UnitPromotionClass', 'PROMOTION_CLASS_MELEE'),
+-- 	('TRAIT_AZTECS_FIVE_SUNS_MELEE_PRODUCTION', 'EraType', 'NO_ERA'),
+-- 	('TRAIT_AZTECS_FIVE_SUNS_MELEE_PRODUCTION', 'Amount', '50');
 -- INSERT OR IGNORE INTO TraitModifiers VALUES
--- 	('TRAIT_CIVILIZATION_LEGEND_FIVE_SUNS', 'TRAIT_MELEE_PRODUCTION_BBG');
+-- 	('TRAIT_CIVILIZATION_LEGEND_FIVE_SUNS', 'TRAIT_AZTECS_FIVE_SUNS_MELEE_PRODUCTION');
 -- -- Aztec Tlachtli Unique Building is now slightly cheaper and is +3 Culture instead of +2 Faith/+1 Culture
 -- DELETE FROM Building_YieldChanges WHERE BuildingType='BUILDING_TLACHTLI' AND YieldType='YIELD_FAITH';
 -- UPDATE Building_YieldChanges SET YieldChange=3 WHERE BuildingType='BUILDING_TLACHTLI';
@@ -33,6 +33,13 @@
 
 -- Tlachtli +3 Culture instead +2
 update Building_YieldChanges set YieldChange = 3 where BuildingType = 'BUILDING_TLACHTLI' and YieldType = 'YIELD_CULTURE';
+
+-- Aztecs have +50% production towards melee units
+insert or ignore into Modifiers (ModifierId, ModifierType) values ('TRAIT_AZTECS_FIVE_SUNS_MELEE_PRODUCTION', 'MODIFIER_PLAYER_CITIES_ADJUST_UNIT_TAG_ERA_PRODUCTION');
+insert or ignore into ModifierArguments (ModifierId, Name, Value) values ('TRAIT_AZTECS_FIVE_SUNS_MELEE_PRODUCTION', 'UnitPromotionClass', 'PROMOTION_CLASS_MELEE'),
+                                                                         ('TRAIT_AZTECS_FIVE_SUNS_MELEE_PRODUCTION', 'EraType', 'NO_ERA'),
+                                                                         ('TRAIT_AZTECS_FIVE_SUNS_MELEE_PRODUCTION', 'Amount', '50');
+insert or ignore into TraitModifiers values ('TRAIT_CIVILIZATION_LEGEND_FIVE_SUNS', 'TRAIT_AZTECS_FIVE_SUNS_MELEE_PRODUCTION');
 
 -- Eagle warrior no longer replaces warrior but swordsman (with all its values)
 update Units set Combat = 35, Cost = 90, Maintenance = 2, PrereqTech = 'TECH_IRON_WORKING', MandatoryObsoleteTech = 'TECH_REPLACEABLE_PARTS' where UnitType = 'UNIT_AZTEC_EAGLE_WARRIOR';
