@@ -4,7 +4,7 @@
 		<Replace Tag="LOC_POLICY_DISCIPLINE_DESCRIPTION" Language="de_DE">
 			<Text>+10 [ICON_Strength] Kampfstärke gegen Barbaren.</Text>
 		</Replace>
-		
+
 		<Replace Tag="LOC_BELIEF_JUST_WAR_DESCRIPTION" Language="de_DE">
 			<Text>Kampfeinheiten erhalten +7 [ICON_Strength] Kampfstärke innerhalb der Grenzen fremder Städte mit dieser Religion.</Text>
 		</Replace>
@@ -26,6 +26,7 @@
 		</Replace>
 		<Replace Tag="LOC_GOVERNOR_PROMOTION_MERCHANT_TAX_COLLECTOR_DESCRIPTION" Language="de_DE">
 			<Text>+2 [ICON_Gold] Gold pro Zug für jeden [ICON_Citizen] Bürger in der Stadt und +1 Handelsrouten-Kapazität solange Reyna in der Stadt stationiert ist.</Text>
+		</Replace>
 		<Replace Tag="LOC_BUILDING_CHANCERY_DESCRIPTION" Language="de_DE">
 			<Text>+3 Einflusspunkte pro Runde. Wenn diese Zivilisation einen feindlichen Spion gefangen nimmt oder tötet, erhält sie 200 [ICON_Science] Wissenschaft (auf Standard-Geschwindigkeit) pro Stufe des feindlichen Spions. .</Text>
 		</Replace>
@@ -142,7 +143,6 @@
 		</Replace>
 		<Replace Tag="LOC_BELIEF_STONE_CIRCLES_DESCRIPTION" Language="de_DE">
 			<Text>+1 [ICON_Production] Produktion und +1 [ICON_Faith] Glauben durch Steinbrüche.</Text>
-		</Replace>
 		</Replace>
 		<Row Tag="LOC_GOVERNOR_PROMOTION_EDUCATOR_KNOWLEDGE_DESCRIPTION" Language="de_DE">
 			<Text>Inländische [ICON_TradeRoute] Handelswege gewähren Pingalas Stadt +3 [ICON_SCIENCE] Wissenschaft.</Text>
@@ -374,12 +374,12 @@
 		<Replace Tag="LOC_UNIT_AZTEC_EAGLE_WARRIOR_DESCRIPTION" Language="de_DE">
 			<Text>Atzekische Spezialeinheit der Klassik, die den Schwertkämpfer ersetzt. Erleidet auf Dschungel- oder Waldfeldern weder einen Malus auf [ICON_Movement] Fortbewegung noch eine eingeschränkte Sicht. Hat eine Chance, Militäreinheiten anderer Zivilisationen gefangen zu nehmen, indem sie diese zu Handwerkern umwandelt.</Text>
 		</Replace>
-		<Replace Tag="LOC_ABILITY_EAGLE_WARRIOR_NAME" Language="de_DE">
+		<Row Tag="LOC_ABILITY_EAGLE_WARRIOR_NAME" Language="de_DE">
 			<Text>Auf Adlers Schwingen</Text>
-		</Replace>
-		<Replace Tag="LOC_ABILITY_EAGLE_WARRIOR_DESCRIPTION" Language="de_DE">
+		</Row>
+		<Row Tag="LOC_ABILITY_EAGLE_WARRIOR_DESCRIPTION" Language="de_DE">
 			<Text>Erleidet auf Dschungel- oder Waldfeldern weder einen Malus auf [ICON_Movement] Fortbewegung noch eine eingeschränkte Sicht.</Text>
-		</Replace>
+		</Row>
 		<!-- Babylon -->
 		<!-- China -->
 		<!-- Egypt -->
@@ -451,7 +451,7 @@
 		</Replace>
 		<Replace Tag="LOC_PEDIA_LEADERS_PAGE_LEADER_GILGAMESH_CHAPTER_CAPSULE_BODY" Language="de_DE">
 			<Text>Der König aller Könige ist ein mächtiger Anführer mit der Fähigkeit je nach Situation entweder früh die aggressive Auseinandersetzung zu suchen oder aber ein hoch entwickeltes Reich aufzubauen.</Text>
-		</Replace>	
+		</Replace>
 		<Replace Tag="LOC_PEDIA_LEADERS_PAGE_LEADER_GILGAMESH_CHAPTER_DETAILED_BODY" Language="de_DE">
 			<Text>Als erste entwickelte Zivilisation der Weltgeschichte, erleben die Sumerer eine frühe Blüte. Ihre Kriegswägen können vom ersten Zug an rekrutiert, ihre Ziggurats errichtet werden und dank der Fähigkeit 'Wiege der Zivilisation' habe die Sumerer das Potenzial für ein schnelles Wachstum. Gilgamesh wird früh Kriegswägen rekrutieren um Barbarenlager zu zerstören, damit er Nutzen aus der Fähigkeit 'Shūtur eli sharrī' ziehen kann ("König der Könige"). Er wird an den Läufen nahegelegener Flüsse Ziggurats errichten um früh mithilfe einer guten Stadtplanung in [ICON_Science] Wissenschaft, [ICON_Culture] Kultur und sogar [ICON_Faith] Glauben davonzuziehen.</Text>
 		</Replace>
@@ -466,7 +466,7 @@
 		</Replace>
 		<Replace Tag="LOC_ABILITY_WAR_CART_COMBAT_STRENGTH_VS_BARBS_DESCRIPTION_BBG" Language="de_DE">
 			<Text>+4 [ICON_Strength] Kampfstärke gegen Barbaren.</Text>
-		</Replace>	
+		</Replace>
 		<!---->
 		<!--===============   D E D I C A T I O N S   ===============-->
 		<!-- Pen, Brush and Voice -->
@@ -627,7 +627,7 @@
 		</Replace>
 		<Replace Tag="BBG_FRONT_BARB_SETTING_OFF_DESC" Language="de_DE">
 			<Text>Keine Barbaren</Text>
-		</Replace>			
+		</Replace>
 
 		<Replace Tag="BBG_FRONT_VICTORY_SPEED_SLIDER_NAME" Language="de_DE">
 			<Text>Voraussetzungen</Text>
@@ -749,7 +749,7 @@
 		<Replace Tag="BBG_FRONT_VICTORY_CONQUEST_SETTING_3_NAME" Language="de_DE">
 			<Text>Deaktiviert</Text>
 		</Replace>
-		
+
 		<Replace Tag="BBG_FRONT_VICTORY_CULTURAL_SETTING_0_DESC" Language="de_DE">
 			<Text>Standard Firaxis Einstellungen</Text>
 		</Replace>
@@ -828,7 +828,7 @@
 		<Replace Tag="BBG_FRONT_VICTORY_CONQUEST_SETTING_3_DESC" Language="de_DE">
 			<Text>Kein Herrschaftssieg</Text>
 		</Replace>
-		
+
 		<Replace Tag="LOC_VICTORY_TRADITIONAL_DOMINATION_TT" Language="de_DE">
 			<Text>Nutzt Euer Militär und Euer wachsendes Reich um die Länder dieser Welt zu dominieren!</Text>
 		</Replace>
@@ -868,8 +868,8 @@
 		<Replace Tag="LOC_VICTORY_TRADITIONAL_DOMINATION_TEXT" Language="de_DE">
 			<Text>Die Welt erkennt eure absolute Herrschaft an, für welche Ihr ein Imperium errichtet hat, in dem die Sonne nie untergeht.</Text>
 		</Replace>
-		
-		
+
+
 		<!-- Conquest legacy text -->
 		<Replace Tag="LOC_WORLD_RANKINGS_DOMINATION_TAB" Language="de_DE">
 			<Text>Herrschaftssieg</Text>
@@ -895,6 +895,6 @@
 		<Replace Tag="LOC_WORLD_RANKINGS_DOMINATION_DETAILS" Language="de_DE">
 			<Text>Um einen [COLOR:ResMilitaryLabelCS]HERRSCHAFTS[ENDCOLOR] Sieg zu erzielen, müsst Ihr die ursprüngliche [ICON_Capital] Hauptstadt jeder anderen Zivilisation erobern.[NEWLINE][NEWLINE]Ein sarkes Militär ist äußert empfehlenswert</Text>
 		</Replace>
-		
+
 	</LocalizedText>
 </GameData>
