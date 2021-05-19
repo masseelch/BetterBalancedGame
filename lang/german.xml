@@ -371,13 +371,13 @@
 		<Replace Tag="LOC_BUILDING_TLACHTLI_DESCRIPTION" Language="de_DE">
 			<Text>Einzigartiges Gebäude der Azteken. Gewährt +2 [ICON_Amenities] Annehmlichkeit, +3 [ICON_Culture] Kultur, +2 [ICON_Religion] und +1 [ICON_GreatGeneral] Punkt des Typs "Großer General" pro Runde. +35% Produktion auf alle Land-Militäreinheiten außer schwerer und leichter Kavallerie sowie Luftwaffe.</Text>
 		</Replace>
-		<Replace Tag="LOC_UNIT_AZTEC_EAGLE_WARRIOR_DESCRIPTION" Language="de_De">
+		<Replace Tag="LOC_UNIT_AZTEC_EAGLE_WARRIOR_DESCRIPTION" Language="de_DE">
 			<Text>Atzekische Spezialeinheit der Klassik, die den Schwertkämpfer ersetzt. Erleidet auf Dschungel- oder Waldfeldern weder einen Malus auf [ICON_Movement] Fortbewegung noch eine eingeschränkte Sicht. Hat eine Chance, Militäreinheiten anderer Zivilisationen gefangen zu nehmen, indem sie diese zu Handwerkern umwandelt.</Text>
 		</Replace>
-		<Replace Tag="LOC_ABILITY_EAGLE_WARRIOR_NAME" Language="de_De">
+		<Replace Tag="LOC_ABILITY_EAGLE_WARRIOR_NAME" Language="de_DE">
 			<Text>Auf Adlers Schwingen</Text>
 		</Replace>
-		<Replace Tag="LOC_ABILITY_EAGLE_WARRIOR_DESCRIPTION" Language="de_De">
+		<Replace Tag="LOC_ABILITY_EAGLE_WARRIOR_DESCRIPTION" Language="de_DE">
 			<Text>Erleidet auf Dschungel- oder Waldfeldern weder einen Malus auf [ICON_Movement] Fortbewegung noch eine eingeschränkte Sicht.</Text>
 		</Replace>
 		<!-- Babylon -->
