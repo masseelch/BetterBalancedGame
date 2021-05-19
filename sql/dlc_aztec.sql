@@ -47,10 +47,13 @@ update UnitReplaces set ReplacesUnitType = 'UNIT_SWORDSMAN' where CivUniqueUnitT
 update UnitUpgrades set UpgradeUnit = 'UNIT_MAN_AT_ARMS' where Unit = 'UNIT_AZTEC_EAGLE_WARRIOR';
 
 -- Eagle warrior can see through forest / jungle and has no movement penalty (ability of kongos nagao unit).
-insert or ignore into Modifiers select 'EAGLE_WARRIOR_FOREST_MOVEMENT', ModifierType, RunOnce, NewOnly, Permanent, Repeatable, OwnerRequirementSetId, SubjectRequirementSetId, OwnerStackLimit, SubjectStackLimit from Modifiers where ModifierId = 'NAGAO_FOREST_MOVEMENT';
-insert or ignore into ModifierArguments select 'EAGLE_WARRIOR_FOREST_MOVEMENT', Name, Type, Value, Extra, SecondExtra from ModifierArguments where ModifierId = 'NAGAO_FOREST_MOVEMENT';
-insert or ignore into UnitAbilities select 'ABILITY_EAGLE_WARRIOR', 'LOC_ABILITY_EAGLE_WARRIOR_NAME', 'LOC_ABILITY_EAGLE_WARRIOR_DESCRIPTION', Inactive, ShowFloatTextWhenEarned, Permanent from UnitAbilities where UnitAbilityType = 'ABILITY_NAGAO';
-insert or ignore into UnitAbilityModifiers (UnitAbilityType, ModifierId) values ('ABILITY_EAGLE_WARRIOR', 'EAGLE_WARRIOR_FOREST_MOVEMENT');
+insert or ignore into Modifiers (ModifierId, ModifierType) values ('EAGLE_WARRIOR_FOREST_MOVEMENT', 'MODIFIER_PLAYER_UNIT_ADJUST_IGNORE_TERRAIN_COST'),
+                                                                  ('EAGLE_WARRIOR_FOREST_SIGHT', 'MODIFIER_PLAYER_UNIT_ADJUST_SEE_THROUGH_FEATURES');
+insert or ignore into ModifierArguments (ModifierId, Name, Value) values ('EAGLE_WARRIOR_FOREST_MOVEMENT', 'Ignore', '1'),
+                                                                         ('EAGLE_WARRIOR_FOREST_MOVEMENT', 'Type', 'FOREST'),
+                                                                         ('EAGLE_WARRIOR_FOREST_SIGHT', 'CanSee', '1');
+insert or ignore into UnitAbilities (UnitAbilityType, Name, Description, Permanent) values ('ABILITY_EAGLE_WARRIOR', 'LOC_ABILITY_EAGLE_WARRIOR_NAME', 'LOC_ABILITY_EAGLE_WARRIOR_DESCRIPTION', 1);
+insert or ignore into UnitAbilityModifiers (UnitAbilityType, ModifierId) values ('ABILITY_EAGLE_WARRIOR', 'EAGLE_WARRIOR_FOREST_MOVEMENT'), ('ABILITY_EAGLE_WARRIOR', 'EAGLE_WARRIOR_FOREST_SIGHT');
 insert or ignore into Types (Type, Kind) values ('ABILITY_EAGLE_WARRIOR', 'KIND_ABILITY');
 insert or ignore into TypeTags (Type, Tag) values ('ABILITY_EAGLE_WARRIOR', 'CLASS_EAGLE_WARRIOR'), ('UNIT_AZTEC_EAGLE_WARRIOR', 'CLASS_EAGLE_WARRIOR');
 insert or ignore into Tags (Tag, Vocabulary) values ('CLASS_EAGLE_WARRIOR', 'ABILITY_CLASS');
