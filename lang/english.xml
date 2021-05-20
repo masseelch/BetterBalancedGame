@@ -402,8 +402,11 @@
 		<!-- Arabia -->
 		<!-- Australia -->
 		<!-- Aztec -->
+		<Replace Tag="LOC_TRAIT_CIVILIZATION_LEGEND_FIVE_SUNS_DESCRIPTION" Language="en_US">
+			<Text>Spend Builder charges to complete 20% of the original district cost. +50% [ICON_PRODUCTION] Production towards land melee units.</Text>
+		</Replace>
 		<Replace Tag="LOC_BUILDING_TLACHTLI_DESCRIPTION" Language="en_US">
-			<Text>A building unique to the Aztecs. Provides +2 [ICON_Amenities] Amenity, +3 [ICON_CULTURE] Culture, +2 Religion and a [ICON_GreatGeneral] Great General Point. Additionally, the Tlachtli provides +35% to all non-naval and non-aerial military units except light and heavy cavalry</Text>
+			<Text>A building unique to the Aztecs. Provides +2 [ICON_Amenities] Amenity, +3 [ICON_CULTURE] Culture, +2 Religion and a [ICON_GreatGeneral] Great General Point.</Text>
 		</Replace>
 		<Replace Tag="LOC_UNIT_AZTEC_EAGLE_WARRIOR_DESCRIPTION" Language="en_US">
 			<Text>Aztec unique Classic era unit that replaces the Swordsman. Suffers neither a [ICON_Movement] movement-penalty nor decreased sight for jungle- or wood-tiles. Has a chance to capture other civilizations' military units by turning them into Builders.</Text>
