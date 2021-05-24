@@ -94,6 +94,8 @@ insert into Adjacency_YieldChanges
 values ( 'Ziggurat_Faith_Farm', 'Placeholder', 'YIELD_FAITH', 1, 2, 'IMPROVEMENT_FARM', 0 ),
        ( 'Ziggurat_Faith_District', 'Placeholder', 'YIELD_FAITH', 1, 1, null, 1 );
 
+update Improvement_Tourism set TourismSource = 'TOURISMSOURCE_FAITH' where ImprovementType = 'IMPROVEMENT_ZIGGURAT';
+
 
 -- Sumerian War Carts are nerfed to 26 (BASE = 30)
 -- 20-12-07 Hotfix: Nerf from 28->26-->27 (Devries)
