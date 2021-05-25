@@ -198,19 +198,19 @@ UPDATE Modifiers SET SubjectRequirementSetId='SPECIAL_DISTRICT_ON_COAST_BBG' WHE
 -- INSERT OR IGNORE INTO ModifierStrings (ModifierId , Context , Text)
 --     VALUES ('TIGER_ADJACENCY_DAMAGE' , 'Preview' , 'LOC_ABILITY_TIGER_ADJACENCY_DESCRIPTION');
 --
--- --==================
--- -- Egypt
--- --==================
--- -- wonder and district on rivers bonus increased to 25%
--- UPDATE ModifierArguments SET Value='25' WHERE ModifierId='TRAIT_RIVER_FASTER_BUILDTIME_WONDER';
--- UPDATE ModifierArguments SET Value='25' WHERE ModifierId='TRAIT_RIVER_FASTER_BUILDTIME_DISTRICT';
--- --
--- INSERT OR IGNORE INTO RequirementSets (RequirementSetId, RequirementSetType)
--- 	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_CPL', 'REQUIREMENTSET_TEST_ANY');
--- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId)
--- 	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_CPL', 'REQUIRES_PLOT_HAS_FLOODPLAINS');
--- -- Sphinx base Faith Increased to 2 (from 1)
--- UPDATE Improvement_YieldChanges SET YieldChange=2 WHERE ImprovementType='IMPROVEMENT_SPHINX' AND YieldType='YIELD_FAITH';
+--==================
+-- Egypt
+--==================
+-- wonder and district on rivers bonus increased to 25%
+UPDATE ModifierArguments SET Value='25' WHERE ModifierId='TRAIT_RIVER_FASTER_BUILDTIME_WONDER';
+UPDATE ModifierArguments SET Value='25' WHERE ModifierId='TRAIT_RIVER_FASTER_BUILDTIME_DISTRICT';
+--
+INSERT OR IGNORE INTO RequirementSets (RequirementSetId, RequirementSetType)
+	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_CPL', 'REQUIREMENTSET_TEST_ANY');
+INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId)
+	VALUES ('REQUIRES_PLOT_HAS_FLOODPLAINS_CPL', 'REQUIRES_PLOT_HAS_FLOODPLAINS');
+-- Sphinx base Faith Increased to 2 (from 1)
+UPDATE Improvement_YieldChanges SET YieldChange=2 WHERE ImprovementType='IMPROVEMENT_SPHINX' AND YieldType='YIELD_FAITH';
 -- -- +1 Faith and +1 Culture if adjacent to a wonder, instead of 2 Faith.
 -- UPDATE ModifierArguments SET Value='1' WHERE ModifierId='SPHINX_WONDERADJACENCY_FAITH' AND Name='Amount';
 -- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
@@ -221,67 +221,82 @@ UPDATE Modifiers SET SubjectRequirementSetId='SPECIAL_DISTRICT_ON_COAST_BBG' WHE
 -- 	VALUES ('SPHINX_WONDERADJACENCY_CULTURE_CPLMOD' , 'Amount' , 1);
 -- INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
 -- 	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_WONDERADJACENCY_CULTURE_CPLMOD');
--- -- Increased +1 Culture moved to Diplomatic Service (Was Natural History)
--- UPDATE Improvement_BonusYieldChanges SET PrereqCivic = 'CIVIC_DIPLOMATIC_SERVICE' WHERE Id = 18;
--- -- Now grants 1 food and 1 production on desert tiles without floodplains. Go Go Gadget bad-start fixer.
--- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
--- 	VALUES ('SPHINX_DESERT_FOOD_MODIFIER' , 'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS', 'SPHINX_FOOD_PLOT_HAS_DESERT_REQUIREMENTS');
--- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
--- 	VALUES ('SPHINX_DESERT_HILLS_FOOD_MODIFIER' , 'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS', 'SPHINX_FOOD_PLOT_HAS_DESERT_HILLS_REQUIREMENTS');
--- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
--- 	VALUES ('SPHINX_DESERT_PRODUCTION_MODIFIER' , 'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS' ,'SPHINX_PRODUCTION_PLOT_HAS_DESERT_REQUIREMENTS');
--- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
--- 	VALUES ('SPHINX_DESERT_HILLS_PRODUCTION_MODIFIER' , 'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS' ,'SPHINX_PRODUCTION_PLOT_HAS_DESERT_HILLS_REQUIREMENTS');
--- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
--- 	VALUES ('SPHINX_DESERT_FOOD_MODIFIER' , 'YieldType' , 'YIELD_FOOD');
--- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
--- 	VALUES ('SPHINX_DESERT_FOOD_MODIFIER' , 'Amount' , '1');
--- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
--- 	VALUES ('SPHINX_DESERT_HILLS_FOOD_MODIFIER' , 'YieldType' , 'YIELD_FOOD');
--- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
--- 	VALUES ('SPHINX_DESERT_HILLS_FOOD_MODIFIER' , 'Amount' , '1');
--- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
--- 	VALUES ('SPHINX_DESERT_PRODUCTION_MODIFIER' , 'YieldType' , 'YIELD_PRODUCTION');
--- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
--- 	VALUES ('SPHINX_DESERT_PRODUCTION_MODIFIER' , 'Amount' , '1');
--- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
--- 	VALUES ('SPHINX_DESERT_HILLS_PRODUCTION_MODIFIER' , 'YieldType' , 'YIELD_PRODUCTION');
--- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
--- 	VALUES ('SPHINX_DESERT_HILLS_PRODUCTION_MODIFIER' , 'Amount' , '1');
--- INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
--- 	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
--- INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
--- 	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
--- INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
--- 	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
--- INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
--- 	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
--- INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
--- 	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_DESERT_FOOD_MODIFIER');
--- INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
--- 	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_DESERT_HILLS_FOOD_MODIFIER');
--- INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
--- 	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_DESERT_PRODUCTION_MODIFIER');
--- INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
--- 	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_DESERT_HILLS_PRODUCTION_MODIFIER');
--- -- No prod nor food bonus on Floodplains
--- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
--- 	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_NO_FLOODPLAINS');
--- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
--- 	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_NO_FLOODPLAINS');
--- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
--- 	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_NO_FLOODPLAINS');
--- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
--- 	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_NO_FLOODPLAINS');
--- -- Requires Desert or Desert Hills
--- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
--- 	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_DESERT');
--- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
--- 	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_DESERT_HILLS');
--- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
--- 	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_DESERT');
--- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
--- 	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_DESERT_HILLS');
+
+-- Remove default +2 faith adjacency for a wonder.
+delete from ImprovementModifiers where ModifierID = 'SPHINX_WONDERADJACENCY_FAITH';
+delete from ModifierArguments WHERE ModifierId='SPHINX_WONDERADJACENCY_FAITH';
+
+-- +1 Faith and +1 Culture per adjacent to wonder.
+insert or ignore into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, TilesRequired, AdjacentWonder)
+	values ('SPHINX_WONDERADJACENCY_CULTURE_FTB', 'Placeholder', 'YIELD_CULTURE', 1, 1, 1);
+insert or ignore into Adjacency_YieldChanges (ID, Description, YieldType, YieldChange, TilesRequired, AdjacentWonder)
+    values ('SPHINX_WONDERADJACENCY_FAITH_FTB', 'Placeholder', 'YIELD_FAITH', 1, 1, 1);
+insert or ignore into Improvement_Adjacencies (ImprovementType, YieldChangeId)  values  ('IMPROVEMENT_SPHINX', 'SPHINX_WONDERADJACENCY_CULTURE_FTB');
+insert or ignore into Improvement_Adjacencies (ImprovementType, YieldChangeId)  values  ('IMPROVEMENT_SPHINX', 'SPHINX_WONDERADJACENCY_FAITH_FTB');
+
+-- Additional +1 culture when reaching 'Diplomatic Service'-civic
+INSERT OR IGNORE INTO Improvement_BonusYieldChanges (ImprovementType, YieldType, BonusYieldChange, PrereqCivic)
+    VALUES ('IMPROVEMENT_SPHINX' , 'YIELD_CULTURE' , 1, 'CIVIC_DIPLOMATIC_SERVICE');
+
+-- Now grants 1 food and 1 production on desert tiles without floodplains. Go Go Gadget bad-start fixer.
+INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
+	VALUES ('SPHINX_DESERT_FOOD_MODIFIER' , 'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS', 'SPHINX_FOOD_PLOT_HAS_DESERT_REQUIREMENTS');
+INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
+	VALUES ('SPHINX_DESERT_HILLS_FOOD_MODIFIER' , 'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS', 'SPHINX_FOOD_PLOT_HAS_DESERT_HILLS_REQUIREMENTS');
+INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
+	VALUES ('SPHINX_DESERT_PRODUCTION_MODIFIER' , 'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS' ,'SPHINX_PRODUCTION_PLOT_HAS_DESERT_REQUIREMENTS');
+INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
+	VALUES ('SPHINX_DESERT_HILLS_PRODUCTION_MODIFIER' , 'MODIFIER_SINGLE_PLOT_ADJUST_PLOT_YIELDS' ,'SPHINX_PRODUCTION_PLOT_HAS_DESERT_HILLS_REQUIREMENTS');
+INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+	VALUES ('SPHINX_DESERT_FOOD_MODIFIER' , 'YieldType' , 'YIELD_FOOD');
+INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+	VALUES ('SPHINX_DESERT_FOOD_MODIFIER' , 'Amount' , '1');
+INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+	VALUES ('SPHINX_DESERT_HILLS_FOOD_MODIFIER' , 'YieldType' , 'YIELD_FOOD');
+INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+	VALUES ('SPHINX_DESERT_HILLS_FOOD_MODIFIER' , 'Amount' , '1');
+INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+	VALUES ('SPHINX_DESERT_PRODUCTION_MODIFIER' , 'YieldType' , 'YIELD_PRODUCTION');
+INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+	VALUES ('SPHINX_DESERT_PRODUCTION_MODIFIER' , 'Amount' , '1');
+INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+	VALUES ('SPHINX_DESERT_HILLS_PRODUCTION_MODIFIER' , 'YieldType' , 'YIELD_PRODUCTION');
+INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+	VALUES ('SPHINX_DESERT_HILLS_PRODUCTION_MODIFIER' , 'Amount' , '1');
+INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
+	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
+INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
+	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
+INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
+	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
+INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
+	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
+INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
+	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_DESERT_FOOD_MODIFIER');
+INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
+	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_DESERT_HILLS_FOOD_MODIFIER');
+INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
+	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_DESERT_PRODUCTION_MODIFIER');
+INSERT OR IGNORE INTO ImprovementModifiers (ImprovementType , ModifierId)
+	VALUES ('IMPROVEMENT_SPHINX' , 'SPHINX_DESERT_HILLS_PRODUCTION_MODIFIER');
+-- No prod nor food bonus on Floodplains
+INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_NO_FLOODPLAINS');
+INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_NO_FLOODPLAINS');
+INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_NO_FLOODPLAINS');
+INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_NO_FLOODPLAINS');
+-- Requires Desert or Desert Hills
+INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_DESERT');
+INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+	VALUES ('SPHINX_FOOD_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_DESERT_HILLS');
+INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_DESERT');
+INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+	VALUES ('SPHINX_PRODUCTION_PLOT_HAS_DESERT_HILLS_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_DESERT_HILLS');
 --
 --
 -- --==================
@@ -447,97 +462,98 @@ UPDATE Modifiers SET SubjectRequirementSetId='SPECIAL_DISTRICT_ON_COAST_BBG' WHE
 --
 --
 --
--- --==================
--- -- Norway
--- --==================
--- -- Berserker no longer gets +10 on attack and -5 on defense... simplified to be base on defense and +15 on attack
--- -- UPDATE ModifierArguments SET Value='15' WHERE ModifierId='UNIT_STRONG_WHEN_ATTACKING';
--- -- UPDATE ModifierArguments SET Value='0' WHERE ModifierId='UNIT_WEAK_WHEN_DEFENDING';
--- -- Berserker unit now gets unlocked at Feudalism instead of Military Tactics, and can be purchased with Faith
--- UPDATE Units SET PrereqTech=NULL , PrereqCivic='CIVIC_FEUDALISM' WHERE UnitType='UNIT_NORWEGIAN_BERSERKER';
--- INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
--- 	VALUES ('TRAIT_CIVILIZATION_UNIT_NORWEGIAN_BERSERKER' , 'BERSERKER_FAITH_PURCHASE_CPLMOD');
--- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType)
--- 	VALUES ('BERSERKER_FAITH_PURCHASE_CPLMOD' , 'MODIFIER_PLAYER_CITIES_ENABLE_UNIT_FAITH_PURCHASE');
--- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
--- 	VALUES ('BERSERKER_FAITH_PURCHASE_CPLMOD' , 'Tag' , 'CLASS_MELEE_BERSERKER');
--- --Berserker Movement bonus extended to all water tiles
--- UPDATE RequirementSets SET RequirementSetType='REQUIREMENTSET_TEST_ANY' WHERE RequirementSetId='BERSERKER_PLOT_IS_ENEMY_TERRITORY';
--- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
--- 	VALUES
--- 	('BERSERKER_PLOT_IS_ENEMY_TERRITORY' , 'REQUIRES_PLOT_HAS_COAST'),
--- 	('BERSERKER_PLOT_IS_ENEMY_TERRITORY' , 'REQUIRES_TERRAIN_OCEAN' );
--- -- Stave Church now gives +1 Faith to resource tiles in the city, instead of standard adjacency bonus for woods
--- INSERT OR IGNORE INTO Modifiers (ModifierID , ModifierType , SubjectRequirementSetId)
--- 	VALUES ('STAVECHURCH_RESOURCE_FAITH' , 'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD' , 'STAVE_CHURCH_RESOURCE_REQUIREMENTS');
--- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
--- 	VALUES ('STAVECHURCH_RESOURCE_FAITH' , 'YieldType' , 'YIELD_FAITH');
--- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
--- 	VALUES ('STAVECHURCH_RESOURCE_FAITH' , 'Amount' , '1');
--- INSERT OR IGNORE INTO BuildingModifiers (BuildingType , ModifierId)
--- 	VALUES ('BUILDING_STAVE_CHURCH' , 'STAVECHURCH_RESOURCE_FAITH');
--- INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
--- 	VALUES ('STAVE_CHURCH_RESOURCE_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
--- INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
--- 	VALUES ('STAVE_CHURCH_RESOURCE_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_VISIBLE_RESOURCE');
--- UPDATE ModifierArguments SET Value='0' WHERE ModifierId='STAVE_CHURCH_FAITHWOODSADJACENCY' AND Name='Amount';
---
--- -- +2 gold harbor adjacency if adjacent to holy sites
+--==================
+-- Norway
+--==================
+-- Berserker
+UPDATE Units SET Combat=40 WHERE UnitType='UNIT_NORWEGIAN_BERSERKER';
+UPDATE ModifierArguments SET Value='10' WHERE ModifierId='UNIT_STRONG_WHEN_ATTACKING';
+UPDATE ModifierArguments SET Value='0' WHERE ModifierId='UNIT_WEAK_WHEN_DEFENDING';
+-- Berserker unit now gets unlocked at Feudalism instead of Military Tactics, and can be purchased with Faith
+--UPDATE Units SET PrereqTech=NULL , PrereqCivic='CIVIC_FEUDALISM' WHERE UnitType='UNIT_NORWEGIAN_BERSERKER';
+INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
+	VALUES ('TRAIT_CIVILIZATION_UNIT_NORWEGIAN_BERSERKER' , 'BERSERKER_FAITH_PURCHASE_CPLMOD');
+INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType)
+	VALUES ('BERSERKER_FAITH_PURCHASE_CPLMOD' , 'MODIFIER_PLAYER_CITIES_ENABLE_UNIT_FAITH_PURCHASE');
+INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+	VALUES ('BERSERKER_FAITH_PURCHASE_CPLMOD' , 'Tag' , 'CLASS_MELEE_BERSERKER');
+--Berserker Movement bonus extended to all water tiles
+UPDATE RequirementSets SET RequirementSetType='REQUIREMENTSET_TEST_ANY' WHERE RequirementSetId='BERSERKER_PLOT_IS_ENEMY_TERRITORY';
+INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+	VALUES
+	('BERSERKER_PLOT_IS_ENEMY_TERRITORY' , 'REQUIRES_PLOT_HAS_COAST'),
+	('BERSERKER_PLOT_IS_ENEMY_TERRITORY' , 'REQUIRES_TERRAIN_OCEAN' );
+-- Stave Church now gives +1 Faith to resource tiles in the city, instead of standard adjacency bonus for woods
+INSERT OR IGNORE INTO Modifiers (ModifierID , ModifierType , SubjectRequirementSetId)
+	VALUES ('STAVECHURCH_RESOURCE_FAITH' , 'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD' , 'STAVE_CHURCH_RESOURCE_REQUIREMENTS');
+INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+	VALUES ('STAVECHURCH_RESOURCE_FAITH' , 'YieldType' , 'YIELD_FAITH');
+INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+	VALUES ('STAVECHURCH_RESOURCE_FAITH' , 'Amount' , '1');
+INSERT OR IGNORE INTO BuildingModifiers (BuildingType , ModifierId)
+	VALUES ('BUILDING_STAVE_CHURCH' , 'STAVECHURCH_RESOURCE_FAITH');
+INSERT OR IGNORE INTO RequirementSets (RequirementSetId , RequirementSetType)
+	VALUES ('STAVE_CHURCH_RESOURCE_REQUIREMENTS' , 'REQUIREMENTSET_TEST_ALL');
+INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId , RequirementId)
+	VALUES ('STAVE_CHURCH_RESOURCE_REQUIREMENTS' , 'REQUIRES_PLOT_HAS_VISIBLE_RESOURCE');
+UPDATE ModifierArguments SET Value='0' WHERE ModifierId='STAVE_CHURCH_FAITHWOODSADJACENCY' AND Name='Amount';
+
+-- +2 gold harbor adjacency if adjacent to holy sites
+INSERT OR IGNORE INTO Adjacency_YieldChanges (ID , Description , YieldType , YieldChange , TilesRequired , AdjacentDistrict)
+    VALUES
+    ('District_HS_Gold_Positive' , 'LOC_HOLY_SITE_HARBOR_ADJACENCY_DESCRIPTION' , 'YIELD_GOLD' , '2'  , '1' , 'DISTRICT_HOLY_SITE'),
+    ('District_HS_Gold_Negative' , 'LOC_HOLY_SITE_HARBOR_ADJACENCY_DESCRIPTION' , 'YIELD_GOLD' , '-2' , '1' , 'DISTRICT_HOLY_SITE');
+INSERT OR IGNORE INTO District_Adjacencies (DistrictType , YieldChangeId)
+    VALUES
+    ('DISTRICT_HARBOR' , 'District_HS_Gold_Positive'),
+    ('DISTRICT_HARBOR' , 'District_HS_Gold_Negative');
+INSERT OR IGNORE INTO ExcludedAdjacencies (YieldChangeId , TraitType)
+    VALUES
+    ('District_HS_Gold_Negative' , 'TRAIT_LEADER_MELEE_COASTAL_RAIDS');
+
 -- INSERT OR IGNORE INTO Adjacency_YieldChanges (ID , Description , YieldType , YieldChange , TilesRequired , AdjacentDistrict)
 --     VALUES
---     ('District_HS_Gold_Positive' , 'LOC_HOLY_SITE_HARBOR_ADJACENCY_DESCRIPTION' , 'YIELD_GOLD' , '2'  , '1' , 'DISTRICT_HOLY_SITE'),
---     ('District_HS_Gold_Negative' , 'LOC_HOLY_SITE_HARBOR_ADJACENCY_DESCRIPTION' , 'YIELD_GOLD' , '-2' , '1' , 'DISTRICT_HOLY_SITE');
+--     ('District_HS_Gold_Positive' , 'LOC_HOLY_SITE_HARBOR_ADJACENCY_DESCRIPTION' , 'YIELD_GOLD' , '2'  , '1' , 'DISTRICT_HOLY_SITE');
 -- INSERT OR IGNORE INTO District_Adjacencies (DistrictType , YieldChangeId)
 --     VALUES
---     ('DISTRICT_HARBOR' , 'District_HS_Gold_Positive'),
---     ('DISTRICT_HARBOR' , 'District_HS_Gold_Negative');
--- INSERT OR IGNORE INTO ExcludedAdjacencies (YieldChangeId , TraitType)
---     VALUES
---     ('District_HS_Gold_Negative' , 'TRAIT_LEADER_MELEE_COASTAL_RAIDS');
---
--- -- INSERT OR IGNORE INTO Adjacency_YieldChanges (ID , Description , YieldType , YieldChange , TilesRequired , AdjacentDistrict)
--- --     VALUES
--- --     ('District_HS_Gold_Positive' , 'LOC_HOLY_SITE_HARBOR_ADJACENCY_DESCRIPTION' , 'YIELD_GOLD' , '2'  , '1' , 'DISTRICT_HOLY_SITE');
--- -- INSERT OR IGNORE INTO District_Adjacencies (DistrictType , YieldChangeId)
--- --     VALUES
--- --     ('DISTRICT_HARBOR' , 'District_HS_Gold_Positive');
--- -- INSERT OR IGNORE INTO ExcludedAdjacencies
--- -- 	SELECT DISTINCT TraitType, 'District_HS_Gold_Positive'
--- -- 	FROM (SELECT * FROM LeaderTraits WHERE TraitType LIKE 'TRAIT_LEADER_%' GROUP BY LeaderType)
--- -- 	WHERE LeaderType!='LEADER_HARDRADA' AND TraitType!='TRAIT_LEADER_MAJOR_CIV';
---
--- -- Holy Sites coastal adjacency
--- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType)
--- 	VALUES
--- 	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'MODIFIER_PLAYER_CITIES_TERRAIN_ADJACENCY');
--- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
--- 	VALUES
--- 	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'DistrictType' , 'DISTRICT_HOLY_SITE'             			 ),
--- 	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'TerrainType'  , 'TERRAIN_COAST'                  			 ),
--- 	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'YieldType'    , 'YIELD_FAITH'                    			 ),
--- 	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'Amount'       , '1'                              			 ),
--- 	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'TilesRequired', '1'                              			 ),
--- 	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'Description'  , 'LOC_DISTRICT_HOLY_SITE_NORWAY_COAST_FAITH');
--- INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
--- 	VALUES
--- 	('TRAIT_LEADER_MELEE_COASTAL_RAIDS' , 'TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY');
--- -- +50% production towards Holy Sites and associated Buildings
--- INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
--- 	VALUES
--- 	('TRAIT_LEADER_MELEE_COASTAL_RAIDS'          , 'THUNDERBOLT_HOLY_SITE_DISTRICT_BOOST'              );
--- --	('TRAIT_LEADER_MELEE_COASTAL_RAIDS'          , 'THUNDERBOLT_HOLY_SITE_BUILDING_BOOST'              );
--- INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
--- 	VALUES
--- 	('THUNDERBOLT_HOLY_SITE_DISTRICT_BOOST'               , 'MODIFIER_PLAYER_CITIES_ADJUST_DISTRICT_PRODUCTION'                 , null);
--- --	('THUNDERBOLT_HOLY_SITE_BUILDING_BOOST'               , 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_PRODUCTION'                 , null)
--- INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value , Extra , SecondExtra)
--- 	VALUES
--- 	('THUNDERBOLT_HOLY_SITE_DISTRICT_BOOST'               , 'DistrictType' , 'DISTRICT_HOLY_SITE' , null , null),
--- 	('THUNDERBOLT_HOLY_SITE_DISTRICT_BOOST'               , 'Amount'       , '50'                 , null , null);
--- --	('THUNDERBOLT_HOLY_SITE_BUILDING_BOOST'               , 'DistrictType' , 'DISTRICT_HOLY_SITE' , null , null),
--- --	('THUNDERBOLT_HOLY_SITE_BUILDING_BOOST'               , 'Amount'       , '50'                 , null , null);
---
---
+--     ('DISTRICT_HARBOR' , 'District_HS_Gold_Positive');
+-- INSERT OR IGNORE INTO ExcludedAdjacencies
+-- 	SELECT DISTINCT TraitType, 'District_HS_Gold_Positive'
+-- 	FROM (SELECT * FROM LeaderTraits WHERE TraitType LIKE 'TRAIT_LEADER_%' GROUP BY LeaderType)
+-- 	WHERE LeaderType!='LEADER_HARDRADA' AND TraitType!='TRAIT_LEADER_MAJOR_CIV';
+
+-- Holy Sites coastal adjacency
+INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType)
+	VALUES
+	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'MODIFIER_PLAYER_CITIES_TERRAIN_ADJACENCY');
+INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value)
+	VALUES
+	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'DistrictType' , 'DISTRICT_HOLY_SITE'             			 ),
+	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'TerrainType'  , 'TERRAIN_COAST'                  			 ),
+	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'YieldType'    , 'YIELD_FAITH'                    			 ),
+	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'Amount'       , '1'                              			 ),
+	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'TilesRequired', '1'                              			 ),
+	('TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY' , 'Description'  , 'LOC_DISTRICT_HOLY_SITE_NORWAY_COAST_FAITH');
+INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
+	VALUES
+	('TRAIT_LEADER_MELEE_COASTAL_RAIDS' , 'TRAIT_LEADER_THUNDERBOLT_HOLYSITE_COASTAL_ADJACENCY');
+-- +50% production towards Holy Sites and associated Buildings
+INSERT OR IGNORE INTO TraitModifiers (TraitType , ModifierId)
+	VALUES
+	('TRAIT_LEADER_MELEE_COASTAL_RAIDS'          , 'THUNDERBOLT_HOLY_SITE_DISTRICT_BOOST'              );
+--	('TRAIT_LEADER_MELEE_COASTAL_RAIDS'          , 'THUNDERBOLT_HOLY_SITE_BUILDING_BOOST'              );
+INSERT OR IGNORE INTO Modifiers (ModifierId , ModifierType , SubjectRequirementSetId)
+	VALUES
+	('THUNDERBOLT_HOLY_SITE_DISTRICT_BOOST'               , 'MODIFIER_PLAYER_CITIES_ADJUST_DISTRICT_PRODUCTION'                 , null);
+--	('THUNDERBOLT_HOLY_SITE_BUILDING_BOOST'               , 'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_PRODUCTION'                 , null)
+INSERT OR IGNORE INTO ModifierArguments (ModifierId , Name , Value , Extra , SecondExtra)
+	VALUES
+	('THUNDERBOLT_HOLY_SITE_DISTRICT_BOOST'               , 'DistrictType' , 'DISTRICT_HOLY_SITE' , null , null),
+	('THUNDERBOLT_HOLY_SITE_DISTRICT_BOOST'               , 'Amount'       , '50'                 , null , null);
+--	('THUNDERBOLT_HOLY_SITE_BUILDING_BOOST'               , 'DistrictType' , 'DISTRICT_HOLY_SITE' , null , null),
+--	('THUNDERBOLT_HOLY_SITE_BUILDING_BOOST'               , 'Amount'       , '50'                 , null , null);
+
+
 -- --==================
 -- -- Rome
 -- --==================

@@ -181,8 +181,8 @@
 <!--            <File>sql/new_bbg_mother_russia.sql</File>-->
 <!--            <File>sql/new_bbg_catherine_black_queen.sql</File>-->
 <!--            <File>sql/new_bbg_england.sql</File>-->
-<!--            <File>sql/new_bbg_sumer.sql</File>-->
-<!--            <File>sql/new_bbg_gilgamesh.sql</File>-->
+            <File>sql/new_bbg_sumer.sql</File>
+            <File>sql/new_bbg_gilgamesh.sql</File>
             <File>sql/new_bbg_citystates.sql</File>
             <File>sql/new_bbg_great_people.sql</File>
             <File>sql/new_bbg_great_works.sql</File>
@@ -200,12 +200,12 @@
 <!--            </Properties>-->
 <!--            <File>sql/dlc_australia.sql</File>-->
 <!--        </UpdateDatabase>-->
-<!--        <UpdateDatabase id="bbg_dlc_aztec" criteria="dlc_aztec">-->
-<!--            <Properties>-->
-<!--                <LoadOrder>11614</LoadOrder>-->
-<!--            </Properties>-->
-<!--            <File>sql/dlc_aztec.sql</File>-->
-<!--        </UpdateDatabase>-->
+        <UpdateDatabase id="bbg_dlc_aztec" criteria="dlc_aztec">
+            <Properties>
+                <LoadOrder>11614</LoadOrder>
+            </Properties>
+            <File>sql/dlc_aztec.sql</File>
+        </UpdateDatabase>
 <!--        <UpdateDatabase id="bbg_dlc_indo_khmer" criteria="dlc_indo_khmer">-->
 <!--            <Properties>-->
 <!--                <LoadOrder>11615</LoadOrder>-->
@@ -250,7 +250,7 @@
             <File>sql/xp2__gathering_storm.sql</File>
             <File>sql/new_bbg_xp2_units.sql</File>
 <!--            <File>sql/new_bbg_hungary.sql</File>-->
-<!--            <File>sql/new_bbg_sumer_xp2.sql</File>-->
+            <File>sql/new_bbg_sumer_xp2.sql</File>
             <File>sql/new_bbg_citystates_xp2.sql</File>
 <!--            <File>sql/new_bbg_xp2_phoenician.sql</File>-->
             <File>sql/new_bbg_xp2_government.sql</File>
@@ -492,7 +492,7 @@
 <!--        <File>lang/chinese.xml</File>-->
         <File>sql/base.sql</File>
 <!--        <File>sql/dlc_australia.sql</File>-->
-<!--        <File>sql/dlc_aztec.sql</File>-->
+        <File>sql/dlc_aztec.sql</File>
 <!--        <File>sql/dlc_indo_khmer.sql</File>-->
 <!--        <File>sql/dlc_macedon_persia.sql</File>-->
 <!--        <File>sql/dlc_nubia.sql</File>-->
@@ -522,9 +522,9 @@
 <!--        <File>sql/new_bbg_mapuche.sql</File>-->
 <!--        <File>sql/new_bbg_england.sql</File>-->
 <!--        <File>sql/new_bbg_hungary.sql</File>-->
-<!--        <File>sql/new_bbg_sumer.sql</File>-->
-<!--        <File>sql/new_bbg_sumer_xp2.sql</File>-->
-<!--        <File>sql/new_bbg_gilgamesh.sql</File>-->
+        <File>sql/new_bbg_sumer.sql</File>
+        <File>sql/new_bbg_sumer_xp2.sql</File>
+        <File>sql/new_bbg_gilgamesh.sql</File>
         <File>sql/new_bbg_citystates.sql</File>
         <File>sql/new_bbg_citystates_xp2.sql</File>
 <!--        <File>sql/new_bbg_nfp_babylon.sql</File>-->

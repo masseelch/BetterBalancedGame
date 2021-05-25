@@ -4,7 +4,7 @@
 		<Replace Tag="LOC_POLICY_DISCIPLINE_DESCRIPTION" Language="de_DE">
 			<Text>+10 [ICON_Strength] Kampfstärke gegen Barbaren.</Text>
 		</Replace>
-		
+
 		<Replace Tag="LOC_BELIEF_JUST_WAR_DESCRIPTION" Language="de_DE">
 			<Text>Kampfeinheiten erhalten +7 [ICON_Strength] Kampfstärke innerhalb der Grenzen fremder Städte mit dieser Religion.</Text>
 		</Replace>
@@ -26,6 +26,7 @@
 		</Replace>
 		<Replace Tag="LOC_GOVERNOR_PROMOTION_MERCHANT_TAX_COLLECTOR_DESCRIPTION" Language="de_DE">
 			<Text>+2 [ICON_Gold] Gold pro Zug für jeden [ICON_Citizen] Bürger in der Stadt und +1 Handelsrouten-Kapazität solange Reyna in der Stadt stationiert ist.</Text>
+		</Replace>
 		<Replace Tag="LOC_BUILDING_CHANCERY_DESCRIPTION" Language="de_DE">
 			<Text>+3 Einflusspunkte pro Runde. Wenn diese Zivilisation einen feindlichen Spion gefangen nimmt oder tötet, erhält sie 200 [ICON_Science] Wissenschaft (auf Standard-Geschwindigkeit) pro Stufe des feindlichen Spions. .</Text>
 		</Replace>
@@ -142,7 +143,6 @@
 		</Replace>
 		<Replace Tag="LOC_BELIEF_STONE_CIRCLES_DESCRIPTION" Language="de_DE">
 			<Text>+1 [ICON_Production] Produktion und +1 [ICON_Faith] Glauben durch Steinbrüche.</Text>
-		</Replace>
 		</Replace>
 		<Row Tag="LOC_GOVERNOR_PROMOTION_EDUCATOR_KNOWLEDGE_DESCRIPTION" Language="de_DE">
 			<Text>Inländische [ICON_TradeRoute] Handelswege gewähren Pingalas Stadt +3 [ICON_SCIENCE] Wissenschaft.</Text>
@@ -368,9 +368,36 @@
 		<!-- Arabia -->
 		<!-- Australia -->
 		<!-- Aztec -->
+		<Replace Tag="LOC_TRAIT_CIVILIZATION_LEGEND_FIVE_SUNS_DESCRIPTION" Language="de_DE">
+			<Text>Verwendet Handwerker-Ladungen, um 20% der benötigten Produktion für einen Bezirk zu vervollständigen. +50% [ICON_PRODUCTION] Produktion auf Land-Nahkampf-Einheiten.</Text>
+		</Replace>
+		<Replace Tag="LOC_BUILDING_TLACHTLI_DESCRIPTION" Language="de_DE">
+			<Text>Einzigartiges Gebäude der Azteken. Gewährt +2 [ICON_Amenities] Annehmlichkeit, +3 [ICON_Culture] Kultur, +2 [ICON_Religion] und +1 [ICON_GreatGeneral] Punkt des Typs "Großer General" pro Runde.</Text>
+		</Replace>
+		<Replace Tag="LOC_UNIT_AZTEC_EAGLE_WARRIOR_DESCRIPTION" Language="de_DE">
+			<Text>Atzekische Spezialeinheit der Klassik, die den Schwertkämpfer ersetzt. Erleidet auf Dschungel- oder Waldfeldern weder einen Malus auf [ICON_Movement] Fortbewegung noch eine eingeschränkte Sicht. Hat eine Chance, Militäreinheiten anderer Zivilisationen gefangen zu nehmen, indem sie diese zu Handwerkern umwandelt.</Text>
+		</Replace>
+		<Row Tag="LOC_ABILITY_EAGLE_WARRIOR_NAME" Language="de_DE">
+			<Text>Auf Adlers Schwingen</Text>
+		</Row>
+		<Row Tag="LOC_ABILITY_EAGLE_WARRIOR_DESCRIPTION" Language="de_DE">
+			<Text>Erleidet auf Dschungel- oder Waldfeldern weder einen Malus auf [ICON_Movement] Fortbewegung noch eine eingeschränkte Sicht.</Text>
+		</Row>
 		<!-- Babylon -->
 		<!-- China -->
 		<!-- Egypt -->
+		<Replace Tag="LOC_IMPROVEMENT_SPHINX_EXPANSION2_DESCRIPTION" Language="de_DE">
+			<Text>Schaltet die Handwerker-Fähigkeit frei, eine Sphinx, die einzigartige Modernisierung Ägyptens, zu bauen.[NEWLINE][NEWLINE]+2 [ICON_Faith] Glauben und +1 [ICON_Culture] Kultur. +2 Anziehungskraft. +1  [ICON_Faith] Glauben und +1 [ICON_Culture] Kultur für jedes angrenzende Wunder. +1 [ICON_Culture] Nahrung und +1 [ICON_Production] Produktion beim Bau auf Wüstenfelder. +1 [ICON_Culture] Kultur beim Bau auf Schwemmland.[NEWLINE][NEWLINE]Gewährt weitere +1 Kultur jeweils nach der Entdeckung von "Dipomatischer Dienst" und "Naturgeschichte". Generiert Tourismus in Höhe des Kulturertrags nach der Erforschung von "Luftfahrt". Kann nicht auf Schnee oder Schneehügeln gebaut werden.</Text>
+		</Replace>
+		<Replace Tag="LOC_IMPROVEMENT_SPHINX_DESCRIPTION" Language="de_DE">
+			<Text>Schaltet die Handwerker-Fähigkeit frei, eine Sphinx, die einzigartige Modernisierung Ägyptens, zu bauen.[NEWLINE][NEWLINE]+2 [ICON_Faith] Glauben und +1 [ICON_Culture] Kultur. +2 Anziehungskraft. +1  [ICON_Faith] Glauben und +1 [ICON_Culture] Kultur für jedes angrenzende Wunder. +1 [ICON_Culture] Nahrung und +1 [ICON_Production] Produktion beim Bau auf Wüstenfelder. +1 [ICON_Culture] Kultur beim Bau auf Schwemmland.[NEWLINE][NEWLINE]Gewährt weitere +1 Kultur jeweils nach der Entdeckung von "Dipomatischer Dienst" und "Naturgeschichte". Generiert Tourismus in Höhe des Kulturertrags nach der Erforschung von "Luftfahrt". Kann nicht auf Schnee oder Schneehügeln gebaut werden.</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_CIVILIZATION_ITERU_DESCRIPTION" Language="de_DE">
+			<Text>+25% [ICON_Production] Produktion für Bezirke und Wunder, wenn sie neben einem Fluss platziert werden. Erleidet keinen Schaden durch Überschwemmungen.</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_CIVILIZATION_ITERU_EXPANSION2_DESCRIPTION" Language="de_DE">
+			<Text>+25% [ICON_Production] Produktion für Bezirke und Wunder, wenn sie neben einem Fluss platziert werden. Erleidet keinen Schaden durch Überschwemmungen.</Text>
+		</Replace>
 		<!-- France -->
 		<!-- Georgia -->
 		<!-- Germany -->
@@ -384,6 +411,27 @@
 		<!-- Korea -->
 		<!-- Mapuche -->
 		<!-- Norway -->
+		<Replace Tag="LOC_TRAIT_LEADER_THUNDERBOLT_DESCRIPTION" Language="de_DE">
+			<Text>Gewährt Küstenraubzüge und +50 % [ICON_PRODUCTION] Produktion für alle Nahkampf-Marineeinheiten.[NEWLINE][NEWLINE]Heilige Stätten und deren Gebäude erhalten einen Bonus von +50% [ICON_PRODUCTION] Produktion. Heilige Stätten erhalten außerdem einen Standard-Nachbarschaftsbonus durch Küstenfelder.[NEWLINE][NEWLINE]Hafen-Bezirke neben einem Heilige-Stätte-Bezirk erhalten zusätzlich einen Nachbarschaftsbonus von +2 [ICON_GOLD] Gold.</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_LEADER_THUNDERBOLT_EXPANSION2_DESCRIPTION" Language="de_DE">
+			<Text>Gewährt Küstenraubzüge und +50 % [ICON_PRODUCTION] Produktion für alle Nahkampf-Marineeinheiten. Erhaltet [ICON_SCIENCE] Wissenschaft durch Plündern von und Küstenraubzügen auf Minen zusätzlich zu [ICON_GOLD] Gold. Plündern von und Küstenraubzüge auf Steinbrüche, Weiden, Plantagen und Jagdlager gewähren zusätzlich zu [ICON_FAITH] Glauben auch [ICON_CULTURE]  Kultur.[NEWLINE][NEWLINE]+50% [ICON_PRODUCTION] auf Heilige Stätten. Heilige Stätten erhalten einen Standard-Nachbarschaftsbonus durch Küstenfelder.[NEWLINE][NEWLINE]Hafen-Bezirke neben einem Heilige-Stätte-Bezirk erhalten zusätzlich einen Nachbarschaftsbonus von +2 [ICON_GOLD] Gold.</Text>
+		</Replace>
+		<Replace Tag="LOC_BUILDING_STAVE_CHURCH_DESCRIPTION" Language="de_DE">
+            <Text>Einzigartiges Gebäude von Norwegen, dass den Tempel ersetzt. Erforderlich für den Erwerb von Aposteln und Inquisitoren mit Glauben. +1 [ICON_Faith] Glauben für jedes Reesource-Geländefeld in dieser Stadt. +1 [ICON_Production] Produktion für jedes Küstenressourcen-Geländefeld in dieser Stadt.</Text>
+        </Replace>
+        <Replace Tag="LOC_UNIT_NORWEGIAN_BERSERKER_DESCRIPTION" Language="de_DE">
+			<Text>Einzigartige norwegische Nahkampfeinheit des Mittelalters. +2 [ICON_Movement] Fortbewegungspunkte bei Start in feindlichem Gebiet. +15 [ICON_Strength] Kampfstärke beim Angreifen. Kann mit [ICON_Faith] gekauft werden.</Text>
+		</Replace>
+		<Replace Tag="LOC_ABILITY_BERSERKER_RAGE_DESCRIPTION" Language="de_DE">
+			<Text>+15 [ICON_Strength] Kampfstärke beim Angriff.</Text>
+		</Replace>
+		<Row Tag="LOC_DISTRICT_HOLY_SITE_RIVER_FAITH" Language="de_DE">
+			<Text>+{1_num} [ICON_Faith] Glaube von Flüssen.</Text>
+		</Row>
+		<Row Tag="LOC_DISTRICT_HOLY_SITE_NORWAY_COAST_FAITH" Language="de_DE">
+			<Text>+{1_num} [ICON_Faith] Glauben von Küste.</Text>
+		</Row>
 		<!-- Nubia -->
 		<!-- Persia -->
 		<!-- Poland -->
@@ -391,7 +439,37 @@
 		<!-- Scotland -->
 		<!-- Scythia -->
 		<!-- Spain -->
-		<!---->
+		<!-- Sumer -->
+			<Replace Tag="LOC_TRAIT_CIVILIZATION_FIRST_CIVILIZATION_NAME" Language="de_DE">
+			<Text>Wiege der Zivilisation</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_CIVILIZATION_FIRST_CIVILIZATION_DESCRIPTION" Language="de_DE">
+			<Text>Bauernhöfe erhalten +1 [ICON_Food] Nahrung, wenn sie an einen Fluss angrenzen. [NEWLINE]Bauernhöfe erhalten +1 [ICON_Production] Produktion, wenn sie nach der Entdeckung der Ausrichtung 'Frühes Reich' an einen Ziggurat angrenzen. </Text>
+		</Replace>
+		<Replace Tag="LOC_IMPROVEMENT_ZIGGURAT_DESCRIPTION" Language="de_DE">
+			<Text>Schaltet die Handwerker-Fähigkeit frei einen Ziggurat zu errichten, eine einzigartige Modernisierung der Sumerer.[NEWLINE][NEWLINE]+1 [ICON_Housing] Wohnraum, +2 [ICON_Science] Wissenschaft, +1 [ICON_Food] Nahrung. Weitere +1 [ICON_Culture] Kultur, wenn sie an einen Fluss angrenzen. +1 [ICON_Faith] Glauben, wenn sie an einen Bezirk oder zwei Bauernhöfe angrenzen. Generiert Tourismus in Höhe des Glaubensertrags nach der Erforschung von "Luftfahrt". [NEWLINE]Können nicht auf Hügeln oder neben einem anderen Ziggurat errichtet werden.</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_LEADER_ADVENTURES_ENKIDU_NAME" Language="de_DE">
+			<Text>Shūtur eli sharrī</Text>
+		</Replace>
+		<Replace Tag="LOC_PEDIA_LEADERS_PAGE_LEADER_GILGAMESH_CHAPTER_CAPSULE_BODY" Language="de_DE">
+			<Text>Der König aller Könige ist ein mächtiger Anführer mit der Fähigkeit je nach Situation entweder früh die aggressive Auseinandersetzung zu suchen oder aber ein hoch entwickeltes Reich aufzubauen.</Text>
+		</Replace>
+		<Replace Tag="LOC_PEDIA_LEADERS_PAGE_LEADER_GILGAMESH_CHAPTER_DETAILED_BODY" Language="de_DE">
+			<Text>Als erste entwickelte Zivilisation der Weltgeschichte, erleben die Sumerer eine frühe Blüte. Ihre Kriegswägen können vom ersten Zug an rekrutiert, ihre Ziggurats errichtet werden und dank der Fähigkeit 'Wiege der Zivilisation' habe die Sumerer das Potenzial für ein schnelles Wachstum. Gilgamesh wird früh Kriegswägen rekrutieren um Barbarenlager zu zerstören, damit er Nutzen aus der Fähigkeit 'Shūtur eli sharrī' ziehen kann ("König der Könige"). Er wird an den Läufen nahegelegener Flüsse Ziggurats errichten um früh mithilfe einer guten Stadtplanung in [ICON_Science] Wissenschaft, [ICON_Culture] Kultur und sogar [ICON_Faith] Glauben davonzuziehen.</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_LEADER_ADVENTURES_ENKIDU_DESCRIPTION" Language="de_DE">
+			<Text>Kann gegen jeden ohne Kriegstreiber-Mali den Krieg erklären, der mit Verbündeten bereits im Krieg liegt.Wenn man gegen einen gemeinsamen Feind im Krieg ist, werden die Belohnungen beim Plündern und die gewonnene Kampferfahrung innerhalb von 5 Geländefeldern geteilt. Allianzen erhalten Allianzpunkte, wenn sie Krieg gegen einen gemeinsamen Feind führen. +1 [ICON_Strength] Kampfstärke je Allianzstufe gegen Einheiten von Spielern, die sich mit Euch oder Eurem Verbündeten im Krieg befinden.[NEWLINE]Beginnt mit einem Kriegswagen in der Antike.[NEWLINE]Erhaltet eine Stammesdorf-Belohnung bei der Eroberung eines Barbarenlagers zusätzlich zum üblichen [ICON_Gold] Gold. Zahle nur die Hälfte der üblichen Kosten, um die Einheiten von Stadtstaaten auszuheben.</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_LEADER_ADVENTURES_ENKIDU_EXPANSION1_DESCRIPTION" Language="de_DE">
+			<Text>Kann gegen jeden ohne Kriegstreiber-Mali den Krieg erklären, der mit Verbündeten bereits im Krieg liegt. Wenn man gegen einen gemeinsamen Feind im Krieg ist, werden die Belohnungen beim Plündern und die gewonnene Kampferfahrung innerhalb von 5 Geländefeldern geteilt. Allianzen erhalten Allianzpunkte, wenn sie Krieg gegen einen gemeinsamen Feind führen. +1 [ICON_Strength] Kampfstärke je Allianzstufe gegen Einheiten von Spielern, die sich mit Euch oder Eurem Verbündeten im Krieg befinden.[NEWLINE]Beginnt mit einem Kriegswagen in der Antike. Sumerien erhält zusätzliche Allianzpunkte, wenn es mit seinen Verbündeten gemeinsam im Krieg gegen einen äußeren Feind liegt.[NEWLINE]Erhaltet eine Stammesdorf-Belohnung bei der Eroberung eines Barbarenlagers zusätzlich zum üblichen [ICON_Gold] Gold. Zahle nur die Hälfte der üblichen Kosten, um die Einheiten von Stadtstaaten auszuheben.</Text>
+		</Replace>
+		<Replace Tag="LOC_TRAIT_LEADER_ADVENTURES_ENKIDU_EXPANSION2_DESCRIPTION" Language="de_DE">
+			<Text>Wenn man gegen einen gemeinsamen Feind im Krieg ist, werden die Belohnungen beim Plündern und die gewonnene Kampferfahrung innerhalb von 5 Geländefeldern geteilt. Allianzen erhalten Allianzpunkte, wenn sie Krieg gegen einen gemeinsamen Feind führen. +1 [ICON_Strength] Kampfstärke je Allianzstufe gegen Einheiten von Spielern, die sich mit Euch oder Eurem Verbündeten im Krieg befinden.[NEWLINE]Beginnt mit einem Kriegswagen in der Antike.[NEWLINE]Erhaltet eine Stammesdorf-Belohnung bei der Eroberung eines Barbarenlagers zusätzlich zum üblichen [ICON_Gold] Gold. Zahle nur die Hälfte der üblichen Kosten, um die Einheiten von Stadtstaaten auszuheben.</Text>
+		</Replace>
+		<Replace Tag="LOC_ABILITY_WAR_CART_COMBAT_STRENGTH_VS_BARBS_DESCRIPTION_BBG" Language="de_DE">
+			<Text>+4 [ICON_Strength] Kampfstärke gegen Barbaren.</Text>
+		</Replace>
 		<!---->
 		<!--===============   D E D I C A T I O N S   ===============-->
 		<!-- Pen, Brush and Voice -->
@@ -552,7 +630,7 @@
 		</Replace>
 		<Replace Tag="BBG_FRONT_BARB_SETTING_OFF_DESC" Language="de_DE">
 			<Text>Keine Barbaren</Text>
-		</Replace>			
+		</Replace>
 
 		<Replace Tag="BBG_FRONT_VICTORY_SPEED_SLIDER_NAME" Language="de_DE">
 			<Text>Voraussetzungen</Text>
@@ -674,7 +752,7 @@
 		<Replace Tag="BBG_FRONT_VICTORY_CONQUEST_SETTING_3_NAME" Language="de_DE">
 			<Text>Deaktiviert</Text>
 		</Replace>
-		
+
 		<Replace Tag="BBG_FRONT_VICTORY_CULTURAL_SETTING_0_DESC" Language="de_DE">
 			<Text>Standard Firaxis Einstellungen</Text>
 		</Replace>
@@ -753,7 +831,7 @@
 		<Replace Tag="BBG_FRONT_VICTORY_CONQUEST_SETTING_3_DESC" Language="de_DE">
 			<Text>Kein Herrschaftssieg</Text>
 		</Replace>
-		
+
 		<Replace Tag="LOC_VICTORY_TRADITIONAL_DOMINATION_TT" Language="de_DE">
 			<Text>Nutzt Euer Militär und Euer wachsendes Reich um die Länder dieser Welt zu dominieren!</Text>
 		</Replace>
@@ -793,8 +871,8 @@
 		<Replace Tag="LOC_VICTORY_TRADITIONAL_DOMINATION_TEXT" Language="de_DE">
 			<Text>Die Welt erkennt eure absolute Herrschaft an, für welche Ihr ein Imperium errichtet hat, in dem die Sonne nie untergeht.</Text>
 		</Replace>
-		
-		
+
+
 		<!-- Conquest legacy text -->
 		<Replace Tag="LOC_WORLD_RANKINGS_DOMINATION_TAB" Language="de_DE">
 			<Text>Herrschaftssieg</Text>
@@ -820,6 +898,6 @@
 		<Replace Tag="LOC_WORLD_RANKINGS_DOMINATION_DETAILS" Language="de_DE">
 			<Text>Um einen [COLOR:ResMilitaryLabelCS]HERRSCHAFTS[ENDCOLOR] Sieg zu erzielen, müsst Ihr die ursprüngliche [ICON_Capital] Hauptstadt jeder anderen Zivilisation erobern.[NEWLINE][NEWLINE]Ein sarkes Militär ist äußert empfehlenswert</Text>
 		</Replace>
-		
+
 	</LocalizedText>
 </GameData>

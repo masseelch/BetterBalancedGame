@@ -79,18 +79,18 @@ function OnCombatOccurred(attackerPlayerID :number, attackerUnitID :number, defe
 	local pAttackingDistrict :object = attackerDistrictID ~= NO_DISTRICT and pAttackerPlayer:GetDistricts():FindID(attackerDistrictID) or nil;
 	local pDefendingDistrict :object = defenderDistrictID ~= NO_DISTRICT and pDefenderPlayer:GetDistricts():FindID(defenderDistrictID) or nil;
 	
-	-- Attacker died to defender.
-	if(pAttackingUnit ~= nil and pDefendingUnit ~= nil and (pDefendingUnit:IsDead() or pDefendingUnit:IsDelayedDeath())) then
-		if pAttackerLeader == "LEADER_BASIL" then
-			local x = pAttackingUnit:GetX()
-			local y = pAttackingUnit:GetY()
-			local power = pDefendingUnit:GetCombat()
-			local religionType = pAttackerReligion:GetReligionTypeCreated()
-			if x ~= nil and y ~= nil and power ~= nil and religionType ~= nil and religionType ~= -1 then
-				ApplyByzantiumTrait(x,y,power,religionType,attackerPlayerID)
-			end
-		end
-	end
+	-- Attacker died to defender. Is for LEADER_BASIL
+-- 	if(pAttackingUnit ~= nil and pDefendingUnit ~= nil and (pDefendingUnit:IsDead() or pDefendingUnit:IsDelayedDeath())) then
+-- 		if pAttackerLeader == "LEADER_BASIL" then
+-- 			local x = pAttackingUnit:GetX()
+-- 			local y = pAttackingUnit:GetY()
+-- 			local power = pDefendingUnit:GetCombat()
+-- 			local religionType = pAttackerReligion:GetReligionTypeCreated()
+-- 			if x ~= nil and y ~= nil and power ~= nil and religionType ~= nil and religionType ~= -1 then
+-- 				ApplyByzantiumTrait(x,y,power,religionType,attackerPlayerID)
+-- 			end
+-- 		end
+-- 	end
 	
 	-- Gilga XP Sharing, Gilga is not attacker or defender
 	local pDiplomacyAttacker:table = pAttackerPlayer:GetDiplomacy();
@@ -302,93 +302,93 @@ end
 --	Babylon
 -- ===========================================================================
 
-function ApplyHammurabiTrait(playerID, iTechBoosted)
-	print("ApplyHammurabiTrait",playerID, iTechBoosted)
-	local pPlayer = Players[playerID]
-	if (pPlayer == nil) or (iTechBoosted == nil) or (iTechBoosted < 0) then
-		return
-	end	
-	
-	local TechBoosted = {}
-	
-	for Tech in GameInfo.Technologies() do
-		if Tech.Index == iTechBoosted then
-			TechBoosted = Tech
-			break
-		end
-	end
-	
-	local iSpeedCostMultiplier = GameInfo.GameSpeeds[GameConfiguration.GetGameSpeedType()].CostMultiplier
-	local pPlayerTechs = pPlayer:GetTechs()
-	if pPlayerTechs:CanResearch(iTechBoosted) then
-		local team = pPlayer:GetTeam()
-		local bNotGainedViaTeam = true
-		if (team == nil) or (team == -1) then
-			local cost = TechBoosted.Cost
-			if cost ~= nil and iSpeedCostMultiplier ~= nil then
-				cost = cost * iSpeedCostMultiplier/100
-			end
-			pPlayerTechs:SetResearchProgress(TechBoosted.Index,cost)
-			else
-			for _, iPlayerID in ipairs(PlayerManager.GetAliveMajorIDs()) do
-				local pTeamPlayer = Players[iPlayerID]
-				if (pTeamPlayer ~= nil) and (iPlayerID ~= playerID) then
-					if (pTeamPlayer:GetTeam() == team) then
-						local pTeamTech = pTeamPlayer:GetTechs()
-						if (pTeamTech:HasTech(iTechBoosted) == true) then
-							bNotGainedViaTeam = false
-						end
-					end
-				end
-			end
-		end
-		
-		if (bNotGainedViaTeam == true) then
-			local cost = TechBoosted.Cost
-			if cost ~= nil and iSpeedCostMultiplier ~= nil then
-				cost = cost * iSpeedCostMultiplier/100
-			end
-			print("ApplyHammurabiTrait bNotGainedViaTeam == true",bNotGainedViaTeam,TechBoosted.Index,cost)
-			pPlayerTechs:SetResearchProgress(TechBoosted.Index,cost)
-			return
-		end
-	end	
-		
-end
-
--- ===========================================================================
---	Bizantium
--- ===========================================================================
-function ApplyByzantiumTrait(x,y,power,religionType,playerID)
-	if x == nil or y == nil or power == nil or religionType == nil then
-		return
-	end
-	local religionInfo = GameInfo.Religions[religionType]
-
-	local pPlot = Map.GetPlot(x, y)
-	for i = 1, iReligion_ByzantiumRange do
-		local plotScanned = GetAdjacentTiles(pPlot, i)
-		if plotScanned ~= nil then
-			if plotScanned:IsCity() then
-				local pCity = Cities.GetCityInPlot(plotScanned)
-				local pCityReligion = pCity:GetReligion()
-				local impact = power * iReligion_ByzantiumMultiplier
-				print("playerID "..tostring(playerID))
-				print("playerID "..tostring(religionType))
-				print("playerID "..tostring(impact))
-				pCityReligion:AddReligiousPressure(playerID, religionType, impact, -1);
-				print("Added Religious Pressure",impact,pCity:GetName())
-				local message:string  = "+"..tostring(impact)
-				if religionInfo ~= nil then
-					message = message.." "..tostring("[ICON_Religion]")
-					else
-					message = message.." [ICON_Religion]"
-				end
-				Game.AddWorldViewText(0, message, pCity:GetX(), pCity:GetY());
-			end
-		end
-	end
-end
+-- function ApplyHammurabiTrait(playerID, iTechBoosted)
+-- 	print("ApplyHammurabiTrait",playerID, iTechBoosted)
+-- 	local pPlayer = Players[playerID]
+-- 	if (pPlayer == nil) or (iTechBoosted == nil) or (iTechBoosted < 0) then
+-- 		return
+-- 	end
+--
+-- 	local TechBoosted = {}
+--
+-- 	for Tech in GameInfo.Technologies() do
+-- 		if Tech.Index == iTechBoosted then
+-- 			TechBoosted = Tech
+-- 			break
+-- 		end
+-- 	end
+--
+-- 	local iSpeedCostMultiplier = GameInfo.GameSpeeds[GameConfiguration.GetGameSpeedType()].CostMultiplier
+-- 	local pPlayerTechs = pPlayer:GetTechs()
+-- 	if pPlayerTechs:CanResearch(iTechBoosted) then
+-- 		local team = pPlayer:GetTeam()
+-- 		local bNotGainedViaTeam = true
+-- 		if (team == nil) or (team == -1) then
+-- 			local cost = TechBoosted.Cost
+-- 			if cost ~= nil and iSpeedCostMultiplier ~= nil then
+-- 				cost = cost * iSpeedCostMultiplier/100
+-- 			end
+-- 			pPlayerTechs:SetResearchProgress(TechBoosted.Index,cost)
+-- 			else
+-- 			for _, iPlayerID in ipairs(PlayerManager.GetAliveMajorIDs()) do
+-- 				local pTeamPlayer = Players[iPlayerID]
+-- 				if (pTeamPlayer ~= nil) and (iPlayerID ~= playerID) then
+-- 					if (pTeamPlayer:GetTeam() == team) then
+-- 						local pTeamTech = pTeamPlayer:GetTechs()
+-- 						if (pTeamTech:HasTech(iTechBoosted) == true) then
+-- 							bNotGainedViaTeam = false
+-- 						end
+-- 					end
+-- 				end
+-- 			end
+-- 		end
+--
+-- 		if (bNotGainedViaTeam == true) then
+-- 			local cost = TechBoosted.Cost
+-- 			if cost ~= nil and iSpeedCostMultiplier ~= nil then
+-- 				cost = cost * iSpeedCostMultiplier/100
+-- 			end
+-- 			print("ApplyHammurabiTrait bNotGainedViaTeam == true",bNotGainedViaTeam,TechBoosted.Index,cost)
+-- 			pPlayerTechs:SetResearchProgress(TechBoosted.Index,cost)
+-- 			return
+-- 		end
+-- 	end
+--
+-- end
+--
+-- -- ===========================================================================
+-- --	Bizantium
+-- -- ===========================================================================
+-- function ApplyByzantiumTrait(x,y,power,religionType,playerID)
+-- 	if x == nil or y == nil or power == nil or religionType == nil then
+-- 		return
+-- 	end
+-- 	local religionInfo = GameInfo.Religions[religionType]
+--
+-- 	local pPlot = Map.GetPlot(x, y)
+-- 	for i = 1, iReligion_ByzantiumRange do
+-- 		local plotScanned = GetAdjacentTiles(pPlot, i)
+-- 		if plotScanned ~= nil then
+-- 			if plotScanned:IsCity() then
+-- 				local pCity = Cities.GetCityInPlot(plotScanned)
+-- 				local pCityReligion = pCity:GetReligion()
+-- 				local impact = power * iReligion_ByzantiumMultiplier
+-- 				print("playerID "..tostring(playerID))
+-- 				print("playerID "..tostring(religionType))
+-- 				print("playerID "..tostring(impact))
+-- 				pCityReligion:AddReligiousPressure(playerID, religionType, impact, -1);
+-- 				print("Added Religious Pressure",impact,pCity:GetName())
+-- 				local message:string  = "+"..tostring(impact)
+-- 				if religionInfo ~= nil then
+-- 					message = message.." "..tostring("[ICON_Religion]")
+-- 					else
+-- 					message = message.." [ICON_Religion]"
+-- 				end
+-- 				Game.AddWorldViewText(0, message, pCity:GetX(), pCity:GetY());
+-- 			end
+-- 		end
+-- 	end
+-- end
 
 -- ===========================================================================
 --	Sumer
@@ -657,476 +657,476 @@ function Check_DominationVictory()
 
 end
 
--- ===========================================================================
---	Barbarians
--- ===========================================================================
-local iBarbs_Original_Weight = 0.55;
-local iBarbs_Naval_Weight = 0.4;
-local iBarbs_Minimum_Horse_Turn = 15;
-
-function Check_Barbarians()
-	-- GameInfo.BarbarianTribes[0].TribeType
-	local BarbsSetting = GameConfiguration.GetValue("BARBS_SETTING")
-	if BarbsSetting == nil or BarbsSetting == 0 or  BarbsSetting == -1 then
-		return
-	end
-	
-	local currentTurn = Game.GetCurrentGameTurn()
-	local startTurn = GameConfiguration.GetStartTurn()
-	if currentTurn == startTurn + 1 then
-		print("Original Barb Placement")
-		PlaceOriginalBarbCamps()
-		return
-		elseif currentTurn < startTurn + 3 then
-		return
-	end
-	
-	
-	local currentCamps = CountBarbCamps()
-	local maxCamps = PlayerManager.GetAliveMajorsCount()
-	for i, playerID in ipairs(PlayerManager.GetAliveIDs()) do
-		if Players[playerID] ~= nil then
-			if Players[playerID]:IsMajor() then
-				local pPlayerConfig:table = PlayerConfigurations[playerID];
-				if pPlayerConfig and pPlayerConfig:GetLeaderTypeName() == "LEADER_SPECTATOR" then
-					maxCamps = math.max(maxCamps - 1,0)
-				end
-			end
-		end
-	end	
-	maxCamps = math.floor(maxCamps * 2.25) - 2
-	
-	if BarbsSetting == 2 then
-		maxCamps = maxCamps * 3
-	end
-		
-	if currentCamps < maxCamps then
-		print("Total Camp",currentCamps,maxCamps,"Will Add a Barb Camp")
-		AddBarbCamps()
-		else
-		print("Total Camp",currentCamps,maxCamps,"No need to add Camp")
-	end
-end
-
-function AddBarbCamps()
-	print("		AddBarbCamps()")			
-	local rng = TerrainBuilder.GetRandomNumber(100,"Barb Type")/100
-	local iCount = Map.GetPlotCount();
-	local validPlots = {};
-	local currentTurn = Game.GetCurrentGameTurn()
-	local startTurn = GameConfiguration.GetStartTurn()
-	local bNaval = true
-	if rng < iBarbs_Naval_Weight then
-		-- Coastal
-		-- Any Coastal tiles at least 5 plots away from anyone
-		for plotIndex = 0, iCount-1, 1 do
-			local pPlot = Map.GetPlotByIndex(plotIndex)
-			local bValid = false
-			
-			-- Check Coastal
-			if pPlot:IsCoastalLand() == true and pPlot:IsImpassable() == false and pPlot:IsNaturalWonder() == false and pPlot:IsLake() == false  and pPlot:GetOwner() == -1 then
-				bValid = true
-			end
-			
-			if bValid == true then
-				local count = 0
-				for i = 1, 36 do
-					local plotScanned = GetAdjacentTiles(pPlot, i)
-					if plotScanned ~= nil then
-						if plotScanned:IsWater() == true then
-							count = count + 1
-						end
-						if plotScanned:GetImprovementType() ~= -1 then
-							bValid = false
-							--print("Barbs: Can't Place Here it: Too close to other Barbs",plotScanned:GetX(),plotScanned:GetY())
-							break
-						end
-					end
-				end
-				if count < 6 then
-					bValid = false
-				end
-			end
-			
-			
-			-- Check Vision
-			if bValid == true then
-				for i, playerID in ipairs(PlayerManager.GetAliveIDs()) do
-					if playerID < 60 then
-						local pVis = PlayerVisibilityManager.GetPlayerVisibility(playerID)
-						if pVis ~= nil then
-							if pVis:GetState(plotIndex) == RevealedState.VISIBLE then
-								bValid = false
-								break
-							end
-						end
-					end	
-				end
-			end
-			
-			-- Check Buffer
-			if bValid == true then
-				for i, playerID in ipairs(PlayerManager.GetAliveIDs()) do
-					if Players[playerID] ~= nil then
-						if Players[playerID]:IsMajor() then
-							local pPlayerConfig:table = PlayerConfigurations[playerID];
-							if pPlayerConfig and pPlayerConfig:GetLeaderTypeName() ~= "LEADER_SPECTATOR" then
-								local playerCities = Players[playerID]:GetCities()
-								for j, city in playerCities:Members() do
-									if Map.GetPlotDistance(pPlot:GetX(),pPlot:GetY(),city:GetX(),city:GetY()) < 5 then
-										bValid = false
-										break
-									end
-								end
-								if bValid == false then
-									break
-								end
-							end
-						end
-					end
-				end	
-			end	
-
-			-- Insert 
-			if bValid == true then
-				--print("Barbs Add: Valid Plot!",pPlot:GetX(), pPlot:GetY())
-				local tmp = {plot = pPlot, id = -1, team = -1} 
-				table.insert(validPlots, tmp)
-			end		
-		end
-		
-		
-		
-		else
-		bNaval = false
-		-- Non-Coastal
-		for plotIndex = 0, iCount-1, 1 do
-			local pPlot = Map.GetPlotByIndex(plotIndex)
-			local bValid = false
-			local bValidTerrain = true
-			local bHorse = false
-			local iTargetID = -1
-			-- First Check
-			if pPlot:IsWater() or pPlot:IsImpassable() or pPlot:IsNaturalWonder() or pPlot:GetOwner() ~= -1 then
-				bValidTerrain = false
-			end
-			
-			-- Check Vision
-			if bValidTerrain == true then
-				for i, playerID in ipairs(PlayerManager.GetAliveIDs()) do
-					if playerID < 60 then
-						local pVis = PlayerVisibilityManager.GetPlayerVisibility(playerID)
-						if pVis ~= nil then
-							if pVis:GetState(plotIndex) == RevealedState.VISIBLE then
-								bValidTerrain = false
-								break
-							end
-						end
-					end	
-				end
-			end
-						
-			-- Assign Players
-			if bValidTerrain == true then
-				for i, playerID in ipairs(PlayerManager.GetAliveIDs()) do
-					if Players[playerID] ~= nil then
-						if Players[playerID]:IsMajor() then
-							local pPlayerConfig:table = PlayerConfigurations[playerID];
-							if pPlayerConfig and pPlayerConfig:GetLeaderTypeName() ~= "LEADER_SPECTATOR" then
-								local playerCities = Players[playerID]:GetCities()
-								for j, city in playerCities:Members() do
-									if Map.GetPlotDistance(pPlot:GetX(),pPlot:GetY(),city:GetX(),city:GetY()) == 7 then
-										bValid = true
-										iTargetID = playerID
-										break
-									end
-								end
-								if bValid == true then
-									break
-								end
-							end
-						end
-					end
-				end	
-			end
-			
-			-- Check no other barbs are too close
-			if bValid == true then
-				for i = 1, 36 do
-					local plotScanned = GetAdjacentTiles(pPlot, i)
-					if plotScanned ~= nil then
-						if plotScanned:GetImprovementType() ~= -1 then
-							bValid = false
-							--print("Barbs: Can't Place Here it: Too close to other Barbs",plotScanned:GetX(),plotScanned:GetY())
-							break
-						end
-					end
-				end
-			end
-			
-			
-			
-			--Now Check there is no Horses nearby do it would not turn as a Horse camp
-		
-			if bValid == true and currentTurn > startTurn + 14 then
-				for i = 1, 36 do
-					local plotScanned = GetAdjacentTiles(pPlot, i)
-					if plotScanned ~= nil then
-						if plotScanned:GetResourceType() == 42 then
-							bHorse = true
-							--print("Barbs: Can't Place Here it Would Turn into Horse Camp",plotScanned:GetResourceType(),plotScanned:GetX(),plotScanned:GetY())
-							break
-						end
-					end
-				end
-			end
-			
-			-- Insert 
-			if bValid == true then
-				--print("Barbs: Valid Plot!",pPlot:GetX(), pPlot:GetY())
-				local tmp = {plot = pPlot, id = iTargetID, team = Players[iTargetID]:GetTeam(), horse = bHorse} 
-				table.insert(validPlots, tmp)
-			end
-		end	
-	
-	end
-	
-	local shuffledPlots = GetShuffledCopyOfTable(validPlots)
-	
-	-- Place on the map: Naval
-	if shuffledPlots ~= nil and bNaval == true then
-		for j, plotTable in ipairs(shuffledPlots) do
-			if plotTable.id == -1 then
-				local pPlot = plotTable.plot
-				-- PLACE TRIBE NAVAL IF UNTARGETTED
-				PlaceBarbarianCamp(pPlot:GetX(), pPlot:GetY(),-1,0)
-				return
-			end	
-		end
-	end
-	
-	-- Place on the map: Melee
-	-- Balance
-	local BarbBalance = {}
-	for i, playerID in ipairs(PlayerManager.GetAliveMajorIDs()) do 
-		local pPlayer = Players[playerID]
-		if pPlayer ~= nil then
-			if Game.GetProperty("BARB_"..playerID.."_"..pPlayer:GetTeam()) ~= nil then
-				local tmp = { id = playerID, team = pPlayer:GetTeam(), team_score = 0, score = Game.GetProperty("BARB_"..playerID.."_"..pPlayer:GetTeam())}
-				table.insert(BarbBalance, tmp)
-			end		
-		end
-	end
-	
-	-- Aggregate score & sort
-
-	for i = -1, 60, 1 do
-		local team_score_tmp = 0
-		for j, score in ipairs(BarbBalance) do 
-			if score.team == i then
-				team_score_tmp = score.score + team_score_tmp
-			end
-		end
-		for j, score in ipairs(BarbBalance) do 
-			if score.team == i then
-				score.team_score = team_score_tmp
-			end
-		end	
-	end
-		
-	table.sort (BarbBalance, function(a, b) return (((a.team_score == b.team_score) and (a.score < b.score)) or ((a.team_score < b.team_score))); end)
-	for i, score in ipairs(BarbBalance) do 
-		print("BARB: TEAM",score.team,score.team_score,"ID",score.id,score.score,PlayerConfigurations[score.id]:GetLeaderTypeName())
-	end
-	-- Place going for the least impacted player so far:
-	for i, score in ipairs(BarbBalance) do 
-		for j, plotTable in ipairs(shuffledPlots) do
-			if plotTable.id == score.id then
-				local pPlot = plotTable.plot
-				if plotTable.horse == true then
-					PlaceBarbarianCamp(pPlot:GetX(), pPlot:GetY(),score.id,1)
-					return
-					else
-					PlaceBarbarianCamp(pPlot:GetX(), pPlot:GetY(),score.id,2)
-					return
-				end
-			end	
-		end
-	end	
-end
-
-function CountBarbCamps()
-	local count = 0
-	local iCount = Map.GetPlotCount();
-	for plotIndex = 0, iCount-1, 1 do
-		local pPlot = Map.GetPlotByIndex(plotIndex)
-		if pPlot:GetImprovementType() == 0 then
-			count = count + 1
-		end
-	end
-	return count
-end
-
-function PlaceOriginalBarbCamps()
-	local base = PlayerManager.GetAliveMajorsCount()
-	base = tonumber(base)
-	local placed_camps = 0
-	if base > 0 then
-		local iCount = Map.GetPlotCount();
-		local validPlots = {};
-		-- Scan all the Map
-		for plotIndex = 0, iCount-1, 1 do
-			local pPlot = Map.GetPlotByIndex(plotIndex)
-			local bValid = false
-			local bValidTerrain = true
-			local iTargetID = -1
-			-- First Check
-			if pPlot:IsWater() or pPlot:IsImpassable() or pPlot:IsNaturalWonder() or pPlot:GetOwner() ~= -1 then
-				bValidTerrain = false
-			end
-			
-			
-			
-			
-			-- Assign Players
-			if bValidTerrain == true then
-				for i, playerID in ipairs(PlayerManager.GetAliveIDs()) do
-					if Players[playerID] ~= nil then
-						if Players[playerID]:IsMajor() then
-							local pPlayerConfig:table = PlayerConfigurations[playerID];
-							if pPlayerConfig and pPlayerConfig:GetLeaderTypeName() ~= "LEADER_SPECTATOR" then
-								local sPlot = Players[playerID]:GetStartingPlot()
-								if Map.GetPlotDistance(pPlot:GetX(),pPlot:GetY(),sPlot:GetX(),sPlot:GetY()) == 7 then
-									bValid = true
-									iTargetID = playerID
-									break
-								end
-							end
-						end
-					end
-				end	
-			end
-			-- We have a plot within 7 tiles of a spawn check it is not near than 7 of another Major
-			if bValid == true then
-				for i, playerID in ipairs(PlayerManager.GetAliveIDs()) do
-					if Players[playerID] ~= nil then
-						local pPlayerConfig:table = PlayerConfigurations[playerID];
-						if pPlayerConfig and pPlayerConfig:GetLeaderTypeName() ~= "LEADER_SPECTATOR" then
-							local sPlot = Players[playerID]:GetStartingPlot()
-							if sPlot ~= nil then
-								if (Map.GetPlotDistance(pPlot:GetX(),pPlot:GetY(),sPlot:GetX(),sPlot:GetY()) < 7 and Players[playerID]:IsMajor()) or Map.GetPlotDistance(pPlot:GetX(),pPlot:GetY(),sPlot:GetX(),sPlot:GetY()) < 4 then
-									bValid = false
-									--print("Barbs: Can't Place Here it Would Be Next To Another Player",PlayerConfigurations[playerID]:GetLeaderTypeName(),sPlot:GetX(),sPlot:GetY())
-									break
-								end
-							end
-						end
-					end
-				end	
-			end
-			
-			-- Now Check there is no Horses nearby do it would not turn as a Horse camp
-		
-			--if bValid == true then
-			--	for i = 1, 36 do
-			--		local plotScanned = GetAdjacentTiles(pPlot, i)
-			--		if plotScanned ~= nil then
-			--			if plotScanned:GetResourceType() == 42 then
-			--				bValid = false
-			--				--print("Barbs: Can't Place Here it Would Turn into Horse Camp",plotScanned:GetResourceType(),plotScanned:GetX(),plotScanned:GetY())
-			--				break
-			--			end
-			--		end
-			--	end
-			--end
-			
-			-- Insert 
-			if bValid == true then
-				--print("Barbs: Valid Plot!",pPlot:GetX(), pPlot:GetY())
-				local tmp = {plot = pPlot, id = iTargetID, team = Players[iTargetID]:GetTeam()} 
-				table.insert(validPlots, tmp)
-			end
-		end
-		
-		-- Place on the map
-		if validPlots ~= nil then
-			for i, playerID in ipairs(PlayerManager.GetAliveMajorIDs()) do
-				if Players[playerID] ~= nil then
-					if (Players[playerID]:IsMajor()) and PlayerConfigurations[playerID]:GetLeaderTypeName() ~= "LEADER_SPECTATOR" then
-						local rng = TerrainBuilder.GetRandomNumber(100,"Barb Placement")/100
-						if rng < iBarbs_Original_Weight then
-							for j, plotTable in ipairs(validPlots) do
-								if plotTable.id == playerID then
-									local pPlot = plotTable.plot
-									-- Only place Improvement
-									PlaceBarbarianCamp(pPlot:GetX(), pPlot:GetY(),playerID,2)
-									break
-								end
-							end
-						end
-					end
-				end	
-			end	
-		end
-		
-	end
-end
-
-
-
-function PlaceBarbarianCamp(x, y, playerID, tribeType)
-	local BARBARIAN_ID = 62;
-	local BARB_CAMP_ID = 0;
-	local targetId = playerID;
-	local targetTeam = -1;
-	if Players[targetId] ~= nil then
-		targetTeam = Players[targetId]:GetTeam();
-	end
-	local tribeScore = 1
-	if tribeType == 1 then
-		tribeScore = 2
-	end
-	-- Check XML for any and all Improvements flagged as "Barb Camps" and distribute them.
-	local pPlot = Map.GetPlot(x,y);	
-	--ImprovementBuilder.SetImprovementType(pPlot, BARB_CAMP_ID, BARBARIAN_ID);
-
-	for i = 0, 90 do
-		local plotScanned = GetAdjacentTiles(pPlot, i)
-		if plotScanned ~= nil then
-			if plotScanned:GetImprovementType() == BARB_CAMP_ID then
-				print("Already has a Barbarian Camp Nearby")
-				return
-			end
-		end
-	end
-
-	local pBarbManager = Game.GetBarbarianManager();
-	
-	
-
-   ImprovementBuilder.SetImprovementType(pPlot, -1, NO_PLAYER);   
-
-
-   local iTribeNumber = pBarbManager:CreateTribeOfType(tribeType, pPlot:GetIndex());
-	print("Placed Barbarian camp at",x,y,playerID,tribeType)
-	if Game.GetProperty("BARB_"..targetId.."_"..targetTeam ) == nil or tonumber(Game.GetProperty("BARB_"..targetId.."_"..targetTeam )) == nil then
-		Game.SetProperty("BARB_"..targetId.."_"..targetTeam ,1)
-		else
-		local num = tonumber(Game.GetProperty("BARB_"..targetId.."_"..targetTeam )) + tribeScore
-		Game.SetProperty("BARB_"..targetId.."_"..targetTeam ,num)
-	end	
-	
-end
-
-function InitBarbData()
-	for i, playerID in ipairs(PlayerManager.GetAliveMajorIDs()) do
-		if Players[playerID] ~= nil then
-			if Players[playerID]:IsMajor() and PlayerConfigurations[playerID]:GetLeaderTypeName() ~= "LEADER_SPECTATOR" then
-				Game.SetProperty("BARB_"..playerID.."_"..Players[playerID]:GetTeam(),0)
-			end
-		end	
-	end	
-end
+-- -- ===========================================================================
+-- --	Barbarians
+-- -- ===========================================================================
+-- local iBarbs_Original_Weight = 0.55;
+-- local iBarbs_Naval_Weight = 0.4;
+-- local iBarbs_Minimum_Horse_Turn = 15;
+--
+-- function Check_Barbarians()
+-- 	-- GameInfo.BarbarianTribes[0].TribeType
+-- 	local BarbsSetting = GameConfiguration.GetValue("BARBS_SETTING")
+-- 	if BarbsSetting == nil or BarbsSetting == 0 or  BarbsSetting == -1 then
+-- 		return
+-- 	end
+--
+-- 	local currentTurn = Game.GetCurrentGameTurn()
+-- 	local startTurn = GameConfiguration.GetStartTurn()
+-- 	if currentTurn == startTurn + 1 then
+-- 		print("Original Barb Placement")
+-- 		PlaceOriginalBarbCamps()
+-- 		return
+-- 		elseif currentTurn < startTurn + 3 then
+-- 		return
+-- 	end
+--
+--
+-- 	local currentCamps = CountBarbCamps()
+-- 	local maxCamps = PlayerManager.GetAliveMajorsCount()
+-- 	for i, playerID in ipairs(PlayerManager.GetAliveIDs()) do
+-- 		if Players[playerID] ~= nil then
+-- 			if Players[playerID]:IsMajor() then
+-- 				local pPlayerConfig:table = PlayerConfigurations[playerID];
+-- 				if pPlayerConfig and pPlayerConfig:GetLeaderTypeName() == "LEADER_SPECTATOR" then
+-- 					maxCamps = math.max(maxCamps - 1,0)
+-- 				end
+-- 			end
+-- 		end
+-- 	end
+-- 	maxCamps = math.floor(maxCamps * 2.25) - 2
+--
+-- 	if BarbsSetting == 2 then
+-- 		maxCamps = maxCamps * 3
+-- 	end
+--
+-- 	if currentCamps < maxCamps then
+-- 		print("Total Camp",currentCamps,maxCamps,"Will Add a Barb Camp")
+-- 		AddBarbCamps()
+-- 		else
+-- 		print("Total Camp",currentCamps,maxCamps,"No need to add Camp")
+-- 	end
+-- end
+--
+-- function AddBarbCamps()
+-- 	print("		AddBarbCamps()")
+-- 	local rng = TerrainBuilder.GetRandomNumber(100,"Barb Type")/100
+-- 	local iCount = Map.GetPlotCount();
+-- 	local validPlots = {};
+-- 	local currentTurn = Game.GetCurrentGameTurn()
+-- 	local startTurn = GameConfiguration.GetStartTurn()
+-- 	local bNaval = true
+-- 	if rng < iBarbs_Naval_Weight then
+-- 		-- Coastal
+-- 		-- Any Coastal tiles at least 5 plots away from anyone
+-- 		for plotIndex = 0, iCount-1, 1 do
+-- 			local pPlot = Map.GetPlotByIndex(plotIndex)
+-- 			local bValid = false
+--
+-- 			-- Check Coastal
+-- 			if pPlot:IsCoastalLand() == true and pPlot:IsImpassable() == false and pPlot:IsNaturalWonder() == false and pPlot:IsLake() == false  and pPlot:GetOwner() == -1 then
+-- 				bValid = true
+-- 			end
+--
+-- 			if bValid == true then
+-- 				local count = 0
+-- 				for i = 1, 36 do
+-- 					local plotScanned = GetAdjacentTiles(pPlot, i)
+-- 					if plotScanned ~= nil then
+-- 						if plotScanned:IsWater() == true then
+-- 							count = count + 1
+-- 						end
+-- 						if plotScanned:GetImprovementType() ~= -1 then
+-- 							bValid = false
+-- 							--print("Barbs: Can't Place Here it: Too close to other Barbs",plotScanned:GetX(),plotScanned:GetY())
+-- 							break
+-- 						end
+-- 					end
+-- 				end
+-- 				if count < 6 then
+-- 					bValid = false
+-- 				end
+-- 			end
+--
+--
+-- 			-- Check Vision
+-- 			if bValid == true then
+-- 				for i, playerID in ipairs(PlayerManager.GetAliveIDs()) do
+-- 					if playerID < 60 then
+-- 						local pVis = PlayerVisibilityManager.GetPlayerVisibility(playerID)
+-- 						if pVis ~= nil then
+-- 							if pVis:GetState(plotIndex) == RevealedState.VISIBLE then
+-- 								bValid = false
+-- 								break
+-- 							end
+-- 						end
+-- 					end
+-- 				end
+-- 			end
+--
+-- 			-- Check Buffer
+-- 			if bValid == true then
+-- 				for i, playerID in ipairs(PlayerManager.GetAliveIDs()) do
+-- 					if Players[playerID] ~= nil then
+-- 						if Players[playerID]:IsMajor() then
+-- 							local pPlayerConfig:table = PlayerConfigurations[playerID];
+-- 							if pPlayerConfig and pPlayerConfig:GetLeaderTypeName() ~= "LEADER_SPECTATOR" then
+-- 								local playerCities = Players[playerID]:GetCities()
+-- 								for j, city in playerCities:Members() do
+-- 									if Map.GetPlotDistance(pPlot:GetX(),pPlot:GetY(),city:GetX(),city:GetY()) < 5 then
+-- 										bValid = false
+-- 										break
+-- 									end
+-- 								end
+-- 								if bValid == false then
+-- 									break
+-- 								end
+-- 							end
+-- 						end
+-- 					end
+-- 				end
+-- 			end
+--
+-- 			-- Insert
+-- 			if bValid == true then
+-- 				--print("Barbs Add: Valid Plot!",pPlot:GetX(), pPlot:GetY())
+-- 				local tmp = {plot = pPlot, id = -1, team = -1}
+-- 				table.insert(validPlots, tmp)
+-- 			end
+-- 		end
+--
+--
+--
+-- 		else
+-- 		bNaval = false
+-- 		-- Non-Coastal
+-- 		for plotIndex = 0, iCount-1, 1 do
+-- 			local pPlot = Map.GetPlotByIndex(plotIndex)
+-- 			local bValid = false
+-- 			local bValidTerrain = true
+-- 			local bHorse = false
+-- 			local iTargetID = -1
+-- 			-- First Check
+-- 			if pPlot:IsWater() or pPlot:IsImpassable() or pPlot:IsNaturalWonder() or pPlot:GetOwner() ~= -1 then
+-- 				bValidTerrain = false
+-- 			end
+--
+-- 			-- Check Vision
+-- 			if bValidTerrain == true then
+-- 				for i, playerID in ipairs(PlayerManager.GetAliveIDs()) do
+-- 					if playerID < 60 then
+-- 						local pVis = PlayerVisibilityManager.GetPlayerVisibility(playerID)
+-- 						if pVis ~= nil then
+-- 							if pVis:GetState(plotIndex) == RevealedState.VISIBLE then
+-- 								bValidTerrain = false
+-- 								break
+-- 							end
+-- 						end
+-- 					end
+-- 				end
+-- 			end
+--
+-- 			-- Assign Players
+-- 			if bValidTerrain == true then
+-- 				for i, playerID in ipairs(PlayerManager.GetAliveIDs()) do
+-- 					if Players[playerID] ~= nil then
+-- 						if Players[playerID]:IsMajor() then
+-- 							local pPlayerConfig:table = PlayerConfigurations[playerID];
+-- 							if pPlayerConfig and pPlayerConfig:GetLeaderTypeName() ~= "LEADER_SPECTATOR" then
+-- 								local playerCities = Players[playerID]:GetCities()
+-- 								for j, city in playerCities:Members() do
+-- 									if Map.GetPlotDistance(pPlot:GetX(),pPlot:GetY(),city:GetX(),city:GetY()) == 7 then
+-- 										bValid = true
+-- 										iTargetID = playerID
+-- 										break
+-- 									end
+-- 								end
+-- 								if bValid == true then
+-- 									break
+-- 								end
+-- 							end
+-- 						end
+-- 					end
+-- 				end
+-- 			end
+--
+-- 			-- Check no other barbs are too close
+-- 			if bValid == true then
+-- 				for i = 1, 36 do
+-- 					local plotScanned = GetAdjacentTiles(pPlot, i)
+-- 					if plotScanned ~= nil then
+-- 						if plotScanned:GetImprovementType() ~= -1 then
+-- 							bValid = false
+-- 							--print("Barbs: Can't Place Here it: Too close to other Barbs",plotScanned:GetX(),plotScanned:GetY())
+-- 							break
+-- 						end
+-- 					end
+-- 				end
+-- 			end
+--
+--
+--
+-- 			--Now Check there is no Horses nearby do it would not turn as a Horse camp
+--
+-- 			if bValid == true and currentTurn > startTurn + 14 then
+-- 				for i = 1, 36 do
+-- 					local plotScanned = GetAdjacentTiles(pPlot, i)
+-- 					if plotScanned ~= nil then
+-- 						if plotScanned:GetResourceType() == 42 then
+-- 							bHorse = true
+-- 							--print("Barbs: Can't Place Here it Would Turn into Horse Camp",plotScanned:GetResourceType(),plotScanned:GetX(),plotScanned:GetY())
+-- 							break
+-- 						end
+-- 					end
+-- 				end
+-- 			end
+--
+-- 			-- Insert
+-- 			if bValid == true then
+-- 				--print("Barbs: Valid Plot!",pPlot:GetX(), pPlot:GetY())
+-- 				local tmp = {plot = pPlot, id = iTargetID, team = Players[iTargetID]:GetTeam(), horse = bHorse}
+-- 				table.insert(validPlots, tmp)
+-- 			end
+-- 		end
+--
+-- 	end
+--
+-- 	local shuffledPlots = GetShuffledCopyOfTable(validPlots)
+--
+-- 	-- Place on the map: Naval
+-- 	if shuffledPlots ~= nil and bNaval == true then
+-- 		for j, plotTable in ipairs(shuffledPlots) do
+-- 			if plotTable.id == -1 then
+-- 				local pPlot = plotTable.plot
+-- 				-- PLACE TRIBE NAVAL IF UNTARGETTED
+-- 				PlaceBarbarianCamp(pPlot:GetX(), pPlot:GetY(),-1,0)
+-- 				return
+-- 			end
+-- 		end
+-- 	end
+--
+-- 	-- Place on the map: Melee
+-- 	-- Balance
+-- 	local BarbBalance = {}
+-- 	for i, playerID in ipairs(PlayerManager.GetAliveMajorIDs()) do
+-- 		local pPlayer = Players[playerID]
+-- 		if pPlayer ~= nil then
+-- 			if Game.GetProperty("BARB_"..playerID.."_"..pPlayer:GetTeam()) ~= nil then
+-- 				local tmp = { id = playerID, team = pPlayer:GetTeam(), team_score = 0, score = Game.GetProperty("BARB_"..playerID.."_"..pPlayer:GetTeam())}
+-- 				table.insert(BarbBalance, tmp)
+-- 			end
+-- 		end
+-- 	end
+--
+-- 	-- Aggregate score & sort
+--
+-- 	for i = -1, 60, 1 do
+-- 		local team_score_tmp = 0
+-- 		for j, score in ipairs(BarbBalance) do
+-- 			if score.team == i then
+-- 				team_score_tmp = score.score + team_score_tmp
+-- 			end
+-- 		end
+-- 		for j, score in ipairs(BarbBalance) do
+-- 			if score.team == i then
+-- 				score.team_score = team_score_tmp
+-- 			end
+-- 		end
+-- 	end
+--
+-- 	table.sort (BarbBalance, function(a, b) return (((a.team_score == b.team_score) and (a.score < b.score)) or ((a.team_score < b.team_score))); end)
+-- 	for i, score in ipairs(BarbBalance) do
+-- 		print("BARB: TEAM",score.team,score.team_score,"ID",score.id,score.score,PlayerConfigurations[score.id]:GetLeaderTypeName())
+-- 	end
+-- 	-- Place going for the least impacted player so far:
+-- 	for i, score in ipairs(BarbBalance) do
+-- 		for j, plotTable in ipairs(shuffledPlots) do
+-- 			if plotTable.id == score.id then
+-- 				local pPlot = plotTable.plot
+-- 				if plotTable.horse == true then
+-- 					PlaceBarbarianCamp(pPlot:GetX(), pPlot:GetY(),score.id,1)
+-- 					return
+-- 					else
+-- 					PlaceBarbarianCamp(pPlot:GetX(), pPlot:GetY(),score.id,2)
+-- 					return
+-- 				end
+-- 			end
+-- 		end
+-- 	end
+-- end
+--
+-- function CountBarbCamps()
+-- 	local count = 0
+-- 	local iCount = Map.GetPlotCount();
+-- 	for plotIndex = 0, iCount-1, 1 do
+-- 		local pPlot = Map.GetPlotByIndex(plotIndex)
+-- 		if pPlot:GetImprovementType() == 0 then
+-- 			count = count + 1
+-- 		end
+-- 	end
+-- 	return count
+-- end
+--
+-- function PlaceOriginalBarbCamps()
+-- 	local base = PlayerManager.GetAliveMajorsCount()
+-- 	base = tonumber(base)
+-- 	local placed_camps = 0
+-- 	if base > 0 then
+-- 		local iCount = Map.GetPlotCount();
+-- 		local validPlots = {};
+-- 		-- Scan all the Map
+-- 		for plotIndex = 0, iCount-1, 1 do
+-- 			local pPlot = Map.GetPlotByIndex(plotIndex)
+-- 			local bValid = false
+-- 			local bValidTerrain = true
+-- 			local iTargetID = -1
+-- 			-- First Check
+-- 			if pPlot:IsWater() or pPlot:IsImpassable() or pPlot:IsNaturalWonder() or pPlot:GetOwner() ~= -1 then
+-- 				bValidTerrain = false
+-- 			end
+--
+--
+--
+--
+-- 			-- Assign Players
+-- 			if bValidTerrain == true then
+-- 				for i, playerID in ipairs(PlayerManager.GetAliveIDs()) do
+-- 					if Players[playerID] ~= nil then
+-- 						if Players[playerID]:IsMajor() then
+-- 							local pPlayerConfig:table = PlayerConfigurations[playerID];
+-- 							if pPlayerConfig and pPlayerConfig:GetLeaderTypeName() ~= "LEADER_SPECTATOR" then
+-- 								local sPlot = Players[playerID]:GetStartingPlot()
+-- 								if Map.GetPlotDistance(pPlot:GetX(),pPlot:GetY(),sPlot:GetX(),sPlot:GetY()) == 7 then
+-- 									bValid = true
+-- 									iTargetID = playerID
+-- 									break
+-- 								end
+-- 							end
+-- 						end
+-- 					end
+-- 				end
+-- 			end
+-- 			-- We have a plot within 7 tiles of a spawn check it is not near than 7 of another Major
+-- 			if bValid == true then
+-- 				for i, playerID in ipairs(PlayerManager.GetAliveIDs()) do
+-- 					if Players[playerID] ~= nil then
+-- 						local pPlayerConfig:table = PlayerConfigurations[playerID];
+-- 						if pPlayerConfig and pPlayerConfig:GetLeaderTypeName() ~= "LEADER_SPECTATOR" then
+-- 							local sPlot = Players[playerID]:GetStartingPlot()
+-- 							if sPlot ~= nil then
+-- 								if (Map.GetPlotDistance(pPlot:GetX(),pPlot:GetY(),sPlot:GetX(),sPlot:GetY()) < 7 and Players[playerID]:IsMajor()) or Map.GetPlotDistance(pPlot:GetX(),pPlot:GetY(),sPlot:GetX(),sPlot:GetY()) < 4 then
+-- 									bValid = false
+-- 									--print("Barbs: Can't Place Here it Would Be Next To Another Player",PlayerConfigurations[playerID]:GetLeaderTypeName(),sPlot:GetX(),sPlot:GetY())
+-- 									break
+-- 								end
+-- 							end
+-- 						end
+-- 					end
+-- 				end
+-- 			end
+--
+-- 			-- Now Check there is no Horses nearby do it would not turn as a Horse camp
+--
+-- 			--if bValid == true then
+-- 			--	for i = 1, 36 do
+-- 			--		local plotScanned = GetAdjacentTiles(pPlot, i)
+-- 			--		if plotScanned ~= nil then
+-- 			--			if plotScanned:GetResourceType() == 42 then
+-- 			--				bValid = false
+-- 			--				--print("Barbs: Can't Place Here it Would Turn into Horse Camp",plotScanned:GetResourceType(),plotScanned:GetX(),plotScanned:GetY())
+-- 			--				break
+-- 			--			end
+-- 			--		end
+-- 			--	end
+-- 			--end
+--
+-- 			-- Insert
+-- 			if bValid == true then
+-- 				--print("Barbs: Valid Plot!",pPlot:GetX(), pPlot:GetY())
+-- 				local tmp = {plot = pPlot, id = iTargetID, team = Players[iTargetID]:GetTeam()}
+-- 				table.insert(validPlots, tmp)
+-- 			end
+-- 		end
+--
+-- 		-- Place on the map
+-- 		if validPlots ~= nil then
+-- 			for i, playerID in ipairs(PlayerManager.GetAliveMajorIDs()) do
+-- 				if Players[playerID] ~= nil then
+-- 					if (Players[playerID]:IsMajor()) and PlayerConfigurations[playerID]:GetLeaderTypeName() ~= "LEADER_SPECTATOR" then
+-- 						local rng = TerrainBuilder.GetRandomNumber(100,"Barb Placement")/100
+-- 						if rng < iBarbs_Original_Weight then
+-- 							for j, plotTable in ipairs(validPlots) do
+-- 								if plotTable.id == playerID then
+-- 									local pPlot = plotTable.plot
+-- 									-- Only place Improvement
+-- 									PlaceBarbarianCamp(pPlot:GetX(), pPlot:GetY(),playerID,2)
+-- 									break
+-- 								end
+-- 							end
+-- 						end
+-- 					end
+-- 				end
+-- 			end
+-- 		end
+--
+-- 	end
+-- end
+--
+--
+--
+-- function PlaceBarbarianCamp(x, y, playerID, tribeType)
+-- 	local BARBARIAN_ID = 62;
+-- 	local BARB_CAMP_ID = 0;
+-- 	local targetId = playerID;
+-- 	local targetTeam = -1;
+-- 	if Players[targetId] ~= nil then
+-- 		targetTeam = Players[targetId]:GetTeam();
+-- 	end
+-- 	local tribeScore = 1
+-- 	if tribeType == 1 then
+-- 		tribeScore = 2
+-- 	end
+-- 	-- Check XML for any and all Improvements flagged as "Barb Camps" and distribute them.
+-- 	local pPlot = Map.GetPlot(x,y);
+-- 	--ImprovementBuilder.SetImprovementType(pPlot, BARB_CAMP_ID, BARBARIAN_ID);
+--
+-- 	for i = 0, 90 do
+-- 		local plotScanned = GetAdjacentTiles(pPlot, i)
+-- 		if plotScanned ~= nil then
+-- 			if plotScanned:GetImprovementType() == BARB_CAMP_ID then
+-- 				print("Already has a Barbarian Camp Nearby")
+-- 				return
+-- 			end
+-- 		end
+-- 	end
+--
+-- 	local pBarbManager = Game.GetBarbarianManager();
+--
+--
+--
+--    ImprovementBuilder.SetImprovementType(pPlot, -1, NO_PLAYER);
+--
+--
+--    local iTribeNumber = pBarbManager:CreateTribeOfType(tribeType, pPlot:GetIndex());
+-- 	print("Placed Barbarian camp at",x,y,playerID,tribeType)
+-- 	if Game.GetProperty("BARB_"..targetId.."_"..targetTeam ) == nil or tonumber(Game.GetProperty("BARB_"..targetId.."_"..targetTeam )) == nil then
+-- 		Game.SetProperty("BARB_"..targetId.."_"..targetTeam ,1)
+-- 		else
+-- 		local num = tonumber(Game.GetProperty("BARB_"..targetId.."_"..targetTeam )) + tribeScore
+-- 		Game.SetProperty("BARB_"..targetId.."_"..targetTeam ,num)
+-- 	end
+--
+-- end
+--
+-- function InitBarbData()
+-- 	for i, playerID in ipairs(PlayerManager.GetAliveMajorIDs()) do
+-- 		if Players[playerID] ~= nil then
+-- 			if Players[playerID]:IsMajor() and PlayerConfigurations[playerID]:GetLeaderTypeName() ~= "LEADER_SPECTATOR" then
+-- 				Game.SetProperty("BARB_"..playerID.."_"..Players[playerID]:GetTeam(),0)
+-- 			end
+-- 		end
+-- 	end
+-- end
 
 
 
@@ -2243,19 +2243,19 @@ function Initialize()
 	
 	
 	-- turn 0 effects:
-	--if currentTurn == startTurn then
-	--	ApplyGilgameshTrait()
-	--	InitBarbData()
-	--end
+	if currentTurn == startTurn then
+		ApplyGilgameshTrait()
+-- 		InitBarbData()
+	end
 	
 	-- turn checked effects:
 	GameEvents.OnGameTurnStarted.Add(OnGameTurnStarted);
 
 	-- combat effect:
-	--GameEvents.OnCombatOccurred.Add(OnCombatOccurred);
+	GameEvents.OnCombatOccurred.Add(OnCombatOccurred);
 	
 	-- pillage effect:
-	--GameEvents.OnPillage.Add(OnPillage)
+	GameEvents.OnPillage.Add(OnPillage)
 	
 	-- tech boost effect:
 	-- Events.TechBoostTriggered.Add(OnTechBoost);
