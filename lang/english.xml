@@ -504,6 +504,10 @@
 		<Replace Tag="LOC_ABILITY_WAR_CART_COMBAT_STRENGTH_VS_BARBS_DESCRIPTION_BBG" Language="en_US">
 			<Text>+4 [ICON_Strength] Unit Combat Strength when fighting Barbarians.</Text>
 		</Replace>
+		<!-- Zulu -->
+		<Replace Tag="LOC_TRAIT_CIVILIZATION_ZULU_ISIBONGO_DESCRIPTION" Language="en_US">
+			<Text>Cities with a garrisoned unit get +3 Loyalty per turn, or +5 if it is a Corps or Army. Additionally, corps grant +1 [ICON_amenities], armies even +2. Conquering a city with a unit will upgrade it into a Corps or Army, if the proper Civics are unlocked.</Text>
+		</Replace>
 		<!---->
 		<!--===============   D E D I C A T I O N S   ===============-->
 		<!-- Pen, Brush and Voice -->

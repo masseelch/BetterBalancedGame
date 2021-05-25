@@ -241,6 +241,7 @@
 <!--            <File>sql/new_bbg_xp1_cree.sql</File>-->
 <!--            <File>sql/new_bbg_xp1_scotland.sql</File>-->
 <!--            <File>sql/new_bbg_xp1_zulus.sql</File>-->
+            <File>sql/FTB_zulu.sql</File>
         </UpdateDatabase>
 
         <UpdateDatabase id="bbg_xp2_db_updates" criteria="xp2">
@@ -540,6 +541,7 @@
 <!--        <File>sql/new_bbg_xp1_cree.sql</File>-->
 <!--        <File>sql/new_bbg_xp1_scotland.sql</File>-->
 <!--        <File>sql/new_bbg_xp1_zulus.sql</File>-->
+        <File>sql/FTB_zulu.sql</File>
 <!--        <File>sql/new_bbg_nfp_vietnam.sql</File>-->
 <!--        <File>sql/new_bbg_xp2_government.sql</File>-->
 <!--        <File>sql/new_bbg_spain.sql</File>-->

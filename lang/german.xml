@@ -470,6 +470,10 @@
 		<Replace Tag="LOC_ABILITY_WAR_CART_COMBAT_STRENGTH_VS_BARBS_DESCRIPTION_BBG" Language="de_DE">
 			<Text>+4 [ICON_Strength] Kampfstärke gegen Barbaren.</Text>
 		</Replace>
+		<!-- Zulu -->
+		<Replace Tag="LOC_TRAIT_CIVILIZATION_ZULU_ISIBONGO_DESCRIPTION" Language="de_DE">
+			<Text>Städte mit Garnisons-Einheit erhalten +3 Loyalität pro Runde oder +5, wenn es sich um ein Korps oder eine Armee handelt. Korps gewähren zusätzlich +1 [ICON_amenities] Annehmlichkeit, Armeen sogar +2. Eine Einheit, die eine Stadt einnimmt, wird zu einem Korps oder einer Armee verbessert, wenn Ihr die richtigen Ausrichtungen freigeschaltet habt.</Text>
+		</Replace>
 		<!---->
 		<!--===============   D E D I C A T I O N S   ===============-->
 		<!-- Pen, Brush and Voice -->
