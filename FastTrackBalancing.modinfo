@@ -240,6 +240,7 @@
             <File>sql/new_bbg_xp1_policies.sql</File>
 <!--            <File>sql/new_bbg_xp1_cree.sql</File>-->
 <!--            <File>sql/new_bbg_xp1_scotland.sql</File>-->
+            <File>sql/scotland_xp1.sql</File>
 <!--            <File>sql/new_bbg_xp1_zulus.sql</File>-->
             <File>sql/FTB_zulu.sql</File>
         </UpdateDatabase>
@@ -540,6 +541,7 @@
         <File>sql/new_bbg_religion_belief.sql</File>
 <!--        <File>sql/new_bbg_xp1_cree.sql</File>-->
 <!--        <File>sql/new_bbg_xp1_scotland.sql</File>-->
+        <File>sql/scotland_xp1.sql</File>
 <!--        <File>sql/new_bbg_xp1_zulus.sql</File>-->
         <File>sql/FTB_zulu.sql</File>
 <!--        <File>sql/new_bbg_nfp_vietnam.sql</File>-->
